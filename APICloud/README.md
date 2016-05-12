@@ -124,9 +124,9 @@ __ClodRecipe__
 <div id="getVerifyCode"></div>
 #**getVerifyCode**
 
-    获取手机验证码，填入的内容需要为手机号码
+    获取验证码，填入的内容需要为手机号码或者邮箱
 
-    getVerifyCode(String loginname, String appid, UserCallBack usercb)
+    getVerifyCode({params}, callback(ret, err))
 
 ##params
 
@@ -140,37 +140,48 @@ appid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
-//error: 如：请求参数错误
-{"non_field_errors":["应用端验证失败"]}
-
-//success
 {
-  "token": "eyJhbGcxxx44",
-  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+  "meta": {
+    "message": "验证邮件已发送",
+    "code": 0
+  },
+  "data": {
+  }
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "请求参数错误",
+    "code": 23011
+  },
+  "data": {
+  }
 }
 ```
 
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String loginname = "13122222222";
-String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.getVerifyCode(loginname, appid, new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
+var param = {
+    loginname: "loginname",
+    appid: "_APPID"
+};
+mico2.getVerifyCode(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
 });
 ```
@@ -184,7 +195,7 @@ micoUser.getVerifyCode(loginname, appid, new UserCallBack() {
 
     验证获取到的手机验证码
 
-    checkVerifyCode(String loginname, String vercode, String appid, UserCallBack usercb)
+    checkVerifyCode({params}, callback(ret, err))
 
 ##params
 
@@ -194,7 +205,7 @@ loginname
 
 vercode
 - 类型：字符串, 不可为空
-- 描述：手机收到的验证码
+- 描述：收到的验证码
 
 appid
 - 类型：字符串, 不可为空
@@ -202,34 +213,45 @@ appid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
 {
-  "token": "eyJhVlSV8I...",
-  "clientid": "xxx-deaa-11e5-a739-00163e0204c0"
+  "token": "eyJhbGcxxx44",
+  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "请求参数错误",
+    "code": 23010
+  },
+  "data": {
+  }
 }
 ```
 
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String loginname = "13122222222";
-String vercode = "556897";
-String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.checkVerifyCode(loginname, vercode, appid, new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
+var param = {
+    loginname: "loginname",
+    vercode: "vercode",
+    appid: "_APPID"
+};
+mico2.checkVerifyCode(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
 });
 ```
@@ -238,12 +260,12 @@ micoUser.checkVerifyCode(loginname, vercode, appid, new UserCallBack() {
 
     Android系统4.0+
 
-<div id="register"></div>
-#**register**
+<div id="setPassword"></div>
+#**setPassword**
 
-    验证码验证成功后，输入密码注册新用户
+    验证码验证成功后，设置初始密码，这一步可以跳过
 
-    register(String password1, String password2, String appid, UserCallBack usercb, String token)
+    setPassword({params}, callback(ret, err))
 
 ##params
 
@@ -265,8 +287,8 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -276,6 +298,23 @@ usercb
     "code": 0
   },
   "data": {
+    
+  }
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "请求参数错误",
+    "code": 23010
+  },
+  "data": {
+    
   }
 }
 ```
@@ -283,23 +322,18 @@ usercb
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String password1 = "123456";
-String password2 = "123456";
-String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-String token = "xxx81d79316-bb5a-11e5-a739-00163e0204c0xxx";
-micoUser.register(password1, password2, appid, new UserCallBack() {
-                        
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
+var param = {
+    password1: "password1_val",
+    password2: "password2_val",
+    token: "token"
+};
+mico2.setPassword(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
-    
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-}, token);
+});
 ```
 
 ##可用性
