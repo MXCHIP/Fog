@@ -131,11 +131,11 @@ __ClodRecipe__
 ##params
 
 loginname
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：手机号码或邮箱
 
 appid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
 ##callback
@@ -145,13 +145,13 @@ usercb
 - 描述：接口调用成功后的回调函数
 
 ```js
+//error: 如：请求参数错误
+{"non_field_errors":["应用端验证失败"]}
+
+//success
 {
-  "meta": {
-    "message": "验证邮件已发送",
-    "code": 23000
-  },
-  "data": {
-  }
+  "token": "eyJhbGcxxx44",
+  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```
 
@@ -189,15 +189,15 @@ micoUser.getVerifyCode(loginname, appid, new UserCallBack() {
 ##params
 
 loginname
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：手机号码或邮箱
 
 vercode
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：手机收到的验证码
 
 appid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
 ##callback
@@ -248,19 +248,19 @@ micoUser.checkVerifyCode(loginname, vercode, appid, new UserCallBack() {
 ##params
 
 password1
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户密码
 
 password2
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户密码
 
 appid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：验证验证码后返回的token
 
 ##callback
@@ -311,52 +311,57 @@ micoUser.register(password1, password2, appid, new UserCallBack() {
 
     用户登录
 
-    login(String phone, String password, String appid, UserCallBack usercb)
+    login({params}, callback(ret, err))
 
 ##params
 
-phone
-- 类型：String, 不可为空
-- 描述：手机号码
+loginname
+- 类型：字符串, 不可为空
+- 描述：手机号码/邮箱
 
 password
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户密码
 
 appid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
 {
-  "token": "eyJhbGcMCPNKJI...",
-  "clientid": "xxx-deaa-11e5-a739-00163e0204c0"
+  "token": "eyJhbGcxxx44",
+  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{"non_field_errors":["应用端验证失败"]}
 ```
 
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String userName = "13122222222";
-String password = "123456";
-String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.login(userName, password, appid, new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
+var mico2 = api.require('mico2');
+var param = {
+    loginname: "loginname",
+    password: "password",
+    appid: "_APPID"
+};
+mico2.login(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
 });
 ```
@@ -375,7 +380,7 @@ micoUser.login(userName, password, appid, new UserCallBack() {
 ##params
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
 ##callback
@@ -424,11 +429,11 @@ micoUser.refreshToken(userToken, new UserCallBack() {
 ##params
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的deviceid
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##callback
@@ -473,15 +478,15 @@ micoUser.getMemberList(deviceid, new UserCallBack() {
 ##params
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的deviceid
 
 enduserid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户的id
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##callback
@@ -542,7 +547,7 @@ micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
 ##callback
 
 ssid
-- 类型：String
+- 类型：字符串
 - 描述：当前WIFI的名称
 
 ##示例代码
@@ -566,11 +571,11 @@ Log.d(TAG, micodev.getSSID());
 ##params
 
 ssid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：准备发送的ssid
 
 password
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：ssid对应的WIFI密码
 
 runSecond
@@ -655,7 +660,7 @@ micodev.stopEasyLink(new EasyLinkCallBack() {
 ##params
 
 serviceName
-- 类型：String, 不可为空, "_easylink._tcp.local."
+- 类型：字符串, 不可为空, "_easylink._tcp.local."
 - 描述：只要你使用的是庆科的模块，这个名字是不会变的
 
 ##callback
@@ -757,11 +762,11 @@ micodev.stopSearchDevices(new SearchDeviceCallBack() {
 ##params
 
 ip
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：即将绑定的设备的IP
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##callback
@@ -822,12 +827,12 @@ micodev.bindDevice(ip, deviceid, new ManageDeviceCallBack() {
 ##params
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的deviceid
 
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户token
 
 ##callback
@@ -887,7 +892,7 @@ usercb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##示例代码
@@ -923,7 +928,7 @@ micoUser.getDeviceList(new UserCallBack() {
 ##params
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：即将绑定的设备的deviceid
 
 ##callback
@@ -935,7 +940,7 @@ usercb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##示例代码
@@ -972,11 +977,11 @@ micoUser.getDeviceInfo(deviceid, new UserCallBack() {
 ##params
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：即将绑定的设备的deviceid
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##callback
@@ -1021,7 +1026,7 @@ getShareVerCode(deviceid, new ManageDeviceCallBack() {
 ##params
 
 message
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：需要生成二维码的信息
 
 height
@@ -1041,7 +1046,7 @@ role
 - 描述：1超级用户 3普通用户 2管理员
 
 bindingtype
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
 
 iscallback
@@ -1095,7 +1100,7 @@ role
 - 描述：1超级用户 3普通用户 2管理员
 
 bindingtype
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
 
 iscallback
@@ -1103,7 +1108,7 @@ iscallback
 - 描述：是否返回绑定状态，此版本请都设置为false
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##callback
@@ -1157,27 +1162,27 @@ listendevparams
 - 描述：ListenDeviceParams至少包含以下的信息
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的deviceid
 
 host
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：云端的host地址，默认为"iot.mxchip.com"
 
 port
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：云端的port，默认为"1883"
 
 userName
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：enduserid
 
 passWord
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：devicepw, 与用户密码相同，或者与注册验证码相同
 
 clientID
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：enduserid，即用户登录后获取的enduserid
 
 ##callback
@@ -1232,23 +1237,23 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 ##params
 
 deviceid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的deviceid
 
 devicepw
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的devicepw
 
 command
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：发送给设备的指令"json"格式的字符串
 
 commandType
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述："json", 默认
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户的token
 
 
@@ -1296,7 +1301,7 @@ micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceC
 ##params
 
 topic
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：需要定义的topic
 
 qos
@@ -1342,7 +1347,7 @@ micoDev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
 ##params
 
 topic
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：需要定义的topic
 
 ##callback
@@ -1422,7 +1427,7 @@ sspara
 - 描述：SinSocketParams至少包含以下的信息
 
 ip
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的ip，通过startSearchDevices发现设备
 
 port
@@ -1500,7 +1505,7 @@ micodev.connectLocalDevice(sspara, sscb);
 ##params
 
 command
-- 类型：String, 不可为空，虽然是String型，但是必须是json的样子
+- 类型：字符串, 不可为空，虽然是String型，但是必须是json的样子
 - 描述：否则模块会死掉，格式如下"{\"applocallogin\":\"admin\"}"
 
 ##callback
@@ -1583,7 +1588,7 @@ type
 - 描述：云菜谱的类型，自己定义(与云端一致)
 
 productid
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：产品ID
 
 ##callback
@@ -1595,7 +1600,7 @@ usercb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 ##示例代码
@@ -1631,7 +1636,7 @@ micoUser.getCookBookByType(type, productid, new UserCallBack() {
 ##params
 
 cookbookname
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：云菜谱的名字，支持模糊查询
 
 ##callback
@@ -1643,7 +1648,7 @@ usercb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 ##示例代码
@@ -1686,7 +1691,7 @@ usercb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 ##示例代码
@@ -1733,7 +1738,7 @@ usercb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 ##示例代码
@@ -1772,11 +1777,11 @@ stp
 - 描述：ScheduleTaskParam至少包含以下的信息
 
 device_id
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的device id
 
 order
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：控制指令
 
 enable
@@ -1784,23 +1789,23 @@ enable
 - 描述：当前task，True 启用 False 暂停
 
 month
-- 类型：String, 可为空
+- 类型：字符串, 可为空
 - 描述：月
 
 day_of_month
-- 类型：String, 可为空
+- 类型：字符串, 可为空
 - 描述：日
 
 day_of_week
-- 类型：String, 可为空
+- 类型：字符串, 可为空
 - 描述：周
 
 hour
-- 类型：String, 可为空
+- 类型：字符串, 可为空
 - 描述：小时
 
 minute
-- 类型：String, 可为空
+- 类型：字符串, 可为空
 - 描述：分
 
 ##callback
@@ -1816,7 +1821,7 @@ ctrldevcb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
 ##示例代码
@@ -1866,11 +1871,11 @@ stp
 - 描述：ScheduleTaskParam至少包含以下的信息
 
 device_id
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：设备的device id
 
 order
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：控制指令
 
 enable
@@ -1894,7 +1899,7 @@ ctrldevcb
 ##token
 
 token
-- 类型：String, 不可为空
+- 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 ##示例代码
