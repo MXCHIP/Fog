@@ -179,9 +179,9 @@ var param = {
 };
 mico2.getVerifyCode(param, function(ret, err) {
     if (ret) {
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     } else {
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -249,9 +249,9 @@ var param = {
 };
 mico2.checkVerifyCode(param, function(ret, err) {
     if (ret) {
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     } else {
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -276,10 +276,6 @@ password1
 password2
 - 类型：字符串, 不可为空
 - 描述：用户密码
-
-appid
-- 类型：字符串, 不可为空
-- 描述：在Fogcloud平台注册的APP的id
 
 token
 - 类型：字符串, 不可为空
@@ -329,9 +325,9 @@ var param = {
 };
 mico2.setPassword(param, function(ret, err) {
     if (ret) {
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     } else {
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -393,9 +389,9 @@ var param = {
 };
 mico2.login(param, function(ret, err) {
     if (ret) {
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     } else {
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
