@@ -584,7 +584,7 @@ micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
 
     获取当前手机连接的WIFI的名称，即ssid
 
-    String getSSID()
+    getSSID(callback(ret, err))
 
 ##callback
 
@@ -592,11 +592,16 @@ ssid
 - 类型：字符串
 - 描述：当前WIFI的名称
 
+```js
+{ssid: "gg"}
+```
+
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-Log.d(TAG, micodev.getSSID());
+mico2.getSSID(function(ret, err){
+    alert(ret.ssid);
+});
 ```
 
 ##可用性
@@ -608,7 +613,7 @@ Log.d(TAG, micodev.getSSID());
 
     发送数据包(包含ssid和password)给设备，每10ms发一次，连续发10s，再停止10s，继续发，如此反复
 
-    startEasyLink(String ssid, String password, int runSecond, EasyLinkCallBack easylinkcb)
+    startEasyLink({params}, callback(ret, err))
 
 ##params
 
@@ -626,9 +631,23 @@ runSecond
 
 ##callback
 
-easylinkcb
-- 类型：EasyLinkCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
+
+```js
+{
+  "token": "eyJhbGcxxx44",
+  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+```
 
 ##示例代码
 
