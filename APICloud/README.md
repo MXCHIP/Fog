@@ -32,7 +32,7 @@ __基础功能__
 
 * [验证验证码](#checkVerifyCode)
 
-* [设置密码](#setPassword)
+* [设置初始密码](#setPassword)
 
 * [登录](#login)
 
@@ -375,7 +375,11 @@ err
 - 描述：接口调用失败后的回调函数
 
 ```js
-{"non_field_errors":["应用端验证失败"]}
+{
+  "non_field_errors": [
+    "应用端验证失败"
+  ]
+}
 ```
 
 ##示例代码
@@ -405,7 +409,7 @@ mico2.login(param, function(ret, err) {
 
     刷新用户的token，服务器端默认7天内生效，刷新后可以后延7天，失效了就需要重新登录
 
-    refreshToken(String token, UserCallBack usercb)
+    refreshToken({params}, callback(ret, err))
 
 ##params
 
@@ -415,32 +419,40 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
 {
-  "token": "eyJhbGcMCPNKJI...",
-  "clientid": "xxx-deaa-11e5-a739-00163e0204c0"
+  "token": "eyJhbGcxxx44",
+  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "non_field_errors": [
+    "签名解析错误"
+  ]
 }
 ```
 
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String userToken = "XXX...";
-micoUser.refreshToken(userToken, new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
+var param = {
+    token: "token"
+};
+mico2.refreshToken(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
 });
 ```
