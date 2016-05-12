@@ -1963,4 +1963,13 @@ micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
     Android系统4.0+
 
 
+##错误码摘要
+
+- 0,     success
+- 1003,  取消
+- 9000,  未登陆
+- 9001,  请求参数错误
+- 9003,  Json Exception
+
+
 (完)
