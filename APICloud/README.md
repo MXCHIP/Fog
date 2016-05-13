@@ -450,9 +450,9 @@ var param = {
 };
 mico2.refreshToken(param, function(ret, err) {
     if (ret) {
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     } else {
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -652,21 +652,16 @@ err
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-String ssidStr = "mxchip";
-String passwordStr = "123456";
-int runs = 10000; //发送10秒即关闭
-micodev.startEasyLink(ssidStr, passwordStr, runs, new EasyLinkCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
+var param = {
+    ssid: "ssid_val",
+    password: "psw_val",
+    runSecond: 20000 //20秒后停止发包
+};
+mico2.startEasyLink(param, function(ret, err) {
+    if(ret)
+        alert(ret);
+    else
+        alert(err);
 });
 ```
 
@@ -679,30 +674,27 @@ micodev.startEasyLink(ssidStr, passwordStr, runs, new EasyLinkCallBack() {
 
     停止发送数据包
 
-    stopEasyLink(EasyLinkCallBack easylinkcb)
+    stopEasyLink(callback(ret, err))
 
 ##callback
 
-easylinkcb
-- 类型：EasyLinkCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
+
+```js
+{message: "stop success"}
+```
 
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-micodev.stopEasyLink(new EasyLinkCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-});
+mico2.stopEasyLink(function(ret, err) {
+    if(ret)
+        alert(ret);
+    else
+        alert(err);
+}); 
 ```
 
 ##可用性
@@ -716,61 +708,50 @@ micodev.stopEasyLink(new EasyLinkCallBack() {
 
     当然，前提是手机和设备必须在同一个网段
 
-    startSearchDevices(String serviceName, SearchDeviceCallBack searchdevcb)
-
-##params
-
-serviceName
-- 类型：字符串, 不可为空, "_easylink._tcp.local."
-- 描述：只要你使用的是庆科的模块，这个名字是不会变的
+    startSearchDevices(callback(ret, err))
 
 ##callback
 
-searchdevcb
-- 类型：SearchDeviceCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
-[
-  {
-    "deviceName": "MiCOKit 3165#0C2EB6",
-    "deviceMac": "D0:BA:E4:0C:2E:B6",
-    "deviceIP": "172.16.112.6",
-    "deviceMacbind": "0",
-    "hardwareID": "0",
-    "fogProductID": "6486b2d1-0ee9-4647-baa3-78b9cbc778f7",
-    "isEasyLinkOK": "false",
-    "isHaveSuperUser": "true",
-    "remainingUserNumber": "0",
-    "allInfo": "MAC=D0:BA:E4:0C:2E:B6Firmware ...",
-    "devicePort": "8002"
-  }
-]
+{
+  "devices": [
+    {
+      "deviceName": "MiCOKit 3288#91813C",
+      "deviceMac": "C8:93:46:91:81:3C",
+      "deviceIP": "172.26.18.3",
+      "deviceMacbind": "false",
+      "hardwareID": "0",
+      "fogProductID": "0",
+      "isEasyLinkOK": "0",
+      "isHaveSuperUser": "0",
+      "remainingUserNumber": "0",
+      "allInfo": "MAC=C8:93:46:91:81:3CBinding=falseFirmware Rev=MK3288_1@1507211945Hardware Rev=MK3288_1MICO OS Rev=10880002.035-0709Model=MiCOKit-3288Protocol=com.mxchip.micokitManufacturer=MXCHIP Inc.Seed=562",
+      "devicePort": "8080"
+    }
+  ]
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{code: 9403, message: "It is closed."}
 ```
 
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-String serviceName = "_easylink._tcp.local.";
-micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onDevicesFind(JSONArray deviceStatus) {
-        if (!deviceStatus.equals("")) {
-            Log.d(TAG, deviceStatus.toString());
-        }
-    }
+mico2.startSearchDevices(function(ret, err) {
+    if (ret)
+        alert(JSON.stringify(ret));
+    else
+        alert(err);
 });
 ```
 
@@ -783,29 +764,31 @@ micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
 
     停止发现设备，发现了需要激活的设备，主动调用此接口
 
-    stopSearchDevices(SearchDeviceCallBack searchdevcb)
+    stopSearchDevices(callback(ret, err))
 
 ##callback
 
-searchdevcb
-- 类型：SearchDeviceCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
+
+```js
+{message: "stop success"}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
 
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-micodev.stopSearchDevices(new SearchDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
+mico2.stopSearchDevices(function(ret, err) {
+    if (ret)
+        alert(ret);
+    else
+        alert(err);
 });
 ```
 
@@ -818,7 +801,7 @@ micodev.stopSearchDevices(new SearchDeviceCallBack() {
 
     通过startSearchDevices获取准备绑定设备的信息，从中提取出IP地址，和deviceid，再通过此接口绑定设备
 
-    bindDevice(String ip, ManageDeviceCallBack managedevcb, String token)
+    bindDevice({params}, callback(ret, err))
 
 ##params
 
@@ -832,8 +815,8 @@ token
 
 ##callback
 
-managedevcb
-- 类型：ManageDeviceCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -850,24 +833,34 @@ managedevcb
 }
 ```
 
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "请求参数错误",
+    "code": 23010
+  },
+  "data": {
+  }
+}
+```
+
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-String ip = "192.168.1.123";
-String token = "xxx...";
-micodev.bindDevice(ip, deviceid, new ManageDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-}, token);
+var param = {
+    ip:"192.168.1.10",
+    token:"token"
+};
+mico2.bindDevice(param, function(ret, err) {
+    if (ret)
+        alert(ret);
+    else
+        alert(err);
+});
 ```
 
 ##可用性
@@ -883,7 +876,7 @@ micodev.bindDevice(ip, deviceid, new ManageDeviceCallBack() {
 
     2）如果是超级管理员，那么解绑后，所有人均不能控制这个设备了
 
-    unBindDevice(String deviceid, final ManageDeviceCallBack managedevcb, String token)
+    unBindDevice({params}, callback(ret, err))
 
 ##params
 
@@ -898,8 +891,8 @@ token
 
 ##callback
 
-managedevcb
-- 类型：ManageDeviceCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -913,24 +906,38 @@ managedevcb
 }
 ```
 
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "message": {
+      "deviceid": [
+        "Ensure this field has no more than 36 characters."
+      ]
+    },
+    "code": 23010
+  },
+  "data": {
+  }
+}
+```
+
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
-String token = "xxx...";
-micoDev.unBindDevice(deviceid, new ManageDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, message);
-    }
-}, token);
+var param = {
+    deviceid: "deviceid",
+    token: "token"
+};
+mico2.unBindDevice(param, function(ret, err) {
+    if (ret)
+        alert(ret);
+    else
+        alert(err);
+});
 ```
 
 ##可用性
@@ -942,37 +949,60 @@ micoDev.unBindDevice(deviceid, new ManageDeviceCallBack() {
 
     获取本账号名下的所有相关设备
 
-    getDeviceList(UserCallBack usercb, String token)
+    getDeviceList({params}, callback(ret, err))
 
-##callback
-
-usercb
-- 类型：UserCallBack
-- 描述：接口调用成功后的回调函数
-
-##token
+##params
 
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "device list by user",
+    "code": 0
+  },
+  "data": [
+    {
+      "device_pw": "7176",
+      "product_icon": "",
+      "device_name": "iBake",
+      "online": false,
+      "product_name": "iBake",
+      "device_id": "aa2dde14-0b8d-11e6-a739-00163e0204c0"
+    }
+  ]
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{"code":401,"message":{"detail":"签名解码错误"}}
+```
+
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String token = "xxx...";
-micoUser.getDeviceList(new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
+var param = {
+    token: "token"
+};
+mico2.getDeviceList(param, function(ret, err) {
+    if (ret){
+        alert(JSON.stringify(ret));
+    }else{
+        alert(JSON.stringify(err));
     }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-}, token);
+});
 ```
 
 ##可用性
