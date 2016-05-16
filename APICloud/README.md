@@ -1184,7 +1184,7 @@ bindvercode
 
 role
 - 类型：int, 不可为空
-- 描述：1超级用户 3普通用户 2管理员
+- 描述：3普通用户 2管理员
 
 bindingtype
 - 类型：字符串, 不可为空
@@ -1237,28 +1237,21 @@ err
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-
-ShareDeviceParams sdevp = new ShareDeviceParams();
-sdevp.bindvercode = "xxx...";
-sdevp.role = 3;
-sdevp.bindingtype = "home";
-sdevp.iscallback = false;
-
-String token = "xxx...";
-
-micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
-    
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
+var param = {
+    deviceid: "deviceid",
+    devicepw: "devicepw",
+    bindvercode: "bindvercode",
+    role: 3,
+    bindingtype: "home",
+    token: "token"
+};
+mico2.addDeviceByVerCode(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
     }
-    
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-}, token);
+});
 ```
 
 ##可用性
