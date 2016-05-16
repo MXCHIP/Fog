@@ -76,8 +76,6 @@ __ManageDevices__
 
 * [获取设备分享码](#getShareVerCode)
 
-* [生成二维码](#creatQrCode)
-
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
 <div id="ControlRemoteDevice"></div>
@@ -466,7 +464,7 @@ mico2.refreshToken(param, function(ret, err) {
 
     获取此设备名下的用户，只能看到自己意外的用户
 
-    getMemberList(String deviceid, UserCallBack usercb, String token)
+    getMemberList({params}, callback(ret, err))
 
 ##params
 
@@ -515,7 +513,7 @@ micoUser.getMemberList(deviceid, new UserCallBack() {
 
     删除某人的设备管理权限
 
-    removeBindRole(String deviceid, String enduserid, UserCallBack usercb, String token)
+    removeBindRole({params}, callback(ret, err))
 
 ##params
 
@@ -1014,7 +1012,7 @@ mico2.getDeviceList(param, function(ret, err) {
 
     获取设备信息
 
-    getDeviceInfo(String deviceid, UserCallBack usercb, String token)
+    getDeviceInfo({params}, callback(ret, err))
 
 ##params
 
@@ -1022,36 +1020,65 @@ deviceid
 - 类型：字符串, 不可为空
 - 描述：即将绑定的设备的deviceid
 
-##callback
-
-usercb
-- 类型：UserCallBack
-- 描述：接口调用成功后的回调函数
-
-##token
-
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "设备信息。",
+    "code": 0
+  },
+  "data": {
+    "alias": "iBake",
+    "online": false,
+    "devicepw": "7176"
+  }
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "code": 400,
+  "message": {
+    "meta": {
+      "message": "用户跟设备没有绑定。",
+      "code": 23100
+    },
+    "data": {
+    }
+  }
+}
+```
+
+##token
+
+
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
-String token = "xxx...";
-micoUser.getDeviceInfo(deviceid, new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
+var param = {
+    deviceid: "deviceid",
+    token: "token"
+};
+mico2.getDeviceInfo(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
     }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-}, token);
+});
 ```
 
 ##可用性
@@ -1063,7 +1090,7 @@ micoUser.getDeviceInfo(deviceid, new UserCallBack() {
 
     我是超级管理员或者普通管理员，那么我就能把我名下的设备分享给别人，首先需要获取分享码
 
-    getShareVerCode(String deviceid, ManageDeviceCallBack managedevcb, String token)
+    getShareVerCode({params}, callback(ret, err))
 
 ##params
 
@@ -1077,92 +1104,61 @@ token
 
 ##callback
 
-managedevcb
-- 类型：ManageDeviceCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
-##示例代码
-
-```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
-String token = "xxx...";
-getShareVerCode(deviceid, new ManageDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-        String sharcode = new JSONObject(message).getString("data");
-        sharcode = new JSONObject(sharcode).getString("vercode");
-    }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
-    }
-}, token);
+```js
+{
+  "vercode": "3c642f24-1b18-11e6-a739-00163e0204c0"
+}
 ```
 
-##可用性
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
 
-    Android系统4.0+
+```js
+{
+  "code": 400,
+  "message": {
+    "meta": {
+      "message": "用户跟设备没有绑定。",
+      "code": 23100
+    },
+    "data": {
+    }
+  }
+}
 
-<div id="creatQrCode"></div>
-#**creatQrCode**
-
-    将分享码和绑定的关系转成二维码，让别人通过手机扫描二维码绑定
-
-    Bitmap creatQrCode(String message, int height, int width)
-
-##params
-
-message
-- 类型：字符串, 不可为空
-- 描述：需要生成二维码的信息
-
-height
-- 类型：int, 不可为空
-- 描述：二维码的高度
-
-width
-- 类型：int, 不可为空
-- 描述：二维码的宽度
-
-vercode
-- String, 不可为空
-- 描述：getShareVerCode接口获取的sharcode
-
-role
-- 类型：int, 不可为空
-- 描述：1超级用户 3普通用户 2管理员
-
-bindingtype
-- 类型：字符串, 不可为空
-- 描述：绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
-
-iscallback
-- boolean, 不可为空
-- 描述：是否返回绑定状态，此版本请都设置为false
-
-##callback
-
-Bitmap
-- 类型：Bitmap
-- 描述：可以直接将BitMap放入ImageView里，如下
+{
+  "code": 9500,
+  "message": {
+    "meta": {
+      "message": "用户对该设备不具有管理员权限",
+      "code": 23201
+    },
+    "data": {
+      
+    }
+  }
+}
+```
 
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-ImageView qrcodeimg = (ImageView) findViewById(R.id.qrcodeimg);
-
-String vercode = "xxx...";
-int role = 3;
-String bindingtype = "home";
-boolean iscallback = false;
-
-String message = "{\"vercode\":\""+ vercode +"\",\"role\":"+ role +",\"bindingtype\":\""+ bindingtype +"\",\"iscallback\":"+ iscallback + "}";
-qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 220, 220));
+var param = {
+    deviceid: "deviceid",
+    token: "token"
+};
+mico2.getShareVerCode(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
+    }
+});
 ```
 
 ##可用性
@@ -1174,7 +1170,7 @@ qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 220, 220));
 
     解析出二维码里的内容，并通过此接口绑定被授权的设备
 
-    addDeviceByVerCode(ShareDeviceParams sdevp, ManageDeviceCallBack managedevcb, String token)
+    addDeviceByVerCode({params}, callback(ret, err))
 
 ##params
 
@@ -1184,7 +1180,7 @@ sdevp
 
 bindvercode
 - 类型：int, 不可为空
-- 描述：二维码的高度
+- 描述：vercode
 
 role
 - 类型：int, 不可为空
@@ -1198,15 +1194,45 @@ iscallback
 - boolean, 不可为空
 - 描述：是否返回绑定状态，此版本请都设置为false
 
+deviceid
+- 类型：字符串, 不可为空
+- 描述：设备的id
+
+devicepw
+- 类型：字符串, 不可为空
+- 描述：设备的PW
+
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
 ##callback
 
-managedevcb
-- 类型：ManageDeviceCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
+
+```js
+{
+  "vercode": "3c642f24-1b18-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "设备id与用户已经绑定",
+    "code": 23101
+  },
+  "data": {
+    
+  }
+}
+```
 
 ##示例代码
 
@@ -1244,7 +1270,7 @@ micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
 
     远程监听设备，获取设备上报的数据
 
-    startListenDevice(ListenDeviceParams listendevparams, ControlDeviceCallBack ctrldevcb)
+    startListenDevice({params}, callback(ret, err))
 
 ##params
 
@@ -1323,7 +1349,7 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 
 	发送指令给设备端
 
-    sendCommand(String deviceid, String devicepw, String command, String commandType,  ControlDeviceCallBack ctrldevcb, String token)
+    sendCommand({params}, callback(ret, err))
 
 ##params
 
@@ -1387,7 +1413,7 @@ micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceC
 
 	增加订阅的频道
 
-    addDeviceListener(String topic, int qos, ControlDeviceCallBack ctrldevcb)
+    addDeviceListener({params}, callback(ret, err))
 
 ##params
 
@@ -1433,7 +1459,7 @@ micoDev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
 
     移除某个监听的topic
 
-    removeDeviceListener(String topic, ControlDeviceCallBack ctrldevcb)
+    removeDeviceListener({params}, callback(ret, err))
 
 ##params
 
@@ -1474,7 +1500,7 @@ micoDev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
 
 	停止监听设备
 
-    stopListenDevice(ControlDeviceCallBack ctrldevcb)
+    stopListenDevice(callback(ret, err))
 
 ##callback
 
@@ -1509,7 +1535,7 @@ micoDev.stopListenDevice(new ControlDeviceCallBack() {
 
     连接本地局域网的设备
 
-    connectLocalDevice(SinSocketParams sspara, SinSocketCallBack sscb)
+    connectLocalDevice({params}, callback(ret, err))
 
 ##params
 
@@ -1591,7 +1617,7 @@ micodev.connectLocalDevice(sspara, sscb);
 
     发送本地的控制指令
 
-    sendLocalCommand(String command, SinSocketCallBack sscb)
+    sendLocalCommand({params}, callback(ret, err))
 
 ##params
 
@@ -1635,7 +1661,7 @@ micodev.sendLocalCommand(command, new SinSocketCallBack() {
 
     断开与本地设备的连接
 
-    disconnectLocalDevice(SinSocketCallBack sscb)
+    disconnectLocalDevice(callback(ret, err))
 
 ##callback
 
@@ -1671,7 +1697,7 @@ micodev.disconnectLocalDevice(new SinSocketCallBack() {
 
     通过食谱类型查询食谱
 
-    getCookBookByType(int type, String productid, UserCallBack usercb, String token)
+    getCookBookByType({params}, callback(ret, err))
 ##params
 
 type
@@ -1723,7 +1749,7 @@ micoUser.getCookBookByType(type, productid, new UserCallBack() {
 
     通过食谱名称查询食谱
 
-    getCookBookByName(String cookbookname, UserCallBack usercb, String token)
+    getCookBookByName({params}, callback(ret, err))
 ##params
 
 cookbookname
@@ -1766,7 +1792,7 @@ miCOUser.getCookBookByName(recipename, new UserCallBack() {
 
     获取食谱详情
 
-    getCookBookInfo(int cookbookid, UserCallBack usercb, String token)
+    getCookBookInfo({params}, callback(ret, err))
 ##params
 
 cookbookid
@@ -1813,7 +1839,7 @@ micouser.getCookBookInfo(recipeid, new UserCallBack() {
 
     给食谱点赞
 
-    addCookBookLikeNo(int cookbookid, UserCallBack usercb, String token)
+    addCookBookLikeNo({params}, callback(ret, err))
 ##params
 
 cookbookid
@@ -1860,7 +1886,7 @@ micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
 
     创建定时任务
 
-    createScheduleTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
+    createScheduleTask({params}, callback(ret, err))
 ##params
 
 stp
@@ -1954,7 +1980,7 @@ micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
 
     创建延时任务
 
-    creatDelayTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
+    creatDelayTask({params}, callback(ret, err))
 ##params
 
 stp
