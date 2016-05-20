@@ -89,10 +89,11 @@ __ControlRemoteDevice__
 
 * [停止监听设备](#stopListenDevice)
 
+<!--
 * [创建定时任务](#createScheduleTask)
 
 * [创建延时任务](#creatDelayTask)
-
+-->
 <br/>
 <br/>
 <div id="getVerifyCode"></div>
@@ -778,6 +779,10 @@ ip
 - 类型：字符串, 不可为空
 - 描述：即将绑定的设备的IP
 
+port
+- 类型：String, 不可为空
+- 描述：设备服务的端口
+
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
@@ -822,6 +827,7 @@ err
 ```java
 var param = {
     ip:"192.168.1.10",
+    port: "8002",
     token:"token"
 };
 mico2.bindDevice(param, function(ret, err) {
@@ -1518,7 +1524,7 @@ mico2.stopListenDevice(function(ret, err){
 ##可用性
 
     Android系统4.0+
-
+<!--
 <div id="createScheduleTask"></div>
 #**createScheduleTask**
 
@@ -1543,6 +1549,22 @@ enable
 - 类型：boolean, 可为空，默认为true
 - 描述：当前task，True 启用 False 暂停
 
+```js
+时间格式：
+
+星期，取值：
+周一：0
+周二：1
+周三：2
+周四：3
+周五：4
+周六：5
+周日：6
+"*"：每天
+不传：单次任务
+(例如“0,1,2”表示周一 周二 周三)
+```
+
 month
 - 类型：字符串, 可为空
 - 描述：月
@@ -1553,7 +1575,7 @@ day_of_month
 
 day_of_week
 - 类型：字符串, 可为空
-- 描述：周
+- 描述：
 
 hour
 - 类型：字符串, 可为空
@@ -1686,7 +1708,7 @@ micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
 ##可用性
 
     Android系统4.0+
-
+-->
 
 ##错误码摘要
 

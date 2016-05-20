@@ -763,6 +763,10 @@ ip
 - 类型：String, 不可为空
 - 描述：即将绑定的设备的IP
 
+port
+- 类型：String, 不可为空
+- 描述：设备服务的端口
+
 token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
@@ -792,8 +796,9 @@ managedevcb
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String ip = "192.168.1.123";
+String port = "8002";
 String token = "xxx...";
-micodev.bindDevice(ip, deviceid, new ManageDeviceCallBack() {
+micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
 
     @Override
     public void onSuccess(String message) {
