@@ -1783,7 +1783,7 @@ device_id
 - 类型：String, 不可为空
 - 描述：设备的device id
 
-order
+commands
 - 类型：String, 不可为空
 - 描述：控制指令
 
@@ -1791,17 +1791,25 @@ enable
 - 类型：boolean, 可为空，默认为true
 - 描述：当前task，True 启用 False 暂停
 
-month
-- 类型：String, 可为空
-- 描述：月
+```js
+时间参数说明：
 
-day_of_month
-- 类型：String, 可为空
-- 描述：日
+星期，取值：
+周一：0
+周二：1
+周三：2
+周四：3
+周五：4
+周六：5
+周日：6
+“*”：每天
+不传：单次任务
+（例如“0,1,2”表示周一 周二 周三）
+```
 
 day_of_week
 - 类型：String, 可为空
-- 描述：周
+- 描述：周 默认为“*”
 
 hour
 - 类型：String, 可为空
@@ -1834,13 +1842,18 @@ MiCODevice micodev = new MiCODevice(MainActivity.this);
 ScheduleTaskParam stp = new ScheduleTaskParam();
 
 stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
-stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
+stp.commands = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
 stp.enable = true;
-stp.month = "*";
-stp.day_of_month = "*";
 stp.day_of_week = "*";
 stp.hour = "*";
 stp.minute = "*";
+
+// 以上参数说明每分钟执行一次，
+// 示例：
+// minute = "10", 每小时的第10分钟执行一次
+// day_of_week = "1,2,3", hour = "11", minute = "30", 每周的周二，周三，周四的11点30分钟执行一次指令
+
+// 更详细的参数说明，参考《Linux crontab定时执行任务》
 
 micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
 
