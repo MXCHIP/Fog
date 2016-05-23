@@ -89,11 +89,21 @@ __ControlRemoteDevice__
 
 * [停止监听设备](#stopListenDevice)
 
-<!--
+<div id="CommandTask"></div>
+__CommandTask__
+
 * [创建定时任务](#createScheduleTask)
 
 * [创建延时任务](#creatDelayTask)
--->
+
+* [获取任务列表](#getTaskList)
+
+* [移除任务](#deleteTask)
+
+* [更新定时任务](#updateScheduleTask)
+
+* [更新延时任务](#updateDelayTask)
+
 <br/>
 <br/>
 <div id="getVerifyCode"></div>
@@ -1116,7 +1126,6 @@ err
       "code": 23201
     },
     "data": {
-      
     }
   }
 }
@@ -1151,9 +1160,13 @@ mico2.getShareVerCode(param, function (ret, err) {
 
 ##params
 
-sdevp
-- 类型：ShareDeviceParams, 不可为空
-- 描述：ShareDeviceParams至少包含以下的信息
+deviceid
+- 类型：字符串, 不可为空
+- 描述：设备的id
+
+devicepw
+- 类型：字符串, 不可为空
+- 描述：设备的PW
 
 bindvercode
 - 类型：int, 不可为空
@@ -1170,14 +1183,6 @@ bindingtype
 iscallback
 - boolean, 不可为空
 - 描述：是否返回绑定状态，此版本请都设置为false
-
-deviceid
-- 类型：字符串, 不可为空
-- 描述：设备的id
-
-devicepw
-- 类型：字符串, 不可为空
-- 描述：设备的PW
 
 token
 - 类型：字符串, 不可为空
@@ -1524,7 +1529,7 @@ mico2.stopListenDevice(function(ret, err){
 ##可用性
 
     Android系统4.0+
-<!--
+
 <div id="createScheduleTask"></div>
 #**createScheduleTask**
 
@@ -1533,15 +1538,11 @@ mico2.stopListenDevice(function(ret, err){
     createScheduleTask({params}, callback(ret, err))
 ##params
 
-stp
-- 类型：ScheduleTaskParam, 不可为空
-- 描述：ScheduleTaskParam至少包含以下的信息
-
-device_id
+deviceid
 - 类型：字符串, 不可为空
 - 描述：设备的device id
 
-order
+command
 - 类型：字符串, 不可为空
 - 描述：控制指令
 
@@ -1569,11 +1570,11 @@ month
 - 类型：字符串, 可为空
 - 描述：月
 
-day_of_month
+dayofmonth
 - 类型：字符串, 可为空
 - 描述：日
 
-day_of_week
+dayofweek
 - 类型：字符串, 可为空
 - 描述：
 
@@ -1585,50 +1586,58 @@ minute
 - 类型：字符串, 可为空
 - 描述：分
 
-##callback
-
-ctrldevcb
-- 类型：ControlDeviceCallBack
-- 描述：接口调用成功后的回调函数
-
-```js
-{"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
-```
-
-##token
-
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "msg": "创建任务成功",
+    "code": 0
+  },
+  "data": "8b95b17c-20bc-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{"message":"success"}
+```
+
+
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-ScheduleTaskParam stp = new ScheduleTaskParam();
+var command = '{"KG_Start":"1","WorkMode":"1"}';
 
-stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
-stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
-stp.enable = true;
-stp.month = "*";
-stp.day_of_month = "*";
-stp.day_of_week = "*";
-stp.hour = "*";
-stp.minute = "*";
-
-micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG + "onSuccess", message);
+var param = {
+    deviceid: "deviceid",
+    command: command,
+    enable: true,
+    month: "*",
+    dayofmonth: "*",
+    dayofweek: "*",
+    hour: "*",
+    minute: "*",
+    token: "token"
+};
+mico2.createScheduleTask(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
     }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG + "onFailure", code + " " + message);
-    }
-
-}, token);
+}); 
 ```
 
 ##可用性
@@ -1643,15 +1652,11 @@ micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
     creatDelayTask({params}, callback(ret, err))
 ##params
 
-stp
-- 类型：ScheduleTaskParam, 不可为空
-- 描述：ScheduleTaskParam至少包含以下的信息
-
-device_id
+deviceid
 - 类型：字符串, 不可为空
 - 描述：设备的device id
 
-order
+command
 - 类型：字符串, 不可为空
 - 描述：控制指令
 
@@ -1663,52 +1668,415 @@ second
 - 类型：int, 可为空
 - 描述：秒
 
-##callback
-
-ctrldevcb
-- 类型：ControlDeviceCallBack
-- 描述：接口调用成功后的回调函数
-
-```js
-{"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
-```
-
-##token
-
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "msg": "创建任务成功",
+    "code": 0
+  },
+  "data": "8b95b17c-20bc-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{"message":"success"}
+```
+
 ##示例代码
 
 ```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-ScheduleTaskParam stp = new ScheduleTaskParam();
-
-stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
-stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
-stp.enable = true;
-stp.second = 100;
-
-micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG + "onSuccess", message);
+var command = '{"KG_Start":"1","WorkMode":"1"}'
+var param = {
+    deviceid: deviceid,
+    command: command,
+    enable: true,
+    second: 61,
+    token: $api.getStorage(_TOKEN)
+};
+mico2.createDelayTask(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
     }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG + "onFailure", code + " " + message);
-    }
-
-}, token);
+});  
 ```
 
 ##可用性
 
     Android系统4.0+
--->
+
+
+<div id="getTaskList"></div>
+#**creatDelayTask**
+
+    获取任务列表
+
+    getTaskList({params}, callback(ret, err))
+##params
+
+deviceid
+- 类型：字符串, 不可为空
+- 描述：设备的device id
+
+tasktype
+- 类型：字符串, 不可为空
+- 描述：任务类型 0 定时任务， 1 延时任务
+
+token
+- 类型：字符串, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{"message":"success"}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "meta": {
+    "msg": "任务列表",
+    "code": 0
+  },
+  "data": [
+    {
+      "commands": "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}",
+      "second": 60,
+      "enable": true,
+      "name": "426d19f4-20b7-11e6-a739-00163e0204c0"
+    },
+    {
+      "commands": "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}",
+      "second": 60,
+      "enable": true,
+      "name": "0c14e3ac-20ba-11e6-a739-00163e0204c0"
+    }
+  ]
+}
+```
+
+##示例代码
+
+```java
+var param = {
+  deviceid: deviceid,
+  tasktype: 1,
+  token: $api.getStorage(_TOKEN)
+};
+mico2.getTaskList(param, function (ret, err) {
+  if (ret){
+      console.log(JSON.stringify(ret));
+  }else{
+      console.log(JSON.stringify(err));
+  }
+});  
+```
+
+##可用性
+
+    Android系统4.0+
+
+<div id="deleteTask"></div>
+#**deleteTask**
+
+    删除任务
+
+    deleteTask({params}, callback(ret, err))
+##params
+
+deviceid
+- 类型：字符串, 不可为空
+- 描述：设备的device id
+
+taskid
+- 类型：字符串, 不可为空
+- 描述：任务的id，通过getTaskList可以获取
+
+token
+- 类型：字符串, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "msg": "成功删除task：8b95b17c-20bc-11e6-a739-00163e0204c0",
+    "code": 0
+  },
+  "data": "8b95b17c-20bc-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+  "code": 400,
+  "message": {
+    "meta": {
+      "msg": "没有找到对应任务,请检查task name是否正确。",
+      "code": 21110
+    },
+    "data": {
+    }
+  }
+}
+```
+
+##示例代码
+
+```java
+var param = {
+    deviceid: deviceid,
+    taskid: "5af8bb16-20b4-11e6-a739-00163e0204c0",
+    token: $api.getStorage(_TOKEN)
+};
+mico2.deleteTask(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
+    }
+});   
+```
+
+##可用性
+
+    Android系统4.0+
+
+<div id="updateScheduleTask"></div>
+#**updateScheduleTask**
+
+    更新定时任务
+
+    updateScheduleTask({params}, callback(ret, err))
+##params
+
+
+deviceid
+- 类型：字符串, 不可为空
+- 描述：设备的device id
+
+taskid
+- 类型：字符串, 不可为空
+- 描述：任务的id，通过getTaskList可以获取
+
+command
+- 类型：字符串, 不可为空
+- 描述：控制指令
+
+enable
+- 类型：boolean, 可为空，默认为true
+- 描述：当前task，True 启用 False 暂停
+
+```js
+时间格式：
+
+星期，取值：
+周一：0
+周二：1
+周三：2
+周四：3
+周五：4
+周六：5
+周日：6
+"*"：每天
+不传：单次任务
+(例如“0,1,2”表示周一 周二 周三)
+```
+
+month
+- 类型：字符串, 可为空
+- 描述：月
+
+dayofmonth
+- 类型：字符串, 可为空
+- 描述：日
+
+dayofweek
+- 类型：字符串, 可为空
+- 描述：
+
+hour
+- 类型：字符串, 可为空
+- 描述：小时
+
+minute
+- 类型：字符串, 可为空
+- 描述：分
+
+token
+- 类型：字符串, 不可为空
+- 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
+
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "msg": "修改任务成功",
+    "code": 0
+  },
+  "data": "5af8bb16-20b4-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{"message":"success"}
+```
+
+##示例代码
+
+```java
+var command = "{\"KG_Start\":\"44\",\"WorkMode\":\"55\"}";
+var taskid = "412ab16e-20b7-11e6-a739-00163e0204c0";
+
+var param = {
+    deviceid: deviceid,
+    taskid: taskid,
+    command: command,
+    enable: false,
+    month: "*",
+    dayofmonth: "*",
+    dayofweek: "*",
+    hour: "*",
+    minute: "*",
+    token: $api.getStorage(_TOKEN)
+};
+mico2.updateScheduleTask(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
+    }
+});  
+```
+
+##可用性
+
+    Android系统4.0+
+
+<div id="updateDelayTask"></div>
+#**updateDelayTask**
+
+    更新延时任务
+
+    updateDelayTask({params}, callback(ret, err))
+##params
+
+deviceid
+- 类型：字符串, 不可为空
+- 描述：设备的device id
+
+taskid
+- 类型：字符串, 不可为空
+- 描述：任务的id，通过getTaskList可以获取
+
+command
+- 类型：字符串, 不可为空
+- 描述：控制指令
+
+enable
+- 类型：boolean, 可为空，默认为true
+- 描述：当前task，True 启用 False 暂停
+
+second
+- 类型：int, 可为空
+- 描述：秒
+
+token
+- 类型：字符串, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "msg": "修改任务成功",
+    "code": 0
+  },
+  "data": "5af8bb16-20b4-11e6-a739-00163e0204c0"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{"message":"success"}
+```
+
+##示例代码
+
+```java
+var command = "{\"KG_Start\":\"44\",\"WorkMode\":\"55\"}";
+var taskid = "5af8bb16-20b4-11e6-a739-00163e0204c0";
+
+var param = {
+    deviceid: deviceid,
+    taskid: taskid,
+    command: command,
+    enable: false,
+    second: 65,
+    token: $api.getStorage(_TOKEN)
+};
+mico2.updateDelayTask(param, function (ret, err) {
+    if (ret){
+        console.log(JSON.stringify(ret));
+    }else{
+        console.log(JSON.stringify(err));
+    }
+});   
+```
+
+##可用性
+
+    Android系统4.0+
+
 
 ##错误码摘要
 
