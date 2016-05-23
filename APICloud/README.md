@@ -72,6 +72,8 @@ __ManageDevices__
 
 * [获取设备详情](#getDeviceInfo)
 
+* [修改设备名称](#updateDeviceAlias)
+
 * [获取设备分享码](#getShareVerCode)
 
 * [通过分享码绑定设备](#addDeviceByVerCode)
@@ -204,7 +206,7 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
+  "eyJhVlSV8I...": "eyJhbGcxxx44",
   "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```
@@ -301,7 +303,7 @@ err
 ```java
 var param = {
     password: "password2_val",
-    token: "token"
+    token: "eyJhVlSV8I..."
 };
 mico2.setPassword(param, function(ret, err) {
     if (ret) {
@@ -345,7 +347,7 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
+  "eyJhVlSV8I...": "eyJhbGcxxx44",
   "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```
@@ -405,7 +407,7 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
+  "eyJhVlSV8I...": "eyJhbGcxxx44",
   "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```
@@ -426,7 +428,7 @@ err
 
 ```java
 var param = {
-    token: "token"
+    token: "eyJhVlSV8I..."
 };
 mico2.refreshToken(param, function(ret, err) {
     if (ret) {
@@ -471,7 +473,7 @@ MiCOUser micoUser = new MiCOUser();
 String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
 
-micoUser.getMemberList(deviceid, new UserCallBack() {
+micoUser.getMemberList("81d79316-bb5a-11e5-a739-00163e0204c0" new UserCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -537,7 +539,7 @@ String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String menduserid = "xxx11e5-a739-00163e0204c0";
 String token = "xxx...";
 
-micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
+micoUser.removeBindRole(m"81d79316-bb5a-11e5-a739-00163e0204c0" menduserid, new UserCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -617,7 +619,7 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
+  "eyJhVlSV8I...": "eyJhbGcxxx44",
   "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```
@@ -811,7 +813,7 @@ ret
   },
   "data": {
     "devicepw": "2665",
-    "deviceid": "e79f0250-ea5e-11e5-a739-00163e0204c0",
+    "81d79316-bb5a-11e5-a739-00163e0204c0": "e79f0250-ea5e-11e5-a739-00163e0204c0",
     "devicename": "开心手环"
   }
 }
@@ -838,7 +840,7 @@ err
 var param = {
     ip:"192.168.1.10",
     port: "8002",
-    token:"token"
+    token:"eyJhVlSV8I..."
 };
 mico2.bindDevice(param, function(ret, err) {
     if (ret)
@@ -899,7 +901,7 @@ err
 {
   "meta": {
     "message": {
-      "deviceid": [
+      "81d79316-bb5a-11e5-a739-00163e0204c0": [
         "Ensure this field has no more than 36 characters."
       ]
     },
@@ -914,8 +916,8 @@ err
 
 ```java
 var param = {
-    deviceid: "deviceid",
-    token: "token"
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
+    token: "eyJhVlSV8I..."
 };
 mico2.unBindDevice(param, function(ret, err) {
     if (ret)
@@ -979,7 +981,7 @@ err
 
 ```java
 var param = {
-    token: "token"
+    token: "eyJhVlSV8I..."
 };
 mico2.getDeviceList(param, function(ret, err) {
     if (ret){
@@ -1049,21 +1051,80 @@ err
 }
 ```
 
-##token
+##示例代码
 
+```java
+var param = {
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
+    token: "eyJhVlSV8I..."
+};
+mico2.getDeviceInfo(param, function (ret, err) {
+    if (ret){
+        alert(JSON.stringify(ret));
+    }else{
+        alert(JSON.stringify(err));
+    }
+});
+```
+
+##可用性
+
+    Android系统4.0+
+
+<div id="updateDeviceAlias"></div>
+#**updateDeviceAlias**
+
+    修改设备名称
+
+    updateDeviceAlias({params}, callback(ret, err))
+
+##params
+
+deviceid
+- 类型：字符串, 不可为空
+- 描述：即将绑定的设备的deviceid
+
+devicename
+- 类型：字符串, 不可为空
+- 描述：设备名称
+
+token
+- 类型：字符串, 不可为空
+- 描述：用户登录后获取的token
+
+##callback
+
+ret
+- 类型：JSON 对象
+- 描述：接口调用成功后的回调函数
+
+```js
+{
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+{
+}
+```
 
 ##示例代码
 
 ```java
 var param = {
-    deviceid: "deviceid",
-    token: "token"
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
+    devicename: "好风尚",
+    token: "eyJhVlSV8I..."
 };
-mico2.getDeviceInfo(param, function (ret, err) {
+mico2.updateDeviceAlias(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -1135,14 +1196,14 @@ err
 
 ```java
 var param = {
-    deviceid: "deviceid",
-    token: "token"
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
+    token: "eyJhVlSV8I..."
 };
 mico2.getShareVerCode(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -1220,18 +1281,18 @@ err
 
 ```java
 var param = {
-    deviceid: "deviceid",
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     devicepw: "devicepw",
     bindvercode: "bindvercode",
     role: 3,
     bindingtype: "home",
-    token: "token"
+    token: "eyJhVlSV8I..."
 };
 mico2.addDeviceByVerCode(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -1295,14 +1356,14 @@ var param = {
     port: "1883",
     username: "enduserid",
     password: "password",
-    deviceid: "deviceid",
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     clientid: "enduserid"
 };
 mico2.startListenDevice(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });  
 ```
@@ -1366,16 +1427,16 @@ err
 
 ```java
 var param = {
-    deviceid: "deviceid",
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     devicepw: "devicepw",
     command: '{"KG_Bottom":"1"}',
-    token: "token"
+    token: "eyJhVlSV8I..."
 };
 mico2.sendCommand(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });  
 ```
@@ -1428,9 +1489,9 @@ var param = {
 };
 mico2.addDeviceListener(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });   
 ```
@@ -1478,9 +1539,9 @@ var param = {
 };
 mico2.removeDeviceListener(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });   
 ```
@@ -1519,9 +1580,9 @@ err
 ```java
 mico2.stopListenDevice(function(ret, err){
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });
 ```
@@ -1610,18 +1671,13 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-```js
-{"message":"success"}
-```
-
-
 ##示例代码
 
 ```java
 var command = '{"KG_Start":"1","WorkMode":"1"}';
 
 var param = {
-    deviceid: "deviceid",
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     command: command,
     enable: true,
     month: "*",
@@ -1629,13 +1685,13 @@ var param = {
     dayofweek: "*",
     hour: "*",
     minute: "*",
-    token: "token"
+    token: "eyJhVlSV8I..."
 };
 mico2.createScheduleTask(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 }); 
 ```
@@ -1692,26 +1748,22 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-```js
-{"message":"success"}
-```
-
 ##示例代码
 
 ```java
 var command = '{"KG_Start":"1","WorkMode":"1"}'
 var param = {
-    deviceid: deviceid,
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0"
     command: command,
     enable: true,
     second: 61,
-    token: $api.getStorage(_TOKEN)
+    token: "eyJhVlSV8I..."
 };
 mico2.createDelayTask(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });  
 ```
@@ -1748,14 +1800,6 @@ ret
 - 描述：接口调用成功后的回调函数
 
 ```js
-{"message":"success"}
-```
-
-err
-- 类型：JSON 对象
-- 描述：接口调用失败后的回调函数
-
-```js
 {
   "meta": {
     "msg": "任务列表",
@@ -1778,19 +1822,24 @@ err
 }
 ```
 
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+
 ##示例代码
 
 ```java
 var param = {
-  deviceid: deviceid,
+  deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
   tasktype: 1,
-  token: $api.getStorage(_TOKEN)
+  token: "eyJhVlSV8I..."
 };
 mico2.getTaskList(param, function (ret, err) {
   if (ret){
-      console.log(JSON.stringify(ret));
+      alert(JSON.stringify(ret));
   }else{
-      console.log(JSON.stringify(err));
+      alert(JSON.stringify(err));
   }
 });  
 ```
@@ -1857,15 +1906,15 @@ err
 
 ```java
 var param = {
-    deviceid: deviceid,
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     taskid: "5af8bb16-20b4-11e6-a739-00163e0204c0",
-    token: $api.getStorage(_TOKEN)
+    token: "eyJhVlSV8I..."
 };
 mico2.deleteTask(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });   
 ```
@@ -1959,9 +2008,6 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-```js
-{"message":"success"}
-```
 
 ##示例代码
 
@@ -1970,7 +2016,7 @@ var command = "{\"KG_Start\":\"44\",\"WorkMode\":\"55\"}";
 var taskid = "412ab16e-20b7-11e6-a739-00163e0204c0";
 
 var param = {
-    deviceid: deviceid,
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     taskid: taskid,
     command: command,
     enable: false,
@@ -1979,13 +2025,13 @@ var param = {
     dayofweek: "*",
     hour: "*",
     minute: "*",
-    token: $api.getStorage(_TOKEN)
+    token: "eyJhVlSV8I..."
 };
 mico2.updateScheduleTask(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });  
 ```
@@ -2046,10 +2092,6 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-```js
-{"message":"success"}
-```
-
 ##示例代码
 
 ```java
@@ -2057,18 +2099,18 @@ var command = "{\"KG_Start\":\"44\",\"WorkMode\":\"55\"}";
 var taskid = "5af8bb16-20b4-11e6-a739-00163e0204c0";
 
 var param = {
-    deviceid: deviceid,
+    deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     taskid: taskid,
     command: command,
     enable: false,
     second: 65,
-    token: $api.getStorage(_TOKEN)
+    token: "eyJhVlSV8I..."
 };
 mico2.updateDelayTask(param, function (ret, err) {
     if (ret){
-        console.log(JSON.stringify(ret));
+        alert(JSON.stringify(ret));
     }else{
-        console.log(JSON.stringify(err));
+        alert(JSON.stringify(err));
     }
 });   
 ```

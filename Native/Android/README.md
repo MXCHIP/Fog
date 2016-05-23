@@ -77,6 +77,8 @@ __ManageDevices__
 
 * [获取设备详情](#getDeviceInfo)
 
+* [修改设备名称](#updateDeviceAlias)
+
 * [获取设备分享码](#getShareVerCode)
 
 * [生成二维码](#creatQrCode)
@@ -963,6 +965,61 @@ micoUser.getDeviceInfo(deviceid, new UserCallBack() {
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
+}, token);
+```
+
+##可用性
+
+    Android系统4.0+
+
+<div id="updateDeviceAlias"></div>
+#**updateDeviceAlias**
+
+    获取设备信息
+
+    updateDeviceAlias(String deviceid, String alias, ManageDeviceCallBack managedevcb, String token)
+
+##params
+
+deviceid
+- 类型：String, 不可为空
+- 描述：即将绑定的设备的deviceid
+
+alias
+- 类型：String, 不可为空
+- 描述：设备名称
+
+##callback
+
+managedevcb
+- 类型：ManageDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##token
+
+token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
+
+##示例代码
+
+```java
+MiCODevice micoDev = new MiCODevice(MainActivity.this);
+String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
+String alias = "好名字";
+String token = "xxx...";
+micoDev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
+
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG, message);
+    }
+
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, code + " " + message);
+    }
+
 }, token);
 ```
 
