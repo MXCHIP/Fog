@@ -161,8 +161,8 @@ err
 
 ```java
 var param = {
-    loginname: "loginname",
-    appid: "_APPID"
+    loginname: "8800000@qq.com",
+    appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
 mico2.getVerifyCode(param, function(ret, err) {
     if (ret) {
@@ -230,9 +230,9 @@ err
 
 ```java
 var param = {
-    loginname: "loginname",
-    vercode: "vercode",
-    appid: "_APPID"
+    loginname: "8800000@qq.com",
+    vercode: "8865",
+    appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
 mico2.checkVerifyCode(param, function(ret, err) {
     if (ret) {
@@ -302,7 +302,7 @@ err
 
 ```java
 var param = {
-    password: "password2_val",
+    password: "123456",
     token: "eyJhVlSV8I..."
 };
 mico2.setPassword(param, function(ret, err) {
@@ -369,9 +369,9 @@ err
 ```java
 var mico2 = api.require('mico2');
 var param = {
-    loginname: "loginname",
-    password: "password",
-    appid: "_APPID"
+    loginname: "8800000@qq.com",
+    password: "123456",
+    appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
 mico2.login(param, function(ret, err) {
     if (ret) {
@@ -462,30 +462,42 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
+
+```js
+{
+  "meta": {
+    "message": "成功根据设备ID获取用户列表",
+    "code": 0
+  },
+  "data": "[{"enduserid":"e32bd592-1bf8-11e6-a739-00163e0204c0","phone":"","email":"33er2212@126.com","nickname":"","realname":"","is_active":true,"app":"db456b4a-17fc-11e6-a739-00163e0204c0"}]"
+}
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+
+```
 
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
-String token = "xxx...";
-
-micoUser.getMemberList("81d79316-bb5a-11e5-a739-00163e0204c0" new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG + "getMemberList", message);
-        setAdapter(message);
+var param = {
+    deviceid: "db456b4a-17fc-xxxx",
+    token: "eyJhVlSV8I..."
+};
+mico2.getMemberList(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, message);
-    }
-}, token);
+}); 
 ```
 
 ##可用性
@@ -515,8 +527,8 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+ret
+- 类型：JSON 对象
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -526,31 +538,35 @@ usercb
     "code": 0
   },
   "data": {
-    "enduserid": "xxx-fbc5-11e5-a739-00163e0204c0"
+    "enduserid": "e32bd592-1bf8-11e6-a739-00163e0204c0"
   }
 }
+```
+
+err
+- 类型：JSON 对象
+- 描述：接口调用失败后的回调函数
+
+```js
+
 ```
 
 ##示例代码
 
 ```java
-MiCOUser micoUser = new MiCOUser();
-String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
-String menduserid = "xxx11e5-a739-00163e0204c0";
-String token = "xxx...";
-
-micoUser.removeBindRole(m"81d79316-bb5a-11e5-a739-00163e0204c0" menduserid, new UserCallBack() {
-
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
+var enduserid = "";
+var param = {
+    deviceid: "db456b4a-17fc-11e6-a739-00163e0204",
+    enduserid: "e32bd592-1bf8-11e6-a739-00163e0204c0",
+    token: "eyJhVlSV8I..."
+};
+mico2.removeBindRole(param, function(ret, err) {
+    if (ret) {
+        console.log(JSON.stringify(ret));
+    } else {
+        console.log(JSON.stringify(err));
     }
-
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, message);
-    }
-},token);
+}); 
 ```
 
 ##可用性
@@ -575,7 +591,7 @@ ssid
 - 描述：当前WIFI的名称
 
 ```js
-{ssid: "gg"}
+{ssid: "mico2"}
 ```
 
 ##示例代码
@@ -635,8 +651,8 @@ err
 
 ```java
 var param = {
-    ssid: "ssid_val",
-    password: "psw_val",
+    ssid: "mico2",
+    password: "12345678",
     runSecond: 20000 //20秒后停止发包
 };
 mico2.startEasyLink(param, function(ret, err) {
@@ -1257,7 +1273,12 @@ ret
 
 ```js
 {
-  "vercode": "3c642f24-1b18-11e6-a739-00163e0204c0"
+  "meta": {
+    "message": "用户已重新绑定",
+    "code": 0
+  },
+  "data": {
+  }
 }
 ```
 
@@ -1268,11 +1289,10 @@ err
 ```js
 {
   "meta": {
-    "message": "设备id与用户已经绑定",
-    "code": 23101
+    "message": "您是超级用户，无法更新授权",
+    "code": 23102
   },
   "data": {
-    
   }
 }
 ```
@@ -1282,8 +1302,8 @@ err
 ```java
 var param = {
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
-    devicepw: "devicepw",
-    bindvercode: "bindvercode",
+    devicepw: "1234",
+    bindvercode: "7a661792-215d-11e6-a739-00163e0204c0",
     role: 3,
     bindingtype: "home",
     token: "eyJhVlSV8I..."
@@ -1428,7 +1448,7 @@ err
 ```java
 var param = {
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
-    devicepw: "devicepw",
+    devicepw: "1234",
     command: '{"KG_Bottom":"1"}',
     token: "eyJhVlSV8I..."
 };
@@ -1528,7 +1548,6 @@ err
 - 描述：接口调用失败后的回调函数
 
 ```js
-{"message":"success"}
 ```
 
 ##示例代码
@@ -1572,7 +1591,6 @@ err
 - 描述：接口调用失败后的回调函数
 
 ```js
-{"message":"success"}
 ```
 
 ##示例代码
