@@ -422,7 +422,7 @@ micoUser.refreshToken(userToken, new UserCallBack() {
 <div id="getMemberList"></div>
 #**getMemberList**
 
-    获取此设备名下的用户，只能看到自己意外的用户
+    获取此设备名下的用户，只能看到自己以外的用户
 
     getMemberList(String deviceid, UserCallBack usercb, String token)
 
