@@ -38,7 +38,7 @@ loginName     | NSString       | 登录名，邮箱或者手机号
 appid         | NSString       | 在Fogcloud平台注册的APP的id
 
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/Login.png)
+![](./Images/Login.png)
 
 <div id='checkVerifyCode'>
 ###*checkVerifyCode*
@@ -50,7 +50,7 @@ appid         | NSString       | 在Fogcloud平台注册的APP的id
 vercode		  | NSString 		| 邮箱或者手机收到的验证码
 
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/CheckVerCode.png)
+![](./Images/CheckVerCode.png)
 
 <div id='register'>
 ###*register*
@@ -64,7 +64,7 @@ appid         | NSString       | 在Fogcloud平台注册的APP的id
 token		  | NSString		| 检查验证码返回的 token
 
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/register.png)
+![](./Images/register.png)
 
 <div id='login'>
 ###*login*
@@ -77,7 +77,7 @@ password      | NSString       | 用户密码
 appid		  | NSString		| 在 Fogcloud 平台注册的 app 的 id
 
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/realLogin.png)
+![](./Images/realLogin.png)
 
 <div id='refreshToken'>
 ###*refreshToken*
@@ -86,7 +86,7 @@ appid		  | NSString		| 在 Fogcloud 平台注册的 app 的 id
 :-----------  | :-------------:| -----------:
 token         | NSString       | 本地持久化的 token
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/refreshToken.png)
+![](./Images/refreshToken.png)
 
 <div id='fetchMemberList'>
 ###*getMemberList*
@@ -96,7 +96,7 @@ token         | NSString       | 本地持久化的 token
 token         | NSString       | 本地持久化的 token
 deviceid	  |	NSString 		| 设备的 id
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/getMemberList.png)
+![](./Images/getMemberList.png)
 
 <div id='removeBindRole'>
 ###*removeBindRole*
@@ -108,4 +108,4 @@ deviceid	  |	NSString 		| 设备的 id
 userid		  | NSString		| 欲移除权限的用户的 id
 
 #####代码示例
-![](/Users/wuzhengbin/Desktop/Mico2Doc/Images/removeBindRole.png)
+![](./Images/removeBindRole.png)
