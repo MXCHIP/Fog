@@ -49,8 +49,53 @@ loginName     | NSString       | 登录名，邮箱或者手机号
 appid         | NSString       | 在Fogcloud平台注册的APP的id
 vercode		  | NSString 		| 邮箱或者手机收到的验证码
 
-#####代码示例
-![](./Images/CheckVerCode.png)
+#####代码示例 
+
+```js
+@implementation MXWRootViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Do any additional setup after loading the view from its nib
+    [[MicoDeviceManager sharedInstance] fetchCurrentSSIDWithBlock:^(NSString *ssid) {
+        self.ssidTextField.text = ssid;
+    }];
+    
+    
+//    [[MicoUserManager sharedInstance] getVerifyCodeWithLoginName:@"wzbdroid@126.com" andAppid:APP_ID success:^(NSDictionary *result) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)startEasyLinkButtonDidClicked:(UIButton *)sender {
+    [self.view endEditing:YES];
+    
+    if (self.passwordTextField.text.length == 0) {
+        return;
+    }
+    
+    [[MicoDeviceManager sharedInstance] startEasyLinkWithPassword:self.passwordTextField.text handler:^(BOOL isSuccess) {
+        [[MicoDeviceManager sharedInstance] startSearchDevicesWithBlock:^(NSArray *devicesArray) {
+            NSLog(@"%@", devicesArray);
+        }];
+    }];
+    
+
+}
+
+
+@end
+
+
+```
 
 <div id='register'>
 ###*register*
