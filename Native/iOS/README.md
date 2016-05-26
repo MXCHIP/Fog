@@ -52,48 +52,14 @@ vercode		  | NSString 		| 邮箱或者手机收到的验证码
 #####代码示例 
 
 ```js
-@implementation MXWRootViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Do any additional setup after loading the view from its nib
-    [[MicoDeviceManager sharedInstance] fetchCurrentSSIDWithBlock:^(NSString *ssid) {
-        self.ssidTextField.text = ssid;
+    NSString *loginName = @"wzbdroid@126.com";//也可以为手机号码
+    NSString *appid = @"appidappidappidappid";
+    [[MicoUserManager sharedInstance] getVerifyCodeWithLoginName:loginName andAppid:appid success:^(NSDictionary *result) {
+        //成功回调
+    } failure:^(NSError *error) {
+        //失败回调
     }];
-    
-    
-//    [[MicoUserManager sharedInstance] getVerifyCodeWithLoginName:@"wzbdroid@126.com" andAppid:APP_ID success:^(NSDictionary *result) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)startEasyLinkButtonDidClicked:(UIButton *)sender {
-    [self.view endEditing:YES];
-    
-    if (self.passwordTextField.text.length == 0) {
-        return;
-    }
-    
-    [[MicoDeviceManager sharedInstance] startEasyLinkWithPassword:self.passwordTextField.text handler:^(BOOL isSuccess) {
-        [[MicoDeviceManager sharedInstance] startSearchDevicesWithBlock:^(NSArray *devicesArray) {
-            NSLog(@"%@", devicesArray);
-        }];
-    }];
-    
-
-}
-
-
-@end
-
 
 ```
 
