@@ -135,7 +135,15 @@ token         | NSString       | 本地持久化的 token
 token         | NSString       | 本地持久化的 token
 deviceid	  |	NSString 		| 设备的 id
 #####代码示例
-![](./Images/getMemberList.png)
+```
+    NSString *token = [TokenManager token];
+    NSString *deviceid = @"xxx-asdfasdf-asdfasdfas";
+    [[MicoUserManager sharedInstance] getMemberListWithDeviceID:deviceid andToken:token success:^(NSDictionary *result) {
+        //处理成功回调
+    } failure:^(NSError *error) {
+        //处理失败的回调
+    }];
+```
 
 <div id='removeBindRole'>
 ###*removeBindRole*
