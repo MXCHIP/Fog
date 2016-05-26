@@ -162,3 +162,30 @@ userid		  | NSString		| 欲移除权限的用户的 id
         //处理失败回调
     }];
 ```
+
+###MiCOUser 用户管理
+#####EasyLink
+* [获取SSID](#fetchCurrentSSID)
+* [开始配网](#startEasyLink)
+* [停止配网](#stopEasyLink)
+
+<div id='fetchCurrentSSID'>
+###*fetchCurrentSSID*
+#####代码示例
+```
+    [[MicoDeviceManager sharedInstance] fetchCurrentSSIDWithBlock:^(NSString *ssid) {
+        NSLog(@"%@", ssid);
+    }];
+```
+
+<div id='startEasyLink'>
+###*startEasyLink*
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+password      | NSString       | 当前连接的 wifi 的密码
+#####代码示例
+```
+	[[MicoDeviceManager sharedInstance] startEasyLinkWithPassword:@"12345678" handler:^(BOOL isSuccess) {
+    	//其实好像不需要这个 block    
+    }];
+```
