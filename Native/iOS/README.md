@@ -82,7 +82,14 @@ appid         | NSString       | 在Fogcloud平台注册的APP的id
 token		  | NSString		| 检查验证码返回的 token
 
 #####代码示例
-![](./Images/register.png)
+```
+	NSString *token = @"xxx...";
+    [[MicoUserManager sharedInstance] registerUserWithPassword:@"123456" confirmPassword:@"123456" appid:APP_ID token:token success:^(NSDictionary *result) {
+        //处理成功回调
+    } failure:^(NSError *error) {
+        //处理失败回调
+    }];
+```
 
 <div id='login'>
 ###*login*
