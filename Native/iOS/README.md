@@ -38,7 +38,15 @@ loginName     | NSString       | 登录名，邮箱或者手机号
 appid         | NSString       | 在Fogcloud平台注册的APP的id
 
 #####代码示例
-![](./Images/Login.png)
+```
+    NSString *loginName = @"wzbdroid@126.com";//也可以为手机号码
+    NSString *appid = @"appidappidappidappid";
+    [[MicoUserManager sharedInstance] getVerifyCodeWithLoginName:loginName andAppid:appid success:^(NSDictionary *result) {
+        //成功回调
+    } failure:^(NSError *error) {
+        //失败回调
+    }];
+```
 
 <div id='checkVerifyCode'>
 ###*checkVerifyCode*
@@ -50,17 +58,16 @@ appid         | NSString       | 在Fogcloud平台注册的APP的id
 vercode		  | NSString 		| 邮箱或者手机收到的验证码
 
 #####代码示例 
-
-```js
-
-    NSString *loginName = @"wzbdroid@126.com";//也可以为手机号码
+```
+	NSString *loginName = @"wzbdroid@126.com";//也可以为手机号码
     NSString *appid = @"appidappidappidappid";
-    [[MicoUserManager sharedInstance] getVerifyCodeWithLoginName:loginName andAppid:appid success:^(NSDictionary *result) {
-        //成功回调
+    NSString *vercode = @"478966";
+    [[MicoUserManager sharedInstance] checkVerifyCodeWithLoginName:loginName vercode:vercode appid:appid success:^(NSDictionary *result) {
+        //处理成功回调，例如
+        self.tokenLabel.text = result[@"token"];
     } failure:^(NSError *error) {
-        //失败回调
+        //处理失败回调
     }];
-
 ```
 
 <div id='register'>
