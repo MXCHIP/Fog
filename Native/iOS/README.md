@@ -155,4 +155,10 @@ deviceid	  |	NSString 		| 设备的 id
 userid		  | NSString		| 欲移除权限的用户的 id
 
 #####代码示例
-![](./Images/removeBindRole.png)
+```
+    [[MicoUserManager sharedInstance] removeBindRoleWithDeviceID:deviceId enduserID:enduserId token:token success:^(NSDictionary *result) {
+        //处理成功回调
+    } failure:^(NSError *error) {
+        //处理失败回调
+    }];
+```
