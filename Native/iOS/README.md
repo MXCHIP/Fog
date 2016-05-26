@@ -117,7 +117,15 @@ appid		  | NSString		| 在 Fogcloud 平台注册的 app 的 id
 :-----------  | :-------------:| -----------:
 token         | NSString       | 本地持久化的 token
 #####代码示例
-![](./Images/refreshToken.png)
+```
+    NSString *token = [TokenManager token];//老的 token
+    [[MicoUserManager sharedInstance] refreshTokenWithOldToken:@"" success:^(NSDictionary *result) {
+        //处理成功回调
+        //持久化新的 token
+    } failure:^(NSError *error) {
+        //处理失败回调
+    }];
+```
 
 <div id='fetchMemberList'>
 ###*getMemberList*
