@@ -163,7 +163,7 @@ userid		  | NSString		| 欲移除权限的用户的 id
     }];
 ```
 
-###MiCOUser 用户管理
+###MiCOUser 设备管理
 #####EasyLink
 * [获取SSID](#fetchCurrentSSID)
 * [开始配网](#startEasyLink)
@@ -187,5 +187,14 @@ password      | NSString       | 当前连接的 wifi 的密码
 ```
 	[[MicoDeviceManager sharedInstance] startEasyLinkWithPassword:@"12345678" handler:^(BOOL isSuccess) {
     	//其实好像不需要这个 block    
+    }];
+```
+
+<div id='stopEasyLink'>
+###*stopEasyLink*
+#####代码示例
+```
+    [[MicoDeviceManager sharedInstance] stopEasyLinkWithBlock:^(NSString *message) {
+        //这里开个 HUD 好了
     }];
 ```
