@@ -26,11 +26,11 @@ typedef void(^MQTTMessageCB)(NSString *str_message);
  @cb：异步成功返回回调，不成功不返回
 */
 - (void) startMqttService:(NSString *)host
-                     port:(int)port
+                     port:(NSInteger)port
                  username:(NSString *)username
                  password:(NSString *)password
                  clientId:(NSString *)clientId
-                    topic:(NSString*)topic
+                 deviceId:(NSString *)deviceId
                  callBack:(MQTTMessageCB)cb;
 /*
  @关闭mqtt服务
