@@ -102,7 +102,13 @@ password      | NSString       | 用户密码
 appid		  | NSString		| 在 Fogcloud 平台注册的 app 的 id
 
 #####代码示例
-![](./Images/realLogin.png)
+```
+    [[MicoUserManager sharedInstance] loginWithName:@"wzbdroid@126.com" password:@"123456" appid:APP_ID success:^(NSDictionary *result) {
+        //处理成功回调
+    } failure:^(NSError *error) {
+        //处理失败回调
+    }];
+```
 
 <div id='refreshToken'>
 ###*refreshToken*
