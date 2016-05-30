@@ -856,6 +856,8 @@ qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 220, 220));
 :-----------  | :-------------:| -----------:
 sdevp     | ShareDeviceParams       | ShareDeviceParams至少包含以下的信息
 
+#####ShareDeviceParams
+参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 bindvercode     | String       | getShareVerCode接口获取的sharcode
 role         | int       | 1超级用户 3普通用户 2管理员
