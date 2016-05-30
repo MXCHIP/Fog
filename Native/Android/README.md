@@ -22,7 +22,6 @@
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
 
 --------------------------------------
-<br/>
 <div id="MiCOUser"></div>
 ##**MiCOUser** 用户管理
 
@@ -97,12 +96,10 @@ __云菜谱__
 
 --------------------------------------
 <div id="getVerifyCode"></div>
-
 #**getVerifyCode**
     获取验证码，目前仅支持大陆手机号，海外用户请使用邮箱注册
 
-    getVerifyCode(String loginname, String appid, UserCallBack usercb)
-
+    getVerifyCode(String loginname, String appid, MiCOCallBack micocb)
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
@@ -110,8 +107,8 @@ loginName     | String       | 登录名，邮箱或者手机号
 appid         | String       | 在Fogcloud平台注册的APP的id
 
 #####callback
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 ```js
 {
@@ -124,77 +121,53 @@ usercb
 }
 ```
 #####示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String loginname = "13122222222";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.getVerifyCode(loginname, appid, new UserCallBack() {
-
+micoUser.getVerifyCode(loginname, appid, new MiCOCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 });
 ```
-
-##可用性
-
-    Android系统4.0+
-
 <div id="checkVerifyCode"></div>
 #**checkVerifyCode**
-
     验证获取到的手机验证码
 
-    checkVerifyCode(String loginname, String vercode, String appid, UserCallBack usercb)
-
-##params
-
-loginname
-- 类型：String, 不可为空
-- 描述：手机号码或邮箱
-
-vercode
-- 类型：String, 不可为空
-- 描述：手机收到的验证码
-
-appid
-- 类型：String, 不可为空
-- 描述：在Fogcloud平台注册的APP的id
-
+    checkVerifyCode(String loginname, String vercode, String appid, MiCOCallBack micocb)
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+loginName     | String       | 登录名，邮箱或者手机号
+vercode         | String       | 手机收到的验证码
+appid         | String       | 在Fogcloud平台注册的APP的id
 ##callback
-
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "token": "eyJhVlSV8I...",
   "clientid": "xxx-deaa-11e5-a739-00163e0204c0"
 }
 ```
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String loginname = "13122222222";
 String vercode = "556897";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.checkVerifyCode(loginname, vercode, appid, new UserCallBack() {
-
+micoUser.checkVerifyCode(loginname, vercode, appid, new MiCOCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
@@ -202,16 +175,13 @@ micoUser.checkVerifyCode(loginname, vercode, appid, new UserCallBack() {
 });
 ```
 
-##可用性
-
-    Android系统4.0+
 
 <div id="register"></div>
 #**register**
 
     验证码验证成功后，输入密码注册新用户
 
-    register(String password1, String password2, String appid, UserCallBack usercb, String token)
+    register(String password1, String password2, String appid, MiCOCallBack micocb, String token)
 
 ##params
 
@@ -233,8 +203,8 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -256,7 +226,7 @@ String password1 = "123456";
 String password2 = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
 String token = "xxx81d79316-bb5a-11e5-a739-00163e0204c0xxx";
-micoUser.register(password1, password2, appid, new UserCallBack() {
+micoUser.register(password1, password2, appid, new MiCOCallBack() {
                         
     @Override
     public void onSuccess(String message) {
@@ -270,16 +240,14 @@ micoUser.register(password1, password2, appid, new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="login"></div>
 #**login**
 
     用户登录
 
-    login(String phone, String password, String appid, UserCallBack usercb)
+    login(String phone, String password, String appid, MiCOCallBack micocb)
 
 ##params
 
@@ -297,8 +265,8 @@ appid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -315,7 +283,7 @@ MiCOUser micoUser = new MiCOUser();
 String userName = "13122222222";
 String password = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.login(userName, password, appid, new UserCallBack() {
+micoUser.login(userName, password, appid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -329,16 +297,14 @@ micoUser.login(userName, password, appid, new UserCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="refreshToken"></div>
 #**refreshToken**
 
     刷新用户的token，服务器端默认7天内生效，刷新后可以后延7天，失效了就需要重新登录
 
-    refreshToken(String token, UserCallBack usercb)
+    refreshToken(String token, MiCOCallBack micocb)
 
 ##params
 
@@ -348,8 +314,8 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -364,7 +330,7 @@ usercb
 ```java
 MiCOUser micoUser = new MiCOUser();
 String userToken = "XXX...";
-micoUser.refreshToken(userToken, new UserCallBack() {
+micoUser.refreshToken(userToken, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -378,16 +344,14 @@ micoUser.refreshToken(userToken, new UserCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="getMemberList"></div>
 #**getMemberList**
 
     获取此设备名下的用户，只能看到自己以外的用户
 
-    getMemberList(String deviceid, UserCallBack usercb, String token)
+    getMemberList(String deviceid, MiCOCallBack micocb, String token)
 
 ##params
 
@@ -401,8 +365,8 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##示例代码
@@ -412,7 +376,7 @@ MiCOUser micoUser = new MiCOUser();
 String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
 
-micoUser.getMemberList(deviceid, new UserCallBack() {
+micoUser.getMemberList(deviceid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -427,16 +391,14 @@ micoUser.getMemberList(deviceid, new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="removeBindRole"></div>
 #**removeBindRole**
 
     删除某人的设备管理权限
 
-    removeBindRole(String deviceid, String enduserid, UserCallBack usercb, String token)
+    removeBindRole(String deviceid, String enduserid, MiCOCallBack micocb, String token)
 
 ##params
 
@@ -454,8 +416,8 @@ token
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ```js
@@ -478,7 +440,7 @@ String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String menduserid = "xxx11e5-a739-00163e0204c0";
 String token = "xxx...";
 
-micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
+micoUser.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -492,9 +454,7 @@ micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
 },token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 
 ##**以下是设备管理部分** 
@@ -520,9 +480,7 @@ MiCODevice micodev = new MiCODevice(MainActivity.this);
 Log.d(TAG, micodev.getSSID());
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="startEasyLink"></div>
 #**startEasyLink**
@@ -572,9 +530,7 @@ micodev.startEasyLink(ssidStr, passwordStr, runs, new EasyLinkCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="stopEasyLink"></div>
 #**stopEasyLink**
@@ -607,9 +563,7 @@ micodev.stopEasyLink(new EasyLinkCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="startSearchDevices"></div>
 #**startSearchDevices**
@@ -688,9 +642,7 @@ micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="stopSearchDevices"></div>
 #**stopSearchDevices**
@@ -723,9 +675,7 @@ micodev.stopSearchDevices(new SearchDeviceCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="bindDevice"></div>
 #**bindDevice**
@@ -789,9 +739,7 @@ micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="unBindDevice"></div>
 #**unBindDevice**
@@ -852,21 +800,19 @@ micoDev.unBindDevice(deviceid, new ManageDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="getDeviceList"></div>
 #**getDeviceList**
 
     获取本账号名下的所有相关设备
 
-    getDeviceList(UserCallBack usercb, String token)
+    getDeviceList(MiCOCallBack micocb, String token)
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
@@ -880,7 +826,7 @@ token
 ```java
 MiCOUser micoUser = new MiCOUser();
 String token = "xxx...";
-micoUser.getDeviceList(new UserCallBack() {
+micoUser.getDeviceList(new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -894,16 +840,14 @@ micoUser.getDeviceList(new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="getDeviceInfo"></div>
 #**getDeviceInfo**
 
     获取设备信息
 
-    getDeviceInfo(String deviceid, UserCallBack usercb, String token)
+    getDeviceInfo(String deviceid, MiCOCallBack micocb, String token)
 
 ##params
 
@@ -913,8 +857,8 @@ deviceid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
@@ -929,7 +873,7 @@ token
 MiCOUser micoUser = new MiCOUser();
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
-micoUser.getDeviceInfo(deviceid, new UserCallBack() {
+micoUser.getDeviceInfo(deviceid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -943,9 +887,7 @@ micoUser.getDeviceInfo(deviceid, new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="updateDeviceAlias"></div>
 #**updateDeviceAlias**
@@ -998,9 +940,7 @@ micoDev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="getShareVerCode"></div>
 #**getShareVerCode**
@@ -1047,9 +987,7 @@ getShareVerCode(deviceid, new ManageDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="creatQrCode"></div>
 #**creatQrCode**
@@ -1109,9 +1047,7 @@ String message = "{\"vercode\":\""+ vercode +"\",\"role\":"+ role +",\"bindingty
 qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 220, 220));
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="addDeviceByVerCode"></div>
 #**addDeviceByVerCode**
@@ -1179,9 +1115,7 @@ micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="startListenDevice"></div>
 #**startListenDevice**
@@ -1258,9 +1192,7 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="sendCommand"></div>
 #**sendCommand**
@@ -1322,9 +1254,7 @@ micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceC
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="addDeviceListener"></div>
 #**addDeviceListener**
@@ -1368,9 +1298,7 @@ micoDev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="removeDeviceListener"></div>
 #**removeDeviceListener**
@@ -1409,9 +1337,7 @@ micoDev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="stopListenDevice"></div>
 #**stopListenDevice**
@@ -1444,9 +1370,7 @@ micoDev.stopListenDevice(new ControlDeviceCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="connectLocalDevice"></div>
 #**connectLocalDevice**
@@ -1526,9 +1450,7 @@ SinSocketCallBack sscb = new SinSocketCallBack() {
 micodev.connectLocalDevice(sspara, sscb);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="sendLocalCommand"></div>
 #**sendLocalCommand**
@@ -1570,9 +1492,7 @@ micodev.sendLocalCommand(command, new SinSocketCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="disconnectLocalDevice"></div>
 #**disconnectLocalDevice**
@@ -1606,16 +1526,14 @@ micodev.disconnectLocalDevice(new SinSocketCallBack() {
 });
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="getCookBookByType"></div>
 #**getCookBookByType**
 
     通过食谱类型查询食谱
 
-    getCookBookByType(int type, String productid, UserCallBack usercb, String token)
+    getCookBookByType(int type, String productid, MiCOCallBack micocb, String token)
 ##params
 
 type
@@ -1628,8 +1546,8 @@ productid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
@@ -1644,7 +1562,7 @@ token
 MiCOUser micoUser = new MiCOUser();
 int type = 1;
 String productid = "6486b2d1-0ee9-4647-XXXX-78b9cbc778f7";
-micoUser.getCookBookByType(type, productid, new UserCallBack() {
+micoUser.getCookBookByType(type, productid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -1658,16 +1576,14 @@ micoUser.getCookBookByType(type, productid, new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="getCookBookByName"></div>
 #**getCookBookByName**
 
     通过食谱名称查询食谱
 
-    getCookBookByName(String cookbookname, UserCallBack usercb, String token)
+    getCookBookByName(String cookbookname, MiCOCallBack micocb, String token)
 ##params
 
 cookbookname
@@ -1676,8 +1592,8 @@ cookbookname
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
@@ -1691,7 +1607,7 @@ token
 ```java
 MiCOUser micoUser = new MiCOUser();
 String recipename = "cake";
-miCOUser.getCookBookByName(recipename, new UserCallBack() {
+miCOUser.getCookBookByName(recipename, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -1710,7 +1626,7 @@ miCOUser.getCookBookByName(recipename, new UserCallBack() {
 
     获取食谱详情
 
-    getCookBookInfo(int cookbookid, UserCallBack usercb, String token)
+    getCookBookInfo(int cookbookid, MiCOCallBack micocb, String token)
 ##params
 
 cookbookid
@@ -1719,8 +1635,8 @@ cookbookid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
@@ -1734,7 +1650,7 @@ token
 ```java
 MiCOUser micoUser = new MiCOUser();
 int recipeid = 86;
-micouser.getCookBookInfo(recipeid, new UserCallBack() {
+micouser.getCookBookInfo(recipeid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -1748,16 +1664,14 @@ micouser.getCookBookInfo(recipeid, new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="addCookBookLikeNo"></div>
 #**addCookBookLikeNo**
 
     给食谱点赞
 
-    addCookBookLikeNo(int cookbookid, UserCallBack usercb, String token)
+    addCookBookLikeNo(int cookbookid, MiCOCallBack micocb, String token)
 ##params
 
 cookbookid
@@ -1766,8 +1680,8 @@ cookbookid
 
 ##callback
 
-usercb
-- 类型：UserCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
@@ -1781,7 +1695,7 @@ token
 ```java
 MiCOUser micoUser = new MiCOUser();
 int recipeid = 86;
-micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
+micouser.addCookBookLikeNo(recipeid, new MiCOCallBack() {
 
     @Override
     public void onSuccess(String message) {
@@ -1795,9 +1709,7 @@ micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="createScheduleTask"></div>
 #**createScheduleTask**
@@ -1902,9 +1814,7 @@ micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 <div id="creatDelayTask"></div>
 #**creatDelayTask**
@@ -1976,9 +1886,7 @@ micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
 }, token);
 ```
 
-##可用性
 
-    Android系统4.0+
 
 
 (完)
