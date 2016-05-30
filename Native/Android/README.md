@@ -984,10 +984,8 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 <div id="sendCommand"></div>
 #**sendCommand**
 	发送指令给设备端
-···js
-    sendCommand(String deviceid, String devicepw, String command, String commandType,  
-                ControlDeviceCallBack ctrldevcb, String token)
-```
+    sendCommand(String deviceid, String devicepw, String command, String commandType,  ControlDeviceCallBack ctrldevcb, String token)
+
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
