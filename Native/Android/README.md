@@ -32,19 +32,14 @@
 __基础功能__
 
 * [获取验证码](#getVerifyCode)
-
 * [验证验证码](#checkVerifyCode)
-
 * [注册](#register)
-
 * [登录](#login)
-
 * [刷新Token](#refreshToken)
 
 __权限管理__
 
 * [获取用户列表](#getMemberList)
-
 * [移除用户权限](#removeBindRole)
 
 <div id="MiCODevice"></div>
@@ -53,102 +48,70 @@ __权限管理__
 __EasyLink__
 
 * [获取SSID](#getSSID)
-
 * [开始配网](#startEasyLink)
-
 * [停止配网](#stopEasyLink)
 
 __SearchDevice__
 
 * [开始搜索设备](#startSearchDevices)
-
 * [停止搜索设备](#stopSearchDevices)
 
 __BindDevice__
 
 * [绑定设备](#bindDevice)
-
 * [解绑设备](#unBindDevice)
 
 <div id="ManageDevices"></div>
 __ManageDevices__
 
 * [获取设备列表](#getDeviceList)
-
 * [获取设备详情](#getDeviceInfo)
-
 * [修改设备名称](#updateDeviceAlias)
-
 * [获取设备分享码](#getShareVerCode)
-
 * [生成二维码](#creatQrCode)
-
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
 <div id="ControlRemoteDevice"></div>
 __ControlRemoteDevice__
 
 * [监听远程设备](#startListenDevice)
-
 * [发送指令](#sendCommand)
-
 * [增加订阅通道](#addDeviceListener)
-
 * [移除订阅通道](#removeDeviceListener)
-
 * [停止监听设备](#stopListenDevice)
 
 <div id="ControlLocalDevice"></div>
 __ControlLocalDevice__
 
 * [连接本地设备](#connectLocalDevice)
-
 * [发送本地控制指令](#sendLocalCommand)
-
 * [断开与本地设备的连接](#disconnectLocalDevice)
-
 <div id="ClodRecipe"></div>
 __ClodRecipe__
-
 * [通过类型获取菜谱列表](#getCookBookByType)
-
 * [通过名称获取菜谱列表](#getCookBookByName)
-
 * [获取菜谱详情](#getCookBookInfo)
-
 * [给菜谱点赞](#addCookBookLikeNo)
-
 * [取消点赞](#delCookBookLikeNo)
-
 * [创建定时任务](#createScheduleTask)
-
 * [创建延时任务](#creatDelayTask)
-
 <br/>
 <br/>
 <div id="getVerifyCode"></div>
 #**getVerifyCode**
-
     获取手机验证码，填入的内容需要为手机号码
-
     getVerifyCode(String loginname, String appid, UserCallBack usercb)
-
 ##params
-
 loginname
 - 类型：String, 不可为空
 - 描述：手机号码或邮箱
-
 appid
 - 类型：String, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
-
 ##callback
-
 usercb
 - 类型：UserCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "meta": {
@@ -159,7 +122,6 @@ usercb
   }
 }
 ```
-
 ##示例代码
 
 ```java
@@ -672,17 +634,29 @@ searchdevcb
 ```js
 [
   {
-    "deviceName": "MiCOKit 3165#0C2EB6",
-    "deviceMac": "D0:BA:E4:0C:2E:B6",
-    "deviceIP": "172.16.112.6",
-    "deviceMacbind": "0",
-    "hardwareID": "0",
-    "fogProductID": "6486b2d1-0ee9-4647-baa3-78b9cbc778f7",
-    "isEasyLinkOK": "false",
-    "isHaveSuperUser": "true",
-    "remainingUserNumber": "0",
-    "allInfo": "MAC=D0:BA:E4:0C:2E:B6Firmware ...",
-    "devicePort": "8002"
+    "MAC": "C8:93:46:91:81:3C",
+    "Binding": "false",
+    "Firmware Rev": "MK3288_1@1507211945",
+    "Hardware Rev": "MK3288_1",
+    "MICO OS Rev": "10880002.035-0709",
+    "Model": "MiCOKit-3288",
+    "Protocol": "com.mxchip.micokit",
+    "Manufacturer": "MXCHIP Inc.",
+    "Seed": "595"
+  },
+  {
+    "MAC": "D0:BA:E4:0C:2F:EE",
+    "Firmware Rev": "FOG_3165_TEST@",
+    "FogProductId": "6486b2d1-0ee9-4647-baa3-78b9cbc778f7",
+    "IsEasylinkOK": "true",
+    "IsHaveSuperUser": "true",
+    "RemainingUserNumber": "3",
+    "Hardware Rev": "MK3165_1",
+    "MICO OS Rev": "31620002.042",
+    "Model": "MiCOKit-3165",
+    "Protocol": "com.mxchip.spp",
+    "Manufacturer": "MXCHIP Inc.",
+    "Seed": "1366"
   }
 ]
 ```
