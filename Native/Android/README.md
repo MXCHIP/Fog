@@ -29,7 +29,7 @@ __基础功能__
 
 * [获取验证码](#getVerifyCode)
 * [验证验证码](#checkVerifyCode)
-* [注册](#register)
+* [设置初始密码](#setPassword)
 * [登录](#login)
 * [刷新Token](#refreshToken)
 
@@ -147,7 +147,7 @@ micoUser.getVerifyCode(loginname, appid, new MiCOCallBack() {
 loginName     | String       | 登录名，邮箱或者手机号
 vercode         | String       | 手机收到的验证码
 appid         | String       | 在Fogcloud平台注册的APP的id
-##callback
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
@@ -174,39 +174,21 @@ micoUser.checkVerifyCode(loginname, vercode, appid, new MiCOCallBack() {
     }
 });
 ```
-
-
-<div id="register"></div>
-#**register**
-
+<div id="setPassword"></div>
+#**setPassword**
     验证码验证成功后，输入密码注册新用户
 
-    register(String password1, String password2, String appid, MiCOCallBack micocb, String token)
-
-##params
-
-password1
-- 类型：String, 不可为空
-- 描述：用户密码
-
-password2
-- 类型：String, 不可为空
-- 描述：用户密码
-
-appid
-- 类型：String, 不可为空
-- 描述：在Fogcloud平台注册的APP的id
-
-token
-- 类型：String, 不可为空
-- 描述：验证验证码后返回的token
-
-##callback
-
+    setPassword(String password, String appid, MiCOCallBack micocb, String token)
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+password     | String       | 登录名，邮箱或者手机号
+appid         | String       | 在Fogcloud平台注册的APP的id
+token         | String       | 验证验证码后返回的token
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "meta": {
@@ -217,209 +199,142 @@ micocb
   }
 }
 ```
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
-String password1 = "123456";
-String password2 = "123456";
+String password = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
 String token = "xxx81d79316-bb5a-11e5-a739-00163e0204c0xxx";
-micoUser.register(password1, password2, appid, new MiCOCallBack() {
-                        
+micoUser.register(password, appid, new MiCOCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 }, token);
 ```
-
-
-
 <div id="login"></div>
 #**login**
-
     用户登录
 
     login(String phone, String password, String appid, MiCOCallBack micocb)
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+loginName     | String       | 登录名，邮箱或者手机号
+password     | String       | 用户密码
+appid         | String       | 在Fogcloud平台注册的APP的id
 
-##params
-
-phone
-- 类型：String, 不可为空
-- 描述：手机号码
-
-password
-- 类型：String, 不可为空
-- 描述：用户密码
-
-appid
-- 类型：String, 不可为空
-- 描述：在Fogcloud平台注册的APP的id
-
-##callback
-
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "token": "eyJhbGcMCPNKJI...",
   "clientid": "xxx-deaa-11e5-a739-00163e0204c0"
 }
 ```
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String userName = "13122222222";
 String password = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
 micoUser.login(userName, password, appid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 });
 ```
-
-
-
 <div id="refreshToken"></div>
 #**refreshToken**
-
     刷新用户的token，服务器端默认7天内生效，刷新后可以后延7天，失效了就需要重新登录
 
     refreshToken(String token, MiCOCallBack micocb)
-
-##params
-
-token
-- 类型：String, 不可为空
-- 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+token     | String       | 用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "token": "eyJhbGcMCPNKJI...",
   "clientid": "xxx-deaa-11e5-a739-00163e0204c0"
 }
 ```
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String userToken = "XXX...";
 micoUser.refreshToken(userToken, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 });
 ```
-
-
-
 <div id="getMemberList"></div>
 #**getMemberList**
-
     获取此设备名下的用户，只能看到自己以外的用户
 
     getMemberList(String deviceid, MiCOCallBack micocb, String token)
-
-##params
-
-deviceid
-- 类型：String, 不可为空
-- 描述：设备的deviceid
-
-token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+token         | String       | 用户登录后获取的token
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
-
 micoUser.getMemberList(deviceid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "getMemberList", message);
         setAdapter(message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, message);
     }
 }, token);
 ```
-
-
-
 <div id="removeBindRole"></div>
 #**removeBindRole**
-
     删除某人的设备管理权限
 
     removeBindRole(String deviceid, String enduserid, MiCOCallBack micocb, String token)
-
-##params
-
-deviceid
-- 类型：String, 不可为空
-- 描述：设备的deviceid
-
-enduserid
-- 类型：String, 不可为空
-- 描述：用户的id
-
-token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+enduserid     | String       | 用户的id
+token         | String       | 用户登录后获取的token
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "meta": {
@@ -431,161 +346,109 @@ micocb
   }
 }
 ```
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String menduserid = "xxx11e5-a739-00163e0204c0";
 String token = "xxx...";
-
 micoUser.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, message);
     }
 },token);
 ```
-
-
-
-
+------------------------------
 ##**以下是设备管理部分** 
-
-
 <div id="getSSID"></div>
 #**getSSID**
-
     获取当前手机连接的WIFI的名称，即ssid
 
     String getSSID()
-
-##callback
-
+#####callback
 ssid
 - 类型：String
 - 描述：当前WIFI的名称
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 Log.d(TAG, micodev.getSSID());
 ```
-
-
-
 <div id="startEasyLink"></div>
 #**startEasyLink**
-
     发送数据包(包含ssid和password)给设备，每10ms发一次，连续发10s，再停止10s，继续发，如此反复
 
     startEasyLink(String ssid, String password, int runSecond, EasyLinkCallBack easylinkcb)
-
-##params
-
-ssid
-- 类型：String, 不可为空
-- 描述：准备发送的ssid
-
-password
-- 类型：String, 不可为空
-- 描述：ssid对应的WIFI密码
-
-runSecond
-- 类型：int, 不可为空，单位ms
-- 描述：发送持续的时间，到点了就停止发送
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+ssid     | String       | 准备发送的ssid
+password     | String       | SSID对应的WIFI密码
+runSecond         | String       | 发送持续的时间，到点了就停止发送
+#####callback
 easylinkcb
 - 类型：EasyLinkCallBack
 - 描述：接口调用成功后的回调函数
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String ssidStr = "mxchip";
 String passwordStr = "123456";
 int runs = 10000; //发送10秒即关闭
 micodev.startEasyLink(ssidStr, passwordStr, runs, new EasyLinkCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 });
 ```
-
-
-
 <div id="stopEasyLink"></div>
 #**stopEasyLink**
-
     停止发送数据包
 
     stopEasyLink(EasyLinkCallBack easylinkcb)
-
-##callback
-
+#####callback
 easylinkcb
 - 类型：EasyLinkCallBack
 - 描述：接口调用成功后的回调函数
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 micodev.stopEasyLink(new EasyLinkCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 });
 ```
-
-
-
 <div id="startSearchDevices"></div>
 #**startSearchDevices**
-
     设备连上WIFI路由器后，我就可以通过这个接口来发现他，
 
     当然，前提是手机和设备必须在同一个网段
 
     startSearchDevices(String serviceName, SearchDeviceCallBack searchdevcb)
-
-##params
-
-serviceName
-- 类型：String, 不可为空, "_easylink._tcp.local."
-- 描述：只要你使用的是庆科的模块，这个名字是不会变的
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+serviceName     | String       | 不可为空, 一般"_easylink._tcp.local."只要你使用的是庆科的模块，这个名字是不会变的
+#####callback
 searchdevcb
 - 类型：SearchDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 [
   {
@@ -615,24 +478,19 @@ searchdevcb
   }
 ]
 ```
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String serviceName = "_easylink._tcp.local.";
 micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onDevicesFind(JSONArray deviceStatus) {
         if (!deviceStatus.equals("")) {
@@ -641,69 +499,44 @@ micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
     }
 });
 ```
-
-
-
 <div id="stopSearchDevices"></div>
 #**stopSearchDevices**
-
     停止发现设备，发现了需要激活的设备，主动调用此接口
 
     stopSearchDevices(SearchDeviceCallBack searchdevcb)
-
-##callback
-
+#####callback
 searchdevcb
 - 类型：SearchDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 micodev.stopSearchDevices(new SearchDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 });
 ```
-
-
-
 <div id="bindDevice"></div>
 #**bindDevice**
-
     通过startSearchDevices获取准备绑定设备的信息，从中提取出IP地址，和deviceid，再通过此接口绑定设备
 
     bindDevice(String ip, ManageDeviceCallBack managedevcb, String token)
-
-##params
-
-ip
-- 类型：String, 不可为空
-- 描述：即将绑定的设备的IP
-
-port
-- 类型：String, 不可为空
-- 描述：设备服务的端口
-
-token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+ip     | String       | 即将绑定的设备的IP
+port     | String       | 设备服务的端口
+token         | String       | 用户登录后获取的token
+#####callback
 managedevcb
 - 类型：ManageDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "meta": {
@@ -717,33 +550,25 @@ managedevcb
   }
 }
 ```
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String ip = "192.168.1.123";
 String port = "8002";
 String token = "xxx...";
 micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 }, token);
 ```
-
-
-
 <div id="unBindDevice"></div>
 #**unBindDevice**
-
     用户不准备使用此设备时候，调用此接口解绑设备，
 
     1）如果是普通用户或者普通管理员，解绑只会解绑自己和设备的绑定关系
@@ -751,24 +576,15 @@ micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
     2）如果是超级管理员，那么解绑后，所有人均不能控制这个设备了
 
     unBindDevice(String deviceid, final ManageDeviceCallBack managedevcb, String token)
-
-##params
-
-deviceid
-- 类型：String, 不可为空
-- 描述：设备的deviceid
-
-
-token
-- 类型：String, 不可为空
-- 描述：用户token
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+token         | String       | 用户登录后获取的token
+#####callback
 managedevcb
 - 类型：ManageDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {
   "meta": {
@@ -779,344 +595,224 @@ managedevcb
   }
 }
 ```
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
 micoDev.unBindDevice(deviceid, new ManageDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, message);
     }
 }, token);
 ```
-
-
-
 <div id="getDeviceList"></div>
 #**getDeviceList**
-
     获取本账号名下的所有相关设备
 
     getDeviceList(MiCOCallBack micocb, String token)
-
-##callback
-
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
-##token
-
+#####token
 token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String token = "xxx...";
 micoUser.getDeviceList(new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 }, token);
 ```
-
-
-
 <div id="getDeviceInfo"></div>
 #**getDeviceInfo**
-
     获取设备信息
 
     getDeviceInfo(String deviceid, MiCOCallBack micocb, String token)
-
-##params
-
-deviceid
-- 类型：String, 不可为空
-- 描述：即将绑定的设备的deviceid
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
-
-##token
-
+#####token
 token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
-
 ##示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
 micoUser.getDeviceInfo(deviceid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 }, token);
 ```
-
-
-
 <div id="updateDeviceAlias"></div>
 #**updateDeviceAlias**
-
     获取设备信息
 
     updateDeviceAlias(String deviceid, String alias, ManageDeviceCallBack managedevcb, String token)
-
-##params
-
-deviceid
-- 类型：String, 不可为空
-- 描述：即将绑定的设备的deviceid
-
-alias
-- 类型：String, 不可为空
-- 描述：设备名称
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+alias     | String       | 设备名称
+#####callback
 managedevcb
 - 类型：ManageDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
-##token
-
+#####token
 token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
-
 ##示例代码
-
 ```java
 MiCODevice micoDev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String alias = "好名字";
 String token = "xxx...";
 micoDev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
-
 }, token);
 ```
-
-
-
 <div id="getShareVerCode"></div>
 #**getShareVerCode**
-
     我是超级管理员或者普通管理员，那么我就能把我名下的设备分享给别人，首先需要获取分享码
 
     getShareVerCode(String deviceid, ManageDeviceCallBack managedevcb, String token)
-
-##params
-
-deviceid
-- 类型：String, 不可为空
-- 描述：即将绑定的设备的deviceid
-
-token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+token         | String       | 用户登录后获取的token
+#####callback
 managedevcb
 - 类型：ManageDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
 getShareVerCode(deviceid, new ManageDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
         String sharcode = new JSONObject(message).getString("data");
         sharcode = new JSONObject(sharcode).getString("vercode");
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 }, token);
 ```
-
-
-
 <div id="creatQrCode"></div>
 #**creatQrCode**
-
     将分享码和绑定的关系转成二维码，让别人通过手机扫描二维码绑定
 
     Bitmap creatQrCode(String message, int height, int width)
-
-##params
-
-message
-- 类型：String, 不可为空
-- 描述：需要生成二维码的信息
-
-height
-- 类型：int, 不可为空
-- 描述：二维码的高度
-
-width
-- 类型：int, 不可为空
-- 描述：二维码的宽度
-
-vercode
-- String, 不可为空
-- 描述：getShareVerCode接口获取的sharcode
-
-role
-- 类型：int, 不可为空
-- 描述：1超级用户 3普通用户 2管理员
-
-bindingtype
-- 类型：String, 不可为空
-- 描述：绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
-
-iscallback
-- boolean, 不可为空
-- 描述：是否返回绑定状态，此版本请都设置为false
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+message     | String       | 需要生成二维码的信息
+height     | int       | 二维码的高度
+width         | int       | 二维码的宽度
+vercode         | String       | getShareVerCode接口获取的sharcode
+role         | int       | 1超级用户 3普通用户 2管理员
+bindingtype         | String       | 绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
+iscallback         | String       | 是否返回绑定状态，此版本请都设置为false
+#####callback
 Bitmap
 - 类型：Bitmap
 - 描述：可以直接将BitMap放入ImageView里，如下
-
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 ImageView qrcodeimg = (ImageView) findViewById(R.id.qrcodeimg);
-
 String vercode = "xxx...";
 int role = 3;
 String bindingtype = "home";
 boolean iscallback = false;
-
-String message = "{\"vercode\":\""+ vercode +"\",\"role\":"+ role +",\"bindingtype\":\""+ bindingtype +"\",\"iscallback\":"+ iscallback + "}";
+String message = "{\"vercode\":\""+ vercode +"\",\"role\":"+ role 
+                +",\"bindingtype\":\""+ bindingtype +"\",\"iscallback\":"
+                + iscallback + "}";
 qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 220, 220));
 ```
-
-
-
 <div id="addDeviceByVerCode"></div>
 #**addDeviceByVerCode**
-
     解析出二维码里的内容，并通过此接口绑定被授权的设备
 
     addDeviceByVerCode(ShareDeviceParams sdevp, ManageDeviceCallBack managedevcb, String token)
-
-##params
-
-sdevp
-- 类型：ShareDeviceParams, 不可为空
-- 描述：ShareDeviceParams至少包含以下的信息
-
-bindvercode
-- 类型：int, 不可为空
-- 描述：二维码的高度
-
-role
-- 类型：int, 不可为空
-- 描述：1超级用户 3普通用户 2管理员
-
-bindingtype
-- 类型：String, 不可为空
-- 描述：绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
-
-iscallback
-- boolean, 不可为空
-- 描述：是否返回绑定状态，此版本请都设置为false
-
-token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-##callback
-
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+sdevp     | ShareDeviceParams       | ShareDeviceParams至少包含以下的信息
+-------------------------------
+bindvercode     | String       | getShareVerCode接口获取的sharcode
+role         | int       | 1超级用户 3普通用户 2管理员
+bindingtype         | String       | 绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
+iscallback         | boolean       | 是否返回绑定状态，此版本请都设置为false
+#####callback
 managedevcb
 - 类型：ManageDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
+#####token
+token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
 ##示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
-
 ShareDeviceParams sdevp = new ShareDeviceParams();
 sdevp.bindvercode = "xxx...";
 sdevp.role = 3;
 sdevp.bindingtype = "home";
 sdevp.iscallback = false;
-
 String token = "xxx...";
-
 micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
-    
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }
 }, token);
 ```
-
-
-
 <div id="startListenDevice"></div>
 #**startListenDevice**
 
