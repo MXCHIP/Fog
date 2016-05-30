@@ -33,11 +33,6 @@ __基础功能__
 * [登录](#login)
 * [刷新Token](#refreshToken)
 
-__权限管理__
-
-* [获取用户列表](#getMemberList)
-* [移除用户权限](#removeBindRole)
-
 <div id="MiCODevice"></div>
 ##**MiCODevice** 设备管理
 
@@ -66,6 +61,11 @@ __设备管理__
 * [获取设备分享码](#getShareVerCode)
 * [生成二维码](#creatQrCode)
 * [通过分享码绑定设备](#addDeviceByVerCode)
+
+__权限管理__
+
+* [获取用户列表](#getMemberList)
+* [移除用户权限](#removeBindRole)
 
 <div id="ControlRemoteDevice"></div>
 __远程控制__
@@ -675,7 +675,6 @@ micocb
 - 描述：接口调用成功后的回调函数
 
 #####token
-token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
 
@@ -712,7 +711,6 @@ micocb
 - 描述：接口调用成功后的回调函数
 
 #####token
-token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
 
@@ -751,7 +749,6 @@ managedevcb
 - 描述：接口调用成功后的回调函数
 
 #####token
-token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
 
@@ -870,7 +867,6 @@ managedevcb
 - 描述：接口调用成功后的回调函数
 
 #####token
-token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
 
@@ -968,7 +964,6 @@ ctrldevcb
 - 描述：接口调用成功后的回调函数
 
 #####token
-token
 - 类型：String, 不可为空
 - 描述：用户的token
 
@@ -1098,7 +1093,7 @@ sspara     | SinSocketParams       | SinSocketParams至少包含以下的信息
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 ip     | String       | 设备的ip，通过startSearchDevices发现设备
-port     | String       | 本地设备的port，默认为8002
+port     | int       | 本地设备的port，默认为8002
 overTime     | int       | 连接设备时候的超时时间，默认为60秒
 heartBeatTime     | int       | 每个心跳包的间隔时间，默认为20秒
 autoConnectNo     | int       | socket连接丢失后，自动重连的次数，默认1000次
@@ -1182,7 +1177,7 @@ micodev.sendLocalCommand(command, new SinSocketCallBack() {
 
     disconnectLocalDevice(SinSocketCallBack sscb)
 
-##callback
+#####callback
 sscb
 - 类型：SinSocketCallBack
 - 描述：接口调用成功后的回调函数
@@ -1219,8 +1214,7 @@ micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
-##token
-token
+#####token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
@@ -1257,8 +1251,7 @@ micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
-##token
-token
+#####token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
@@ -1294,8 +1287,7 @@ micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
-##token
-token
+#####token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
@@ -1331,8 +1323,7 @@ micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
-##token
-token
+#####token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
@@ -1389,7 +1380,7 @@ minute         | String       | 分
 （例如“0,1,2”表示周一 周二 周三）
 ```
 
-##callback
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
@@ -1397,8 +1388,7 @@ ctrldevcb
 {"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
 ```
 
-##token
-token
+#####token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
@@ -1452,7 +1442,7 @@ commands         | String       | 控制指令
 enable         | boolean       | 当前task，True 启用 False 暂停
 second         | String       | 秒
 
-##callback
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
@@ -1460,8 +1450,7 @@ ctrldevcb
 {"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
 ```
 
-##token
-token
+#####token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
