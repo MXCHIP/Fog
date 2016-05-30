@@ -332,94 +332,6 @@ micoUser.refreshToken(userToken, new MiCOCallBack() {
 });
 ```
 
-<div id="getMemberList"></div>
-#**getMemberList**
-    获取此设备名下的用户，只能看到自己以外的用户
-
-    getMemberList(String deviceid, MiCOCallBack micocb, String token)
-
-#####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-deviceid     | String       | 设备的deviceid
-
-#####callback
-micocb
-- 类型：MiCOCallBack
-- 描述：接口调用成功后的回调函数
-
-#####token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-#####示例代码
-```java
-MiCOUser micoUser = new MiCOUser();
-String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
-String token = "xxx...";
-micoUser.getMemberList(deviceid, new MiCOCallBack() {
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG + "getMemberList", message);
-        setAdapter(message);
-    }
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, message);
-    }
-}, token);
-```
-
-<div id="removeBindRole"></div>
-#**removeBindRole**
-    删除某人的设备管理权限
-
-    removeBindRole(String deviceid, String enduserid, MiCOCallBack micocb, String token)
-
-#####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-deviceid     | String       | 设备的deviceid
-enduserid     | String       | 用户的id
-
-#####callback
-micocb
-- 类型：MiCOCallBack
-- 描述：接口调用成功后的回调函数
-```js
-{
-  "meta": {
-    "message": "用户解除成功",
-    "code": 0
-  },
-  "data": {
-    "enduserid": "xxx-fbc5-11e5-a739-00163e0204c0"
-  }
-}
-```
-
-#####token
-- 类型：String, 不可为空
-- 描述：用户登录后获取的token
-
-#####示例代码
-```java
-MiCOUser micoUser = new MiCOUser();
-String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
-String menduserid = "xxx11e5-a739-00163e0204c0";
-String token = "xxx...";
-micoUser.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
-    @Override
-    public void onSuccess(String message) {
-        Log.d(TAG, message);
-    }
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, message);
-    }
-},token);
-```
-
 ------------------------------
 ##**以下是设备管理部分** 
 
@@ -926,6 +838,94 @@ micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
         Log.d(TAG, code + " " + message);
     }
 }, token);
+```
+
+<div id="getMemberList"></div>
+#**getMemberList**
+    获取此设备名下的用户，只能看到自己以外的用户
+
+    getMemberList(String deviceid, MiCOCallBack micocb, String token)
+
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+
+#####callback
+micocb
+- 类型：MiCOCallBack
+- 描述：接口调用成功后的回调函数
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
+
+#####示例代码
+```java
+MiCOUser micoUser = new MiCOUser();
+String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
+String token = "xxx...";
+micoUser.getMemberList(deviceid, new MiCOCallBack() {
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG + "getMemberList", message);
+        setAdapter(message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, message);
+    }
+}, token);
+```
+
+<div id="removeBindRole"></div>
+#**removeBindRole**
+    删除某人的设备管理权限
+
+    removeBindRole(String deviceid, String enduserid, MiCOCallBack micocb, String token)
+
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+enduserid     | String       | 用户的id
+
+#####callback
+micocb
+- 类型：MiCOCallBack
+- 描述：接口调用成功后的回调函数
+```js
+{
+  "meta": {
+    "message": "用户解除成功",
+    "code": 0
+  },
+  "data": {
+    "enduserid": "xxx-fbc5-11e5-a739-00163e0204c0"
+  }
+}
+```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
+
+#####示例代码
+```java
+MiCOUser micoUser = new MiCOUser();
+String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
+String menduserid = "xxx11e5-a739-00163e0204c0";
+String token = "xxx...";
+micoUser.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG, message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, message);
+    }
+},token);
 ```
 
 <div id="startListenDevice"></div>
