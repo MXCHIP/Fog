@@ -214,7 +214,6 @@ micoUser.checkVerifyCode(loginname, vercode, appid, new MiCOCallBack() {
 :-----------  | :-------------:| -----------:
 password     | String       | 登录名，邮箱或者手机号
 appid         | String       | 在Fogcloud平台注册的APP的id
-token         | String       | 验证验证码后返回的token
 
 #####callback
 micocb
@@ -230,6 +229,10 @@ micocb
   }
 }
 ```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
 
 #####示例代码
 ```java
@@ -339,12 +342,15 @@ micoUser.refreshToken(userToken, new MiCOCallBack() {
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 deviceid     | String       | 设备的deviceid
-token         | String       | 用户登录后获取的token
 
 #####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
 
 #####示例代码
 ```java
@@ -375,7 +381,6 @@ micoUser.getMemberList(deviceid, new MiCOCallBack() {
 :-----------  | :-------------:| -----------:
 deviceid     | String       | 设备的deviceid
 enduserid     | String       | 用户的id
-token         | String       | 用户登录后获取的token
 
 #####callback
 micocb
@@ -392,6 +397,10 @@ micocb
   }
 }
 ```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
 
 #####示例代码
 ```java
@@ -435,14 +444,16 @@ Log.d(TAG, micodev.getSSID());
 #**startEasyLink**
     发送数据包(包含ssid和password)给设备，每10ms发一次，连续发10s，再停止10s，继续发，如此反复
 
-    startEasyLink(String ssid, String password, int runSecond, EasyLinkCallBack easylinkcb)
+    startEasyLink(String ssid, String password, int runSecond, int sleeptime, EasyLinkCallBack easylinkcb, String extraData)
 
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 ssid     | String       | 准备发送的ssid
 password     | String       | SSID对应的WIFI密码
-runSecond         | String       | 发送持续的时间，到点了就停止发送
+runSecond         | int       | 发送持续的时间，到点了就停止发送, 单位ms
+sleeptime         | int       | 每包数据的间隔时间，建议未20, 单位ms
+extraData         | String       | 需要发送给设备的额外信息
 
 #####callback
 easylinkcb
@@ -599,7 +610,6 @@ micodev.stopSearchDevices(new SearchDeviceCallBack() {
 :-----------  | :-------------:| -----------:
 ip     | String       | 即将绑定的设备的IP
 port     | String       | 设备服务的端口
-token         | String       | 用户登录后获取的token
 
 #####callback
 managedevcb
@@ -618,6 +628,10 @@ managedevcb
   }
 }
 ```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
 
 #####示例代码
 ```java
@@ -651,7 +665,6 @@ micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 deviceid     | String       | 设备的deviceid
-token         | String       | 用户登录后获取的token
 
 #####callback
 managedevcb
@@ -667,6 +680,10 @@ managedevcb
   }
 }
 ```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后获取的token
 
 #####示例代码
 ```java
@@ -818,8 +835,6 @@ getShareVerCode(deviceid, new ManageDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
-        String sharcode = new JSONObject(message).getString("data");
-        sharcode = new JSONObject(sharcode).getString("vercode");
     }
     @Override
     public void onFailure(int code, String message) {
@@ -969,9 +984,10 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 <div id="sendCommand"></div>
 #**sendCommand**
 	发送指令给设备端
-
-    sendCommand(String deviceid, String devicepw, String command, String commandType,  ControlDeviceCallBack ctrldevcb, String token)
-
+···js
+    sendCommand(String deviceid, String devicepw, String command, String commandType,  
+                ControlDeviceCallBack ctrldevcb, String token)
+```
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
