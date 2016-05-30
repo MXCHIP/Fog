@@ -22,6 +22,11 @@
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
 
 --------------------------------------
+<div id="MiCO"></div>
+##**MiCO** 全局设置
+
+* [初始化](#init)
+
 <div id="MiCOUser"></div>
 ##**MiCOUser** 用户管理
 
@@ -96,6 +101,22 @@ __云菜谱__
 
 --------------------------------------
 
+<div id="init"></div>
+#**init**
+    初始化host，因为连接的服务器分为测试环境和生产环境
+
+    init(String host)
+
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+host     | String       | 服务器的域名(默认为https://iot.mxchip.com)
+
+######示例代码
+```java
+MiCO.init("https://iot.mxchip.com");
+```
+
 <div id="getVerifyCode"></div>
 #**getVerifyCode**
     获取验证码，目前仅支持大陆手机号，海外用户请使用邮箱注册
@@ -139,6 +160,7 @@ micoUser.getVerifyCode(loginname, appid, new MiCOCallBack() {
     }
 });
 ```
+
 <div id="checkVerifyCode"></div>
 #**checkVerifyCode**
     验证获取到的手机验证码
