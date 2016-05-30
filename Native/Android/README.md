@@ -1,7 +1,7 @@
 ##MiCOSDK开发指南
---------------------------------------
+
 ##**概述**
---------------------------------------
+
 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
 
 1、通过Fogcloud平台注册一个APP，得到appid，因为下面需要用到
@@ -20,11 +20,12 @@
 5、控制设备分云端远程控制[ControlRemoteDevice](#ControlRemoteDevice)和局域网内本地控制[ControlLocalDevice](#ControlLocalDevice)
 
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
+
 --------------------------------------
 <br/>
 <div id="MiCOUser"></div>
 ##**MiCOUser** 用户管理
---------------------------------------
+
 __基础功能__
 
 * [获取验证码](#getVerifyCode)
@@ -40,7 +41,7 @@ __权限管理__
 
 <div id="MiCODevice"></div>
 ##**MiCODevice** 设备管理
---------------------------------------
+
 __设备配网__
 
 * [获取SSID](#getSSID)
@@ -94,7 +95,6 @@ __云菜谱__
 * [创建定时任务](#createScheduleTask)
 * [创建延时任务](#creatDelayTask)
 
-<br/>
 --------------------------------------
 <div id="getVerifyCode"></div>
 
