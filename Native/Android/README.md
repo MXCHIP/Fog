@@ -1,31 +1,30 @@
 ##MiCOSDK开发指南
-
+--------------------------------------
 ##**概述**
-
+--------------------------------------
 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
 
 1、通过Fogcloud平台注册一个APP，得到appid，因为下面需要用到
 
 2、对于一个新用户而言，首先需要注册用户，获取验证码、验证验证码、注册登录等，这些都在[MiCOUser](#MiCOUser)部分
 
-3、注册完成后，我还没有一个可以控制的设备，我需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器，
+3、注册完成后，我还没有一个可以控制的设备，我需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器，这些都在[MiCODevice](#MiCODevice)部分
 >1)让设备连上路由器(EasyLink)，
 
 >2)连上以后找到这个设备的IP(SearchDevice)，
 
 >3)绑定她(bindDevice)
 
-这些都在[MiCODevice](#MiCODevice)部分
-
 4、我可以将我名下的设备分享给别人使用，这些在[ManageDevices](#ManageDevices)部分
 
 5、控制设备分云端远程控制[ControlRemoteDevice](#ControlRemoteDevice)和局域网内本地控制[ControlLocalDevice](#ControlLocalDevice)
 
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
+--------------------------------------
 <br/>
 <div id="MiCOUser"></div>
 ##**MiCOUser** 用户管理
-
+--------------------------------------
 __基础功能__
 
 * [获取验证码](#getVerifyCode)
@@ -41,7 +40,7 @@ __权限管理__
 
 <div id="MiCODevice"></div>
 ##**MiCODevice** 设备管理
-
+--------------------------------------
 __设备配网__
 
 * [获取SSID](#getSSID)
@@ -86,6 +85,7 @@ __本地控制__
 
 <div id="ClodRecipe"></div>
 __云菜谱__
+
 * [通过类型获取菜谱列表](#getCookBookByType)
 * [通过名称获取菜谱列表](#getCookBookByName)
 * [获取菜谱详情](#getCookBookInfo)
@@ -93,12 +93,14 @@ __云菜谱__
 * [取消点赞](#delCookBookLikeNo)
 * [创建定时任务](#createScheduleTask)
 * [创建延时任务](#creatDelayTask)
+
 <br/>
-<br/>
+--------------------------------------
 <div id="getVerifyCode"></div>
 
 #**getVerifyCode**
-    获取手机验证码，填入的内容需要为手机号码
+    获取验证码，目前仅支持大陆手机号，海外用户请使用邮箱注册
+
     getVerifyCode(String loginname, String appid, UserCallBack usercb)
 
 #####params
