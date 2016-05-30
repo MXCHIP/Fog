@@ -9,22 +9,14 @@
 2、对于一个新用户而言，首先需要注册用户，获取验证码、验证验证码、注册登录等，这些都在[MiCOUser](#MiCOUser)部分
 
 3、注册完成后，我还没有一个可以控制的设备，我需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器，
-
-1)让设备连上路由器(EasyLink)，
-
-2)连上以后找到这个设备的IP(SearchDevice)，
-
-3)绑定她(bindDevice)
+>1)让设备连上路由器(EasyLink)，
+>2)连上以后找到这个设备的IP(SearchDevice)，
+>3)绑定她(bindDevice)
 
 这些都在[MiCODevice](#MiCODevice)部分
-
 4、我可以将我名下的设备分享给别人使用，这些在[ManageDevices](#ManageDevices)部分
-
 5、控制设备分云端远程控制[ControlRemoteDevice](#ControlRemoteDevice)和局域网内本地控制[ControlLocalDevice](#ControlLocalDevice)
-
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
-
-<br/>
 <br/>
 <div id="MiCOUser"></div>
 ##**MiCOUser** 用户管理
@@ -86,6 +78,7 @@ __ControlLocalDevice__
 * [连接本地设备](#connectLocalDevice)
 * [发送本地控制指令](#sendLocalCommand)
 * [断开与本地设备的连接](#disconnectLocalDevice)
+
 <div id="ClodRecipe"></div>
 __ClodRecipe__
 * [通过类型获取菜谱列表](#getCookBookByType)
@@ -98,16 +91,21 @@ __ClodRecipe__
 <br/>
 <br/>
 <div id="getVerifyCode"></div>
+
 #**getVerifyCode**
     获取手机验证码，填入的内容需要为手机号码
     getVerifyCode(String loginname, String appid, UserCallBack usercb)
+
 ##params
+
 loginname
 - 类型：String, 不可为空
 - 描述：手机号码或邮箱
+
 appid
 - 类型：String, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
+
 ##callback
 usercb
 - 类型：UserCallBack
