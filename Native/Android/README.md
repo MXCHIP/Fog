@@ -10,12 +10,17 @@
 
 3、注册完成后，我还没有一个可以控制的设备，我需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器，
 >1)让设备连上路由器(EasyLink)，
+
 >2)连上以后找到这个设备的IP(SearchDevice)，
+
 >3)绑定她(bindDevice)
 
 这些都在[MiCODevice](#MiCODevice)部分
+
 4、我可以将我名下的设备分享给别人使用，这些在[ManageDevices](#ManageDevices)部分
+
 5、控制设备分云端远程控制[ControlRemoteDevice](#ControlRemoteDevice)和局域网内本地控制[ControlLocalDevice](#ControlLocalDevice)
+
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
 <br/>
 <div id="MiCOUser"></div>
@@ -37,24 +42,24 @@ __权限管理__
 <div id="MiCODevice"></div>
 ##**MiCODevice** 设备管理
 
-__EasyLink__
+__设备配网__
 
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
 
-__SearchDevice__
+__搜索设备__
 
 * [开始搜索设备](#startSearchDevices)
 * [停止搜索设备](#stopSearchDevices)
 
-__BindDevice__
+__绑定设备__
 
 * [绑定设备](#bindDevice)
 * [解绑设备](#unBindDevice)
 
 <div id="ManageDevices"></div>
-__ManageDevices__
+__设备管理__
 
 * [获取设备列表](#getDeviceList)
 * [获取设备详情](#getDeviceInfo)
@@ -64,7 +69,7 @@ __ManageDevices__
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
 <div id="ControlRemoteDevice"></div>
-__ControlRemoteDevice__
+__远程控制__
 
 * [监听远程设备](#startListenDevice)
 * [发送指令](#sendCommand)
@@ -73,14 +78,14 @@ __ControlRemoteDevice__
 * [停止监听设备](#stopListenDevice)
 
 <div id="ControlLocalDevice"></div>
-__ControlLocalDevice__
+__本地控制__
 
 * [连接本地设备](#connectLocalDevice)
 * [发送本地控制指令](#sendLocalCommand)
 * [断开与本地设备的连接](#disconnectLocalDevice)
 
 <div id="ClodRecipe"></div>
-__ClodRecipe__
+__云菜谱__
 * [通过类型获取菜谱列表](#getCookBookByType)
 * [通过名称获取菜谱列表](#getCookBookByName)
 * [获取菜谱详情](#getCookBookInfo)
@@ -96,17 +101,13 @@ __ClodRecipe__
     获取手机验证码，填入的内容需要为手机号码
     getVerifyCode(String loginname, String appid, UserCallBack usercb)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+loginName     | String       | 登录名，邮箱或者手机号
+appid         | String       | 在Fogcloud平台注册的APP的id
 
-loginname
-- 类型：String, 不可为空
-- 描述：手机号码或邮箱
-
-appid
-- 类型：String, 不可为空
-- 描述：在Fogcloud平台注册的APP的id
-
-##callback
+#####callback
 usercb
 - 类型：UserCallBack
 - 描述：接口调用成功后的回调函数
@@ -120,7 +121,7 @@ usercb
   }
 }
 ```
-##示例代码
+#####示例代码
 
 ```java
 MiCOUser micoUser = new MiCOUser();
