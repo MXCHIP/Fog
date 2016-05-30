@@ -897,72 +897,50 @@ micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
 
 <div id="startListenDevice"></div>
 #**startListenDevice**
-
     远程监听设备，获取设备上报的数据
 
     startListenDevice(ListenDeviceParams listendevparams, ControlDeviceCallBack ctrldevcb)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+listendevparams     | ListenDeviceParams       | ListenDeviceParams至少包含以下的信息
 
-listendevparams
-- 类型：ListenDeviceParams, 不可为空
-- 描述：ListenDeviceParams至少包含以下的信息
+#####ShareDeviceParams
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+host     | String       | 云端的host地址，默认为"iot.mxchip.com"
+port     | String       | 云端的port，默认为"1883"
+userName     | String       | enduserid
+passWord     | String       | devicepw, 与用户密码相同，或者与注册验证码相同
+clientID     | String       | enduserid，即用户登录后获取的enduserid
 
-deviceid
-- 类型：String, 不可为空
-- 描述：设备的deviceid
-
-host
-- 类型：String, 不可为空
-- 描述：云端的host地址，默认为"iot.mxchip.com"
-
-port
-- 类型：String, 不可为空
-- 描述：云端的port，默认为"1883"
-
-userName
-- 类型：String, 不可为空
-- 描述：enduserid
-
-passWord
-- 类型：String, 不可为空
-- 描述：devicepw, 与用户密码相同，或者与注册验证码相同
-
-clientID
-- 类型：String, 不可为空
-- 描述：enduserid，即用户登录后获取的enduserid
-
-##callback
-
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
-
 ListenDeviceParams listendevparams = new ListenDeviceParams();
+
 listendevparams.deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 listendevparams.host = "1883";
 listendevparams.port = "home";
 listendevparams.userName = "admin";
 listendevparams.passWord = "admin";
 listendevparams.clientID = "xxx...";
-
 micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
-    
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
     }    
-
     @Override
     public void onDeviceStatusReceived(String msgType, String messages) {
         Log.d(TAG, msgType + " " + message);
@@ -970,46 +948,31 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 });
 ```
 
-
-
 <div id="sendCommand"></div>
 #**sendCommand**
-
 	发送指令给设备端
 
     sendCommand(String deviceid, String devicepw, String command, String commandType,  ControlDeviceCallBack ctrldevcb, String token)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceid     | String       | 设备的deviceid
+devicepw     | String       | 设备的devicepw
+command     | String       | 发送给设备的指令"json"格式的字符串
+commandType         | String       | "json", 默认
 
-deviceid
-- 类型：String, 不可为空
-- 描述：设备的deviceid
-
-devicepw
-- 类型：String, 不可为空
-- 描述：设备的devicepw
-
-command
-- 类型：String, 不可为空
-- 描述：发送给设备的指令"json"格式的字符串
-
-commandType
-- 类型：String, 不可为空
-- 描述："json", 默认
-
-token
-- 类型：String, 不可为空
-- 描述：用户的token
-
-
-##callback
-
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+#####token
+token
+- 类型：String, 不可为空
+- 描述：用户的token
 
+#####示例代码
 ```java
 String devicepw = "xxx...";
 String commandType = "json";
@@ -1019,12 +982,10 @@ micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceC
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG + "onFailure", code + " " + message);
     }
-
     @Override
     public void onDeviceStatusReceived(String msgType, String messages) {
         Log.d(TAG + "onDeviceStatusReceived", msgType + " " + messages);
@@ -1032,43 +993,32 @@ micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceC
 }, token);
 ```
 
-
-
 <div id="addDeviceListener"></div>
 #**addDeviceListener**
-
 	增加订阅的频道
 
     addDeviceListener(String topic, int qos, ControlDeviceCallBack ctrldevcb)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+topic     | String       | 需要定义的topic
+qos     | int       | 0
 
-topic
-- 类型：String, 不可为空
-- 描述：需要定义的topic
-
-qos
-- 类型：int, 不可为空
-- 描述：0
-
-##callback
-
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 String topic = "xxx...";
 int qos = 0;
 micoDev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG + "onFailure", code + " " + message);
@@ -1076,38 +1026,30 @@ micoDev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
 });
 ```
 
-
-
 <div id="removeDeviceListener"></div>
 #**removeDeviceListener**
-
     移除某个监听的topic
 
     removeDeviceListener(String topic, ControlDeviceCallBack ctrldevcb)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+topic     | String       | 需要定义的topic
 
-topic
-- 类型：String, 不可为空
-- 描述：需要定义的topic
-
-##callback
-
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 String topic = "xxx...";
 micoDev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG + "onFailure", code + " " + message);
@@ -1115,32 +1057,25 @@ micoDev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
 });
 ```
 
-
-
 <div id="stopListenDevice"></div>
 #**stopListenDevice**
-
 	停止监听设备
 
     stopListenDevice(ControlDeviceCallBack ctrldevcb)
 
-##callback
-
+#####callback
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 micoDev.stopListenDevice(new ControlDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onDestroy onSuccess", message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG + "onDestroy onFailure", code + " " + message);
@@ -1148,49 +1083,32 @@ micoDev.stopListenDevice(new ControlDeviceCallBack() {
 });
 ```
 
-
-
 <div id="connectLocalDevice"></div>
 #**connectLocalDevice**
-
     连接本地局域网的设备
 
     connectLocalDevice(SinSocketParams sspara, SinSocketCallBack sscb)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+sspara     | SinSocketParams       | SinSocketParams至少包含以下的信息
 
-sspara
-- 类型：SinSocketParams, 不可为空
-- 描述：SinSocketParams至少包含以下的信息
+#####SinSocketParams
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+ip     | String       | 设备的ip，通过startSearchDevices发现设备
+port     | String       | 本地设备的port，默认为8002
+overTime     | int       | 连接设备时候的超时时间，默认为60秒
+heartBeatTime     | int       | 每个心跳包的间隔时间，默认为20秒
+autoConnectNo     | int       | socket连接丢失后，自动重连的次数，默认1000次
 
-ip
-- 类型：String, 不可为空
-- 描述：设备的ip，通过startSearchDevices发现设备
-
-port
-- 类型：int, 可为空
-- 描述：本地设备的port，默认为8002
-
-overTime
-- 类型：int, 可为空, 单位ms
-- 描述：连接设备时候的超时时间，默认为60秒
-
-heartBeatTime
-- 类型：int, 可为空, 单位ms
-- 描述：每个心跳包的间隔时间，默认为20秒
-
-autoConnectNo
-- 类型：int, 可为空
-- 描述：socket连接丢失后，自动重连的次数，默认1000次
-
-##callback
-
+#####callback
 sscb
 - 类型：SinSocketCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 
@@ -1210,59 +1128,47 @@ SinSocketCallBack sscb = new SinSocketCallBack() {
     public void onLost() {  //连接丢失后会执行此方法
         Log.d(TAG, "connect-->"+"lost");
     }
-    
     @Override
     public void onSuccess(String message) { //连接成功后会执行此方法
         Log.d(TAG, "connect-->"+"success");
-        
         //连接成功后，需要立即发送登录指令，否则设备会在5秒内把你踢掉，sendLocalCommand的指令下面会介绍
         micodev.sendLocalCommand("{\"applocallogin\":\"admin\"}", null);
     }
-    
     @Override
     public void onFailure(int code, String message) { //连接失败后会执行此方法
         Log.d(TAG, "connect-->"+code+" "+message);
     }
 };
-
 micodev.connectLocalDevice(sspara, sscb);
 ```
 
-
-
 <div id="sendLocalCommand"></div>
 #**sendLocalCommand**
-
     发送本地的控制指令
 
     sendLocalCommand(String command, SinSocketCallBack sscb)
 
-##params
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+command     | String       | 不可为空，虽然是String型，但是必须是json的样子,否则模块会死掉，格式如下"{\"applocallogin\":\"admin\"}"
 
-command
-- 类型：String, 不可为空，虽然是String型，但是必须是json的样子
-- 描述：否则模块会死掉，格式如下"{\"applocallogin\":\"admin\"}"
-
-##callback
-
+#####callback
 sscb
 - 类型：SinSocketCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 
 String command = "{\"applocallogin\":\"admin\"}";
 
 micodev.sendLocalCommand(command, new SinSocketCallBack() {
-
     @Override
     public void onSuccess(String message) { //这里的发送成功只是write成功，并不能保证设备已经接受到了
         Log.d(TAG, "Command-->"+message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, "Command-->"+code + " " + message);
@@ -1270,33 +1176,25 @@ micodev.sendLocalCommand(command, new SinSocketCallBack() {
 });
 ```
 
-
-
 <div id="disconnectLocalDevice"></div>
 #**disconnectLocalDevice**
-
     断开与本地设备的连接
 
     disconnectLocalDevice(SinSocketCallBack sscb)
 
 ##callback
-
 sscb
 - 类型：SinSocketCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
-
 micodev.disconnectLocalDevice(new SinSocketCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, "disconnect-->"+message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, "disconnect-->"+code + " " + message);
@@ -1304,49 +1202,38 @@ micodev.disconnectLocalDevice(new SinSocketCallBack() {
 });
 ```
 
-
-
 <div id="getCookBookByType"></div>
 #**getCookBookByType**
-
     通过食谱类型查询食谱
 
     getCookBookByType(int type, String productid, MiCOCallBack micocb, String token)
-##params
 
-type
-- 类型：int, 不可为空
-- 描述：云菜谱的类型，自己定义(与云端一致)
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+type     | int       | 云菜谱的类型，自己定义(与云端一致)
+productid     | String       | 产品ID
 
-productid
-- 类型：String, 不可为空
-- 描述：产品ID
-
-##callback
-
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
-
 token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 #####示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 int type = 1;
 String productid = "6486b2d1-0ee9-4647-XXXX-78b9cbc778f7";
 micoUser.getCookBookByType(type, productid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
@@ -1354,44 +1241,36 @@ micoUser.getCookBookByType(type, productid, new MiCOCallBack() {
 }, token);
 ```
 
-
-
 <div id="getCookBookByName"></div>
 #**getCookBookByName**
-
     通过食谱名称查询食谱
 
     getCookBookByName(String cookbookname, MiCOCallBack micocb, String token)
-##params
 
-cookbookname
-- 类型：String, 不可为空
-- 描述：云菜谱的名字，支持模糊查询
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+cookbookname     | String       | 云菜谱的名字，支持模糊查询
 
-##callback
-
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
-
 token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 #####示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 String recipename = "cake";
 miCOUser.getCookBookByName(recipename, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
@@ -1401,40 +1280,34 @@ miCOUser.getCookBookByName(recipename, new MiCOCallBack() {
 
 <div id="getCookBookInfo"></div>
 #**getCookBookInfo**
-
     获取食谱详情
 
     getCookBookInfo(int cookbookid, MiCOCallBack micocb, String token)
-##params
 
-cookbookid
-- 类型：int, 不可为空
-- 描述：云菜谱的id，可以通过获取食谱列表获得
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+cookbookid     | int       | 云菜谱的id，可以通过获取食谱列表获得
 
-##callback
-
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
-
 token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 #####示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 int recipeid = 86;
 micouser.getCookBookInfo(recipeid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
@@ -1442,44 +1315,36 @@ micouser.getCookBookInfo(recipeid, new MiCOCallBack() {
 }, token);
 ```
 
-
-
 <div id="addCookBookLikeNo"></div>
 #**addCookBookLikeNo**
-
     给食谱点赞
 
     addCookBookLikeNo(int cookbookid, MiCOCallBack micocb, String token)
-##params
 
-cookbookid
-- 类型：int, 不可为空
-- 描述：云菜谱的id，可以通过获取食谱列表获得
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+cookbookid     | int       | 云菜谱的id，可以通过获取食谱列表获得
 
-##callback
-
+#####callback
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
 ##token
-
 token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 #####示例代码
-
 ```java
 MiCOUser micoUser = new MiCOUser();
 int recipeid = 86;
 micouser.addCookBookLikeNo(recipeid, new MiCOCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
     }
-    
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
@@ -1487,31 +1352,26 @@ micouser.addCookBookLikeNo(recipeid, new MiCOCallBack() {
 }, token);
 ```
 
-
-
 <div id="createScheduleTask"></div>
 #**createScheduleTask**
-
     创建定时任务
 
     createScheduleTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
-##params
 
-stp
-- 类型：ScheduleTaskParam, 不可为空
-- 描述：ScheduleTaskParam至少包含以下的信息
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+stp     | ScheduleTaskParam       | ScheduleTaskParam至少包含以下的信息
 
-device_id
-- 类型：String, 不可为空
-- 描述：设备的device id
-
-commands
-- 类型：String, 不可为空
-- 描述：控制指令
-
-enable
-- 类型：boolean, 可为空，默认为true
-- 描述：当前task，True 启用 False 暂停
+#####ScheduleTaskParam
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+device_id     | String       | 设备的device id
+commands         | String       | 控制指令
+enable         | boolean       | 当前task，True 启用 False 暂停
+day_of_week         | String       | 周 默认为“*”
+hour         | String       | 小时
+minute         | String       | 分
 
 ```js
 时间参数说明：
@@ -1529,36 +1389,20 @@ enable
 （例如“0,1,2”表示周一 周二 周三）
 ```
 
-day_of_week
-- 类型：String, 可为空
-- 描述：周 默认为“*”
-
-hour
-- 类型：String, 可为空
-- 描述：小时
-
-minute
-- 类型：String, 可为空
-- 描述：分
-
 ##callback
-
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
 ```
 
 ##token
-
 token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 ScheduleTaskParam stp = new ScheduleTaskParam();
@@ -1578,68 +1422,50 @@ stp.minute = "*";
 // 更详细的参数说明，参考《Linux crontab定时执行任务》
 
 micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG + "onFailure", code + " " + message);
     }
-
 }, token);
 ```
 
-
-
 <div id="creatDelayTask"></div>
 #**creatDelayTask**
-
     创建延时任务
 
     creatDelayTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
-##params
 
-stp
-- 类型：ScheduleTaskParam, 不可为空
-- 描述：ScheduleTaskParam至少包含以下的信息
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+stp     | ScheduleTaskParam       | ScheduleTaskParam至少包含以下的信息
 
-device_id
-- 类型：String, 不可为空
-- 描述：设备的device id
-
-order
-- 类型：String, 不可为空
-- 描述：控制指令
-
-enable
-- 类型：boolean, 可为空，默认为true
-- 描述：当前task，True 启用 False 暂停
-
-second
-- 类型：int, 可为空
-- 描述：秒
+#####ScheduleTaskParam
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+device_id     | String       | 设备的device id
+commands         | String       | 控制指令
+enable         | boolean       | 当前task，True 启用 False 暂停
+second         | String       | 秒
 
 ##callback
-
 ctrldevcb
 - 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
-
 ```js
 {"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
 ```
 
 ##token
-
 token
 - 类型：String, 不可为空
 - 描述：用户登录后服务器端返回的token
 
 #####示例代码
-
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 ScheduleTaskParam stp = new ScheduleTaskParam();
@@ -1650,21 +1476,15 @@ stp.enable = true;
 stp.second = 100;
 
 micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
-
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
     }
-
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG + "onFailure", code + " " + message);
     }
-
 }, token);
 ```
-
-
-
 
 (完)
