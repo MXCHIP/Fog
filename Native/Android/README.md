@@ -64,7 +64,6 @@ __设备管理__
 * [获取设备详情](#getDeviceInfo)
 * [修改设备名称](#updateDeviceAlias)
 * [获取设备分享码](#getShareVerCode)
-* [生成二维码](#creatQrCode)
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
 __权限管理__
@@ -753,42 +752,6 @@ getShareVerCode(deviceid, new ManageDeviceCallBack() {
         Log.d(TAG, code + " " + message);
     }
 }, token);
-```
-
-<div id="creatQrCode"></div>
-#**creatQrCode**
-    将分享码和绑定的关系转成二维码，让别人通过手机扫描二维码绑定
-
-    Bitmap creatQrCode(String message, int height, int width)
-
-#####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-message     | String       | 需要生成二维码的信息
-height     | int       | 二维码的高度
-width         | int       | 二维码的宽度
-vercode         | String       | getShareVerCode接口获取的sharcode
-role         | int       | 1超级用户 3普通用户 2管理员
-bindingtype         | String       | 绑定类型 sa 超级用户 home 家庭用户 guest 访客 other 其他
-iscallback         | String       | 是否返回绑定状态，此版本请都设置为false
-
-#####callback
-Bitmap
-- 类型：Bitmap
-- 描述：可以直接将BitMap放入ImageView里，如下
-
-#####示例代码
-```java
-MiCODevice micodev = new MiCODevice(MainActivity.this);
-ImageView qrcodeimg = (ImageView) findViewById(R.id.qrcodeimg);
-String vercode = "xxx...";
-int role = 3;
-String bindingtype = "home";
-boolean iscallback = false;
-String message = "{\"vercode\":\""+ vercode +"\",\"role\":"+ role 
-                +",\"bindingtype\":\""+ bindingtype +"\",\"iscallback\":"
-                + iscallback + "}";
-qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 220, 220));
 ```
 
 <div id="addDeviceByVerCode"></div>
