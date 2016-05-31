@@ -32,83 +32,61 @@
 __基础功能__
 
 * [获取验证码](#getVerifyCode)
-
 * [验证验证码](#checkVerifyCode)
-
 * [设置初始密码](#setPassword)
-
 * [登录](#login)
-
 * [刷新Token](#refreshToken)
 
 <div id="MiCODevice"></div>
 ##**MiCODevice** 设备管理
 
-__EasyLink__
+__设备配网__
 
 * [获取SSID](#getSSID)
-
 * [开始配网](#startEasyLink)
-
 * [停止配网](#stopEasyLink)
 
-__SearchDevice__
+__搜索设备__
 
 * [开始搜索设备](#startSearchDevices)
-
 * [停止搜索设备](#stopSearchDevices)
 
-__BindDevice__
+__绑定设备__
 
 * [绑定设备](#bindDevice)
-
 * [解绑设备](#unBindDevice)
 
 <div id="ManageDevices"></div>
-__ManageDevices__
+__设备管理__
 
 * [获取设备列表](#getDeviceList)
-
 * [获取设备详情](#getDeviceInfo)
-
 * [修改设备名称](#updateDeviceAlias)
-
 * [获取设备分享码](#getShareVerCode)
-
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
 __权限管理__
 
 * [获取用户列表](#getMemberList)
-
 * [移除用户权限](#removeBindRole)
 
 <div id="ControlRemoteDevice"></div>
-__ControlRemoteDevice__
+__远程控制__
 
 * [监听远程设备](#startListenDevice)
-
 * [发送指令](#sendCommand)
-
 * [增加订阅通道](#addDeviceListener)
-
 * [移除订阅通道](#removeDeviceListener)
-
 * [停止监听设备](#stopListenDevice)
 
 <div id="CommandTask"></div>
-__CommandTask__
+__任务管理__
 
 * [创建定时任务](#createScheduleTask)
-
 * [创建延时任务](#creatDelayTask)
-
 * [获取任务列表](#getTaskList)
-
 * [移除任务](#deleteTask)
-
 * [更新定时任务](#updateScheduleTask)
-
 * [更新延时任务](#updateDelayTask)
 
 <br/>

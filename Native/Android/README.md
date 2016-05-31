@@ -95,8 +95,16 @@ __云菜谱__
 * [获取菜谱详情](#getCookBookInfo)
 * [给菜谱点赞](#addCookBookLikeNo)
 * [取消点赞](#delCookBookLikeNo)
+
+<div id="CommandTask"></div>
+__任务管理__
+
 * [创建定时任务](#createScheduleTask)
 * [创建延时任务](#creatDelayTask)
+* [获取任务列表](#getTaskList)
+* [移除任务](#deleteTask)
+* [更新定时任务](#updateScheduleTask)
+* [更新延时任务](#updateDelayTask)
 
 --------------------------------------
 
@@ -1459,6 +1467,235 @@ MiCODevice micodev = new MiCODevice(MainActivity.this);
 ScheduleTaskParam stp = new ScheduleTaskParam();
 
 stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
+stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
+stp.enable = true;
+stp.second = 100;
+
+micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG + "onSuccess", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG + "onFailure", code + " " + message);
+    }
+}, token);
+```
+
+<div id="getTaskList"></div>
+#**getTaskList**
+    获取任务列表
+
+    getTaskList(String deviceid, int taskType, ControlDeviceCallBack ctrldevcb, String token)
+
+#####params
+参数名 | 类型 | 描述
+device_id     | String       | 设备的device id
+taskType         | int       | 任务类型 0 定时任务， 1 延时任务
+
+#####callback
+ctrldevcb
+- 类型：ControlDeviceCallBack
+- 描述：接口调用成功后的回调函数
+```js
+{"data":"ec49e83a-1103-11e6-a739-00163e0204c0"}
+```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+#####示例代码
+```java
+MiCODevice micodev = new MiCODevice(MainActivity.this);
+
+micoDev.getTaskList("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDeviceCallBack() {
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG + "onSuc", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG + "onFai", code + " " + message);
+    }
+}, token);
+```
+
+<div id="deleteTask"></div>
+#**deleteTask**
+    移除某个任务
+
+    deleteTask(String deviceid, String taskid, ControlDeviceCallBack ctrldevcb, String token)
+
+#####params
+参数名 | 类型 | 描述
+device_id     | String       | 设备的device id
+taskid         | String       | 任务的名字
+
+#####callback
+ctrldevcb
+- 类型：ControlDeviceCallBack
+- 描述：接口调用成功后的回调函数
+```js
+{
+  "meta": {
+    "msg": "成功删除task：8b95b17c-20bc-11e6-a739-00163e0204c0",
+    "code": 0
+  },
+  "data": "8b95b17c-20bc-11e6-a739-00163e0204c0"
+}
+```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+#####示例代码
+```java
+MiCODevice micodev = new MiCODevice(MainActivity.this);
+
+String deviceid = "d95366fe-06c0-11e6-a739-00163e0204c0";
+String taskid = "ff9c5c3a-2097-11e6-a739-00163e0204c0";
+micoDev.deleteTask(deviceid, taskid, new ControlDeviceCallBack() {
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG + "onSuc", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG + "onFai", code + " " + message);
+    }
+}, token);
+```
+
+<div id="updateScheduleTask"></div>
+#**updateScheduleTask**
+    更新某个任务
+
+    updateScheduleTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
+
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+stp     | ScheduleTaskParam       | ScheduleTaskParam至少包含以下的信息
+
+#####ScheduleTaskParam
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+device_id     | String       | 设备的device id
+task_id     | String       | 任务的名字
+commands         | String       | 控制指令
+enable         | boolean       | 当前task，True 启用 False 暂停
+day_of_week         | String       | 周 默认为“*”
+hour         | String       | 小时
+minute         | String       | 分
+
+```js
+时间参数说明：
+
+星期，取值：
+周一：0
+周二：1
+周三：2
+周四：3
+周五：4
+周六：5
+周日：6
+“*”：每天
+不传：单次任务
+（例如“0,1,2”表示周一 周二 周三）
+```
+
+#####callback
+ctrldevcb
+- 类型：ControlDeviceCallBack
+- 描述：接口调用成功后的回调函数
+```js
+{
+  "meta": {
+    "msg": "修改任务成功",
+    "code": 0
+  },
+  "data": "5af8bb16-20b4-11e6-a739-00163e0204c0"
+}
+```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+#####示例代码
+```java
+MiCODevice micodev = new MiCODevice(MainActivity.this);
+
+ScheduleTaskParam stp = new ScheduleTaskParam();
+stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
+stp.commands = "{\"KG_Bottom\":\"1\"}";
+stp.task_id = "ff9c5c3a-2097-11e6-a739-00163e0204c0";
+stp.enable = false;
+
+stp.month = "*";
+stp.day_of_week = "*";
+stp.hour = "*";
+stp.minute = "*";
+micoDev.updateScheduleTask(stp, new ControlDeviceCallBack() {
+    @Override
+    public void onSuccess(String message) {
+        Log.d(TAG + "onSuc", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG + "onFai", code + " " + message);
+    }
+}, token);
+```
+
+<div id="updateDelayTask"></div>
+#**updateDelayTask**
+    更新某个延时任务
+
+    updateDelayTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
+
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+stp     | ScheduleTaskParam       | ScheduleTaskParam至少包含以下的信息
+
+#####ScheduleTaskParam
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+device_id     | String       | 设备的device id
+task_id     | String       | 任务的名字
+commands         | String       | 控制指令
+enable         | boolean       | 当前task，True 启用 False 暂停
+second         | String       | 秒
+
+#####callback
+ctrldevcb
+- 类型：ControlDeviceCallBack
+- 描述：接口调用成功后的回调函数
+```js
+{
+  "meta": {
+    "msg": "修改任务成功",
+    "code": 0
+  },
+  "data": "5af8bb16-20b4-11e6-a739-00163e0204c0"
+}
+```
+
+#####token
+- 类型：String, 不可为空
+- 描述：用户登录后服务器端返回的token
+
+#####示例代码
+```java
+MiCODevice micodev = new MiCODevice(MainActivity.this);
+ScheduleTaskParam stp = new ScheduleTaskParam();
+
+stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
+stp.task_id = "ff9c5c3a-2097-11e6-a739-00163e0204c0";
 stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
 stp.enable = true;
 stp.second = 100;
