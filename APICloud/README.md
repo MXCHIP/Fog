@@ -1,4 +1,4 @@
-##Fog2
+##MiCO2
 
 ##**概述**
 
@@ -10,17 +10,22 @@
 
 3、注册完成后，还没有一个可以控制的设备，需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器
 
-1)让设备连上路由器(EasyLink)，
+>1)让设备连上路由器(EasyLink)，
 
-2)连上以后找到这个设备的IP(SearchDevice)，
+>2)连上以后找到这个设备的IP(SearchDevice)，
 
-3)绑定设备(bindDevice)
+>3)绑定设备(bindDevice)
 
 4、可以将自己名下的设备分享给别人使用，这些在(ManageDevices)部分
 
 5、远程控制设备(ControlRemoteDevice)
 
 <br/>
+<div id="MiCO"></div>
+##**MiCO** 全局设置
+
+* [初始化](#init)
+
 <div id="MiCOUser"></div>
 ##**MiCOUser** 用户管理
 
@@ -35,12 +40,6 @@ __基础功能__
 * [登录](#login)
 
 * [刷新Token](#refreshToken)
-
-__权限管理__
-
-* [获取用户列表](#getMemberList)
-
-* [移除用户权限](#removeBindRole)
 
 <div id="MiCODevice"></div>
 ##**MiCODevice** 设备管理
@@ -78,6 +77,12 @@ __ManageDevices__
 
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
+__权限管理__
+
+* [获取用户列表](#getMemberList)
+
+* [移除用户权限](#removeBindRole)
+
 <div id="ControlRemoteDevice"></div>
 __ControlRemoteDevice__
 
@@ -108,6 +113,31 @@ __CommandTask__
 
 <br/>
 <br/>
+<div id="init"></div>
+#**init**
+
+    初始化，设置服务器域名
+
+    init({params})
+
+##params
+
+host
+- 类型：字符串, 不可为空
+- 描述：服务器域名
+
+##示例代码
+
+```java
+const host = {host:"https://iot.mxchip.com"};
+var mico2 = api.require('mico2');
+mico2.init(host);
+```
+
+##可用性
+
+    Android系统4.0+
+
 <div id="getVerifyCode"></div>
 #**getVerifyCode**
 
