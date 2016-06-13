@@ -609,7 +609,7 @@ managedevcb
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
-micoDev.unBindDevice(deviceid, new ManageDeviceCallBack() {
+micodev.unBindDevice(deviceid, new ManageDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
@@ -716,7 +716,7 @@ MiCODevice micoDev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String alias = "好名字";
 String token = "xxx...";
-micoDev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
+micodev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
@@ -799,7 +799,7 @@ sdevp.role = 3;
 sdevp.bindingtype = "home";
 sdevp.iscallback = false;
 String token = "xxx...";
-micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
+micodev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
@@ -931,12 +931,12 @@ MiCODevice micodev = new MiCODevice(MainActivity.this);
 ListenDeviceParams listendevparams = new ListenDeviceParams();
 
 listendevparams.deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
-listendevparams.host = "1883";
-listendevparams.port = "home";
-listendevparams.userName = "admin";
-listendevparams.passWord = "admin";
-listendevparams.clientID = "xxx...";
-micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
+listendevparams.host = "http://101.201.101.153";
+listendevparams.port = "1883";
+listendevparams.userName = enderuserid;
+listendevparams.passWord = "123456";
+listendevparams.clientID = enderuserid;
+micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
@@ -944,10 +944,10 @@ micoDev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
     @Override
     public void onFailure(int code, String message) {
         Log.d(TAG, code + " " + message);
-    }    
+    }
     @Override
     public void onDeviceStatusReceived(String msgType, String messages) {
-        Log.d(TAG, msgType + " " + message);
+        Log.d(TAG, msgType + " " + messages);
     }
 });
 ```
@@ -979,7 +979,7 @@ ctrldevcb
 String devicepw = "xxx...";
 String commandType = "json";
 String token = "xxx...";
-micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceCallBack() {
+micodev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
@@ -1016,7 +1016,7 @@ ctrldevcb
 ```java
 String topic = "xxx...";
 int qos = 0;
-micoDev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
+micodev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
@@ -1047,7 +1047,7 @@ ctrldevcb
 #####示例代码
 ```java
 String topic = "xxx...";
-micoDev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
+micodev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
@@ -1073,7 +1073,7 @@ ctrldevcb
 #####示例代码
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
-micoDev.stopListenDevice(new ControlDeviceCallBack() {
+micodev.stopListenDevice(new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onDestroy onSuccess", message);
@@ -1418,7 +1418,7 @@ stp.minute = "*";
 
 // 更详细的参数说明，参考《Linux crontab定时执行任务》
 
-micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
+micodev.createScheduleTask(stp, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
@@ -1471,7 +1471,7 @@ stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
 stp.enable = true;
 stp.second = 100;
 
-micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
+micodev.creatDelayTask(stp, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
@@ -1510,7 +1510,7 @@ ctrldevcb
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
 
-micoDev.getTaskList("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDeviceCallBack() {
+micodev.getTaskList("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuc", message);
@@ -1557,7 +1557,7 @@ MiCODevice micodev = new MiCODevice(MainActivity.this);
 
 String deviceid = "d95366fe-06c0-11e6-a739-00163e0204c0";
 String taskid = "ff9c5c3a-2097-11e6-a739-00163e0204c0";
-micoDev.deleteTask(deviceid, taskid, new ControlDeviceCallBack() {
+micodev.deleteTask(deviceid, taskid, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuc", message);
@@ -1639,7 +1639,7 @@ stp.month = "*";
 stp.day_of_week = "*";
 stp.hour = "*";
 stp.minute = "*";
-micoDev.updateScheduleTask(stp, new ControlDeviceCallBack() {
+micodev.updateScheduleTask(stp, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuc", message);
@@ -1700,7 +1700,7 @@ stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\"}";
 stp.enable = true;
 stp.second = 100;
 
-micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
+micodev.creatDelayTask(stp, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "onSuccess", message);
