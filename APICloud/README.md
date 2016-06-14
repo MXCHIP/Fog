@@ -214,7 +214,7 @@ ret
 
 ```js
 {
-  "eyJhVlSV8I...": "eyJhbGcxxx44",
+  "token": "eyJhbGcxxx44",
   "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```

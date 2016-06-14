@@ -674,17 +674,18 @@ micocb
 
 #####示例代码
 ```java
-MiCOUser micoUser = new MiCOUser();
+MiCODevice micodev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
-micoUser.getDeviceInfo(deviceid, new MiCOCallBack() {
+micodev.getDeviceInfo(deviceid, new MiCOCallBack() {
     @Override
     public void onSuccess(String message) {
-        Log.d(TAG, message);
+
     }
+
     @Override
     public void onFailure(int code, String message) {
-        Log.d(TAG, code + " " + message);
+
     }
 }, token);
 ```
@@ -712,7 +713,7 @@ managedevcb
 
 #####示例代码
 ```java
-MiCODevice micoDev = new MiCODevice(MainActivity.this);
+MiCODevice micodev = new MiCODevice(MainActivity.this);
 String deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 String alias = "好名字";
 String token = "xxx...";
