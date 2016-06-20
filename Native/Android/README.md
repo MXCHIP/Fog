@@ -1,5 +1,7 @@
 ##MiCOSDK开发指南
 
+这里有测试Demo，[传送门](https://github.com/mxchipSDK/FogLibraryDemo)
+
 ##**概述**
 
 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
@@ -667,6 +669,19 @@ deviceid     | String       | 设备的deviceid
 micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
+```js
+{
+  "meta": {
+    "message": "设备信息。",
+    "code": 0
+  },
+  "data": {
+    "alias": "爱焙客",
+    "online": false,
+    "devicepw": "7176"
+  }
+}
+```
 
 #####token
 - 类型：String, 不可为空
@@ -786,6 +801,17 @@ iscallback         | boolean       | 是否返回绑定状态，此版本请都�
 managedevcb
 - 类型：ManageDeviceCallBack
 - 描述：接口调用成功后的回调函数
+```js
+{
+  "meta": {
+    "message": "您是超级用户，无法更新授权",
+    "code": 23102
+  },
+  "data": {
+    
+  }
+}
+```
 
 #####token
 - 类型：String, 不可为空
@@ -828,16 +854,36 @@ micocb
 - 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 
+```js
+{
+  "meta": {
+    "message": "成功根据设备ID获取用户列表",
+    "code": 0
+  },
+  "data": "[
+        {
+          "enduserid": "e32bd592-1bf8-11e6-a739-00163e0204c0",
+          "phone": "",
+          "email": "wzbdroid@126.com",
+          "nickname": "",
+          "realname": "",
+          "is_active": true,
+          "app": "db456b4a-17fc-11e6-a739-00163e0204c0"
+        }
+  ]"
+}
+```
+
 #####token
 - 类型：String, 不可为空
 - 描述：用户登录后获取的token
 
 #####示例代码
 ```java
-MiCOUser micoUser = new MiCOUser();
+MiCODevice micodevice = new MiCODevice(MyListViewActivity.this);
 String deviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String token = "xxx...";
-micoUser.getMemberList(deviceid, new MiCOCallBack() {
+micodevice.getMemberList(deviceid, new MiCOCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG + "getMemberList", message);
@@ -884,11 +930,11 @@ micocb
 
 #####示例代码
 ```java
-MiCOUser micoUser = new MiCOUser();
+MiCODevice micodevice = new MiCODevice(MyListViewActivity.this);
 String mdeviceid = "xxx-b9db-11e5-a739-00163e0204c0";
 String menduserid = "xxx11e5-a739-00163e0204c0";
 String token = "xxx...";
-micoUser.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
+micodevice.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
