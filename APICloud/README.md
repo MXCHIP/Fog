@@ -480,7 +480,18 @@ ret
     "message": "成功根据设备ID获取用户列表",
     "code": 0
   },
-  "data": "[{"enduserid":"e32bd592-1bf8-11e6-a739-00163e0204c0","phone":"","email":"33er2212@126.com","nickname":"","realname":"","is_active":true,"app":"db456b4a-17fc-11e6-a739-00163e0204c0"}]"
+  "data": [
+    {
+      "realname": "",
+      "enduserid": "e32bd592-1bf8-11e6-a739-00163e0204c0",
+      "app": "db456b4a-17fc-11e6-a739-00163e0204c0",
+      "is_active": true,
+      "phone": "",
+      "role": 2,
+      "nickname": "",
+      "email": "wzbdroid@126.com"
+    }
+  ]
 }
 ```
 
