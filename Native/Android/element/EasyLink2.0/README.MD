@@ -103,6 +103,7 @@ elink.stopEasyLink(new EasyLinkCallBack() {
 });
 ```
 <div id="errorcode"></div>
+#**错误码**
 
 code | message | 描述
 :-----------  | :-------------: | :-------------:
