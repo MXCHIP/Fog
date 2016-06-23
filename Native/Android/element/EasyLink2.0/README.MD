@@ -1,73 +1,79 @@
-##Description: EasyLink接口规范
+##Description: EasyLink2.0
 
-    2015年06月29日
+    2016年06月23日
 
-* [getCurrentSSID](#1)
+对应库：easylink2.0.jar
 
-* [startEasyLink](#2)
+##**功能列表**
 
-* [stopEasyLink](#3)
-
-##**概述**
-
-配网流程：
-
-    1、通过“startEasyLink”发送配网数据包，同时开启mDNS（接口startMdnsService），发现局域网设备，发现后关闭EasyLink
-    
-    注意：发现设备时候，如果局域网有多台设备同时在配网，那么会发现多台设备，一般解决方案，开启mDNS之前，
-    通过扫描二维码或者其他方式得到需要配网设备的mac地址，mDNS搜索到设备时候进行mac匹配，如果一致则说明之
-    前的EasyLink工作完成，关闭EasyLink
-
-首先需要导入一个库：easylink_only.jar
+* [获取SSID](#getSSID)
+* [开始配网](#startEasyLink)
+* [停止配网](#stopEasyLink)
 
 
-#**getCurrentSSID**<div id="1"></div>
+<div id="getSSID"></div>
+#**getSSID**
+    获取当前手机连接的WIFI的名称，即ssid
 
-    获取WIFI的名称SSID
+    String getSSID()
 
-    public  String getCurrentSSID(){}
-
-##return
-
-return：
-
+#####callback
+ssid
 - 类型：String
+- 描述：当前WIFI的名称
 
-##示例代码
-
-```js
-private EasyLinkWifiManager mWifiManager = null;
-private Context ctx = null;
-
-ctx = MainActivity.this;
-mWifiManager = new EasyLinkWifiManager(ctx);
-String Ssid = mWifiManager.getCurrentSSID();
+#####示例代码
+```java
+EasyLink elink = new EasyLink();
+elink.getSSID(context)
 ```
 
-#**startEasyLink**<div id="2"></div>
+<div id="startEasyLink"></div>
+#**startEasyLink**
+    发送数据包(包含ssid和password)给设备，连续发10s，再停止3s，再继续发，如此反复
 
-    开启EasyLink，发送配网数据包给设备
-    
-    public void startEasyLink(Context context, String ssid, String password) {}
+    startEasyLink(Context context, EasyLinkParams easylinkPara, EasyLinkCallBack easylinkcb)
 
-##示例代码
+#####params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+context     | Context       | 上下文
+easylinkPara     | EasyLinkParams       | EasyLinkParams包含以下的信息
 
-```js
-public EasyLinkAPI elapi;
-private Context ctx = null;
+#####EasyLinkParams
+参数名 | 类型 | 默认值 | 描述
+:-----------  | :-------------:| -----------:| -----------:
+ssid        | String       | 无默认值，不可为空 | 当前wifi的名称
+password     | String       | 无默认值，可为空 | 当前wifi的密码
+runSecond         | int       | 默认值60000，可为空 | 发送持续的时间，到点了就停止发送, 单位ms
+sleeptime         | int       | 默认值50，可为空 | 每包数据的间隔时间，建议20-200, 单位ms
+extraData         | String     | 无默认值，可为空   | 需要发送给设备的额外信息
+rc4key     | String       | 无默认值，可为空 | 如果需要RC4加密，这里就输入字符串密钥
 
-ctx = MainActivity.this;
-elapi.startEasyLink_FTC(context,wifissid,  wifipsw);
-```
+#####callback
+easylinkcb
+- 类型：EasyLinkCallBack
+- 描述：接口调用成功后的回调函数
 
-#**stopEasyLink**<div id="3"></div>
+#####示例代码
+```java
+EasyLink elink = new EasyLink();
+EasyLinkParams easylinkPara = new EasyLinkParams();
+easylinkPara.ssid = "mxchip-office";
+easylinkPara.password = "12345678";
+easylinkPara.runSecond = 20000;
+easylinkPara.sleeptime = 50;
+easylinkPara.extraData = "tom";
+// easylinkPara.rc4key = "";
 
-    停止EasyLink，一般情况会等mDNS搜到需要配网的设备时候停止或者添加一个60s超时来停止
-    
-    public void stopEasyLink() {}
-
-##示例代码
-
-```js
-elapi.stopEasyLink();
+elink.startEasyLink(ctx, easylinkPara, new EasyLinkCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+});
 ```
