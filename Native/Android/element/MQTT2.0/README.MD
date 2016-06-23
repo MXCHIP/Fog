@@ -1,6 +1,6 @@
-##元素版本: EasyLink2.0
+##元素版本: MQTT2.0
 
-    2016年06月23日
+<!--    2016年06月23日
 
 对应库：easylink2.0.jar
 
@@ -113,3 +113,5 @@ code | message | 描述
 9402     | It is progressing.   |    EasyLink正在运行中
 9403     | It is closed.   |    EasyLink已经被关闭了
 9405     | Context is null.  |    上下文不能为空
+
+-->
