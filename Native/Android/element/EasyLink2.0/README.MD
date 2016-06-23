@@ -9,6 +9,7 @@
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
+* [错误码](#errorcode)
 
 
 <div id="getSSID"></div>
@@ -57,7 +58,6 @@ easylinkcb
 
 #####示例代码
 ```java
-EasyLink elink = new EasyLink();
 EasyLinkParams easylinkPara = new EasyLinkParams();
 easylinkPara.ssid = "mxchip-office";
 easylinkPara.password = "12345678";
@@ -77,3 +77,38 @@ elink.startEasyLink(ctx, easylinkPara, new EasyLinkCallBack() {
     }
 });
 ```
+
+<div id="stopEasyLink"></div>
+#**stopEasyLink**
+    停止发送数据包
+
+    stopEasyLink(EasyLinkCallBack easylinkcb)
+
+#####callback
+easylinkcb
+- 类型：EasyLinkCallBack
+- 描述：接口调用成功后的回调函数
+
+#####示例代码
+```java
+elink.stopEasyLink(new EasyLinkCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+});
+```
+<div id="errorcode"></div>
+
+code | message | 描述
+:-----------  | :-------------: | :-------------:
+1000     | success       | 打开EasyLink成功
+1001     | stop success   |    关闭EasyLink成功
+9400     | Parameters can not be empty.   |    参数不能为空
+9402     | It is progressing.   |    EasyLink正在运行中
+9403     | It is closed.   |    EasyLink已经被关闭了
+9405     | Context is null.  |    上下文不能为空
