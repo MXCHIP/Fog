@@ -1,4 +1,4 @@
-##Description: EasyLink2.0
+##元素版本: EasyLink2.0
 
     2016年06月23日
 
