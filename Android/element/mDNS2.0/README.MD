@@ -1,104 +1,110 @@
 ##元素版本: mDNS2.0
 
-<!--    2016年06月23日
+2016年06月24日
 
-对应库：easylink2.0.jar
+对应库：mdns2.0.jar
 
 ##**功能列表**
 
-* [获取SSID](#getSSID)
-* [开始配网](#startEasyLink)
-* [停止配网](#stopEasyLink)
+* [搜索设备](#startSearchDevices)
+* [停止搜索](#stopSearchDevices)
 * [错误码](#errorcode)
 
 
-<div id="getSSID"></div>
-#**getSSID**
-    获取当前手机连接的WIFI的名称，即ssid
+<div id="startSearchDevices"></div>
+#**startSearchDevices**
+    开始搜索设备，每3秒返回一次搜索结果，以json数组形式返回
 
-    String getSSID()
-
-#####callback
-ssid
-- 类型：String
-- 描述：当前WIFI的名称
-
-#####示例代码
-```java
-EasyLink elink = new EasyLink();
-elink.getSSID(context)
-```
-
-<div id="startEasyLink"></div>
-#**startEasyLink**
-    发送数据包(包含ssid和password)给设备，连续发10s，再停止3s，再继续发，如此反复
-
-    startEasyLink(Context context, EasyLinkParams easylinkPara, EasyLinkCallBack easylinkcb)
+    startSearchDevices(Context context, String serviceName, SearchDeviceCallBack searchdevcb)
 
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 context     | Context       | 上下文
-easylinkPara     | EasyLinkParams       | EasyLinkParams包含以下的信息
-
-#####EasyLinkParams
-参数名 | 类型 | 默认值 | 描述
-:-----------  | :-------------:| -----------:| -----------:
-ssid        | String       | 无默认值，不可为空 | 当前wifi的名称
-password     | String       | 无默认值，可为空 | 当前wifi的密码
-runSecond         | int       | 默认值60000，可为空 | 发送持续的时间，到点了就停止发送, 单位ms
-sleeptime         | int       | 默认值50，可为空 | 每包数据的间隔时间，建议20-200, 单位ms
-extraData         | String     | 无默认值，可为空   | 需要发送给设备的额外信息
-rc4key     | String       | 无默认值，可为空 | 如果需要RC4加密，这里就输入字符串密钥
+serviceName     | 字符串       | mdns服务的名称
 
 #####callback
-easylinkcb
-- 类型：EasyLinkCallBack
+searchdevcb
+- 类型：SearchDeviceCallBack
 - 描述：接口调用成功后的回调函数
+```js
+[
+  {
+    "Name": "MiCOKit 3165#0762C6",
+    "IP": "192.168.18.119",
+    "Port": 8002,
+    "MAC": "D0:BA:E4:07:62:C6",
+    "Firmware Rev": "fog_3165_Michael@001",
+    "FogProductId": "0b3270da-393d-11e6-a739-00163e0204c0",
+    "IsEasylinkOK": "true",
+    "IsHaveSuperUser": "false",
+    "RemainingUserNumber": "3",
+    "Hardware Rev": "MK3165_1",
+    "MICO OS Rev": "31620002.046",
+    "Model": "MiCOKit-3165",
+    "Protocol": "com.mxchip.basic",
+    "Manufacturer": "MXCHIP Inc.",
+    "Seed": "8"
+  },
+  {
+    "Name": "MiCOKit 3288#91813C",
+    "IP": "192.168.18.121",
+    "Port": 8080,
+    "MAC": "C8:93:46:91:81:3C",
+    "Binding": "true",
+    "Firmware Rev": "MK3288_1@1507211945",
+    "Hardware Rev": "MK3288_1",
+    "MICO OS Rev": "10880002.035-0709",
+    "Model": "MiCOKit-3288",
+    "Protocol": "com.mxchip.micokit",
+    "Manufacturer": "MXCHIP Inc.",
+    "Seed": "708"
+  }
+]
+```
 
 #####示例代码
 ```java
-EasyLinkParams easylinkPara = new EasyLinkParams();
-easylinkPara.ssid = "mxchip-office";
-easylinkPara.password = "12345678";
-easylinkPara.runSecond = 20000;
-easylinkPara.sleeptime = 50;
-easylinkPara.extraData = "tom";
-// easylinkPara.rc4key = "";
-
-elink.startEasyLink(ctx, easylinkPara, new EasyLinkCallBack() {
-    @Override
-    public void onSuccess(int code, String message) {
-        Log.d(TAG, code + message);
-    }
-    @Override
-    public void onFailure(int code, String message) {
-        Log.d(TAG, code + message);
-    }
-});
+MDNS mdns = new MDNS();
+mdns.startSearchDevices(context, serviceInfo, new SearchDeviceCallBack() {
+        @Override
+        public void onDevicesFind(JSONArray deviceStatus) {
+            if (!deviceStatus.equals("")) {
+                Log.d("---mdns---", deviceStatus.toString());
+            }
+        }
+        @Override
+        public void onFailure(int code, String message) {
+            Log.d("---mdns---", message);
+        }
+        @Override
+        public void onSuccess(String message) {
+            Log.d("---mdns---", message);
+        }
+    });
+}
 ```
 
 <div id="stopEasyLink"></div>
 #**stopEasyLink**
-    停止发送数据包
+    停止搜索设备
 
-    stopEasyLink(EasyLinkCallBack easylinkcb)
+    stopSearchDevices(SearchDeviceCallBack searchdevcb)
 
 #####callback
-easylinkcb
-- 类型：EasyLinkCallBack
+searchdevcb
+- 类型：SearchDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
 #####示例代码
 ```java
-elink.stopEasyLink(new EasyLinkCallBack() {
-    @Override
-    public void onSuccess(int code, String message) {
-        Log.d(TAG, code + message);
-    }
+mdns.stopSearchDevices(new SearchDeviceCallBack() {
+    public void onSuccess(String message) {
+        Log.d("---mdns---", message);
+    };
     @Override
     public void onFailure(int code, String message) {
-        Log.d(TAG, code + message);
+        Log.d("---mdns---", message);
     }
 });
 ```
@@ -113,5 +119,3 @@ code | message | 描述
 9402     | It is progressing.   |    EasyLink正在运行中
 9403     | It is closed.   |    EasyLink已经被关闭了
 9405     | Context is null.  |    上下文不能为空
-
--->
