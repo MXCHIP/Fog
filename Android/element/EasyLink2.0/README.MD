@@ -25,8 +25,8 @@ ssid
 
 #####示例代码
 ```java
-EasyLink elink = new EasyLink();
-elink.getSSID(context)
+EasyLink elink = new EasyLink(context);
+elink.getSSID()
 ```
 
 <div id="startEasyLink"></div>
@@ -38,7 +38,6 @@ elink.getSSID(context)
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-context     | Context       | 上下文
 easylinkPara     | EasyLinkParams       | EasyLinkParams包含以下的信息
 
 #####EasyLinkParams
