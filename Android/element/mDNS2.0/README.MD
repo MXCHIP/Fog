@@ -15,7 +15,7 @@
 #**startSearchDevices**
     开始搜索设备，每3秒返回一次搜索结果，以json数组形式返回
 
-    startSearchDevices(Context context, String serviceName, SearchDeviceCallBack searchdevcb)
+    startSearchDevices(String serviceName, SearchDeviceCallBack searchdevcb)
 
 #####params
 参数名 | 类型 | 描述

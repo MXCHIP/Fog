@@ -33,7 +33,7 @@ elink.getSSID()
 #**startEasyLink**
     发送数据包(包含ssid和password)给设备，连续发10s，再停止3s，再继续发，如此反复
 
-    startEasyLink(Context context, EasyLinkParams easylinkPara, EasyLinkCallBack easylinkcb)
+    startEasyLink(EasyLinkParams easylinkPara, EasyLinkCallBack easylinkcb)
 
 #####params
 参数名 | 类型 | 描述
