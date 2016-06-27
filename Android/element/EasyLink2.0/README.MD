@@ -65,7 +65,7 @@ easylinkPara.sleeptime = 50;
 easylinkPara.extraData = "tom";
 // easylinkPara.rc4key = "";
 
-elink.startEasyLink(ctx, easylinkPara, new EasyLinkCallBack() {
+elink.startEasyLink(easylinkPara, new EasyLinkCallBack() {
     @Override
     public void onSuccess(int code, String message) {
         Log.d(TAG, code + message);
