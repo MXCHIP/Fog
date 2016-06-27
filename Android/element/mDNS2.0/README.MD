@@ -20,7 +20,6 @@
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-context     | Context       | 上下文
 serviceName     | 字符串       | mdns服务的名称, 如果使用庆科模块，那么此信息为“_easylink._tcp.local.”
 
 #####callback
@@ -65,9 +64,9 @@ searchdevcb
 
 #####示例代码
 ```java
-MDNS mdns = new MDNS();
+MDNS mdns = new MDNS(context);
 String serviceInfo = "_easylink._tcp.local.";
-mdns.startSearchDevices(context, serviceInfo, new SearchDeviceCallBack() {
+mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
         @Override
         public void onDevicesFind(JSONArray deviceStatus) {
             if (!deviceStatus.equals("")) {
