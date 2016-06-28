@@ -6,6 +6,14 @@
 
 >MQTT2.0：通过MQTT与云通信
 
+#####演示地址
+[EasyLink2.0](http://fir.im/easylink2)
+
+[mDNS2.0](http://fir.im/mDNS2)
+
+[MQTT2.0](http://fir.im/MQTT2)
+
+
 ##开发流程
 
 1、APP端启用EasyLink发送配网的数据包(SSID, PASSWORD), 发送频率建议为50ms-200ms
