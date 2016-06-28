@@ -8,7 +8,7 @@
 
 * [搜索设备](#startSearchDevices)
 * [停止搜索](#stopSearchDevices)
-* [错误码](#errorcode)
+* [状态码](#errorcode)
 
 
 <div id="startSearchDevices"></div>
@@ -109,7 +109,7 @@ mdns.stopSearchDevices(new SearchDeviceCallBack() {
 });
 ```
 <div id="errorcode"></div>
-#**错误码**
+#**状态码**
 
 code | message | 描述
 :-----------  | :-------------: | :-------------:

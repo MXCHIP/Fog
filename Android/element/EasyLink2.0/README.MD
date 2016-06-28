@@ -9,7 +9,7 @@
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
-* [错误码](#errorcode)
+* [状态码](#errorcode)
 
 
 <div id="getSSID"></div>
@@ -102,7 +102,7 @@ elink.stopEasyLink(new EasyLinkCallBack() {
 });
 ```
 <div id="errorcode"></div>
-#**错误码**
+#**状态码**
 
 code | message | 描述
 :-----------  | :-------------: | :-------------:
