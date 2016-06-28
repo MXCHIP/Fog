@@ -12,6 +12,7 @@
 * [移除订阅](#removeDeviceListener)
 * [发送指令](#sendCommand)
 * [状态码](#errorcode)
+* [附录](#appendixes)
 
 <div id="startListenDevice"></div>
 #**startListenDevice**
@@ -103,7 +104,7 @@ mqttapi.stopListenDevice(new ListenDeviceCallBack() {
 :-----------  | :-------------:| -----------:| -----------:
 topic     | String       | 发送指令的通道
 command        | String       | 指令
-qos     | int       | 建议为0(QoS=0：最多一次，有可能重复或丢失。QoS=1：至少一次，有可能重复。QoS=2：只有一次，确保消息只到达一次（用于比较严格的计费系统）。)
+qos     | int       | 建议为0(描述见附录)
 retained         | boolean       | 建议为false(设置是否在服务器中保存消息体)
 
 #####callback
@@ -138,10 +139,8 @@ mqttapi.sendCommand(sendtopic, command, 0, false,
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:| -----------:
 topic     | String       | 订阅的通道
-qos     | int       | 建议为0
-(QoS=0：最多一次，有可能重复或丢失。
-QoS=1：至少一次，有可能重复。
-QoS=2：只有一次，确保消息只到达一次（用于比较严格的计费系统）。)
+qos     | int       | 建议为0(描述见附录)
+
 
 #####callback
 ctrldevcb
@@ -216,3 +215,10 @@ code | message | 描述
 2008     |  MQTT is disconnect  |    MQTT未连接
 2009     |  Subscribe success  |    订阅成功
 2010     |  UnSubscribe success  |    取消订阅成功
+
+<div id="appendixes"></div>
+#**状态码**
+
+>QoS=0：最多一次，有可能重复或丢失
+>QoS=1：至少一次，有可能重复
+>QoS=2：只有一次，确保消息只到达一次（用于比较严格的计费系统）
