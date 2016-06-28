@@ -1,4 +1,4 @@
-##MiCO2
+##MiCO2 
 
 ##**概述**
 
@@ -415,7 +415,7 @@ ret
 
 ```js
 {
-  "eyJhVlSV8I...": "eyJhbGcxxx44",
+  "token": "eyJhbGcxxx44",
   "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
 }
 ```
@@ -737,17 +737,38 @@ ret
 {
   "devices": [
     {
-      "deviceName": "MiCOKit 3288#91813C",
-      "deviceMac": "C8:93:46:91:81:3C",
-      "deviceIP": "172.26.18.3",
-      "deviceMacbind": "false",
-      "hardwareID": "0",
-      "fogProductID": "0",
-      "isEasyLinkOK": "0",
-      "isHaveSuperUser": "0",
-      "remainingUserNumber": "0",
-      "allInfo": "MAC=C8:93:46:91:81:3CBinding=falseFirmware Rev=MK3288_1@1507211945Hardware Rev=MK3288_1MICO OS Rev=10880002.035-0709Model=MiCOKit-3288Protocol=com.mxchip.micokitManufacturer=MXCHIP Inc.Seed=562",
-      "devicePort": "8080"
+      "Name": "MiCOKit 3165#040A39",
+      "IP": "192.168.19.81",
+      "Port": 8002,
+      "MAC": "D0:BA:E4:04:0A:39",
+      "Firmware Rev": "fog_3165_aca@002",
+      "FogProductId": "9f062218-31fc-11e6-a739-00163e0204c0",
+      "IsEasylinkOK": "true",
+      "IsHaveSuperUser": "false",
+      "RemainingUserNumber": "3",
+      "Hardware Rev": "MK3165_1",
+      "MICO OS Rev": "31620002.046",
+      "Model": "MiCOKit-3165",
+      "Protocol": "com.mxchip.basic",
+      "Manufacturer": "MXCHIP Inc.",
+      "Seed": "89203"
+    },
+    {
+      "Name": "MiCOKit 3165#075AEE",
+      "IP": "192.168.18.182",
+      "Port": 8002,
+      "MAC": "D0:BA:E4:07:5A:EE",
+      "Firmware Rev": "fog_3165_aca@002",
+      "FogProductId": "6486b2d1-0ee9-4647-baa3-78b9cbc778f7",
+      "IsEasylinkOK": "true",
+      "IsHaveSuperUser": "false",
+      "RemainingUserNumber": "3",
+      "Hardware Rev": "MK3165_1",
+      "MICO OS Rev": "31620002.046",
+      "Model": "MiCOKit-3165",
+      "Protocol": "com.mxchip.fogcloud",
+      "Manufacturer": "MXCHIP Inc.",
+      "Seed": "22"
     }
   ]
 }
