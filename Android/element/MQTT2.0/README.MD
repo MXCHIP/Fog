@@ -4,6 +4,12 @@
 
 对应库：easylink2.0.jar
 
+#####开启服务
+
+需要现在manifest.xml中开启服务
+
+< service android:name="com.mxchip.mqttservice2.MqttService" ></ service>
+
 ##**功能列表**
 
 * [开始监听设备](#startListenDevice)
