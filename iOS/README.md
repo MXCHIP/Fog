@@ -1,6 +1,6 @@
 # FogCloud For iOS Native 使用指南
 
-###1. 引入 `FogCloud.framework`, `Others.Bundle`, `EasyLink.a`文件
+###1. 解压 `FogCloud.zip` 引入解压后的 `FogCloud.framework`, `Others.Bundle`, `EasyLink.a`文件
 ###2. Pod 安装 `AFNetworking`
 ###3. 引入头文件，如`#import <FogCloud/MicoUserManager.h>`
 
@@ -163,11 +163,31 @@ userid		  | NSString		| 欲移除权限的用户的 id
     }];
 ```
 
-###MiCOUser 设备管理
+###MiCODevice 设备管理
 #####EasyLink
 * [获取SSID](#fetchCurrentSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
+
+#####搜索设备
+* [开始搜索设备](#startSearchDevices)
+* [停止搜索设备](#stopSearchDevices)
+
+#####绑定设备
+* [绑定设备](#bindDevice)
+* [解绑设备](#unBindDevice)
+
+#####设备管理
+* [获取设备列表](#getDeviceList)
+* [获取设备信息](#getDeviceInfo)
+
+
+<!--#####权限管理
+* [获取用户列表](#getMemberList)
+* [移除用户权限](#)-->
+
+
+
 
 <div id='fetchCurrentSSID'>
 ###*fetchCurrentSSID*
@@ -196,5 +216,79 @@ password      | NSString       | 当前连接的 wifi 的密码
 ```
     [[MicoDeviceManager sharedInstance] stopEasyLinkWithBlock:^(NSString *message) {
         //这里开个 HUD 好了
+    }];
+```
+
+<div id='startSearchDevices'>
+###*startSearchDevices*
+#####代码示例
+```
+	[[MicoDeviceManager sharedInstance] startSearchDevicesWithBlock:^(NSArray *devicesArray) {
+		NSLog(@"%@", devicesArray);//此处会返回搜索到的设备信息的数组
+	}];
+```     
+
+<div id='stopSearchDevices'>
+###*stopSearchDevices*
+#####代码示例
+```
+	[[MicoDeviceManager sharedInstance] stopSearchDevicesWithBlock:^(NSString *message) {
+		NSLog(@"停止搜索");//此处的 block 准备去除
+    }];
+```   
+
+<div id='bindDevice'>
+###*bindDevice*
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceIP     | NSString       | 从 mDNS 中发现的设备的 IP 地址
+token		 | NSString		   | 登录 app 后获取的 token
+#####代码示例
+```
+	[[MicoDeviceManager sharedInstance] bindDeviceWithDeviceIP:@"192.168.1.102" andToken:token success:^(NSDictionary *result) {
+        NSLog(@"%@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+```
+
+<div id='unBindDevice'>
+###*unBindDevice*
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceID     | NSString       | 想要解除绑定的设备 ID（在上面的绑定设备接口成功后会返回）
+token		 | NSString		   | 登录 app 后获取的 token
+#####代码示例
+```
+	[[MicoDeviceManager sharedInstance] unBindDeviceWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
+        NSLog(@"%@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+```
+
+<div id='getDeviceList'>
+###*getDeviceList*
+#####示例代码
+```
+	[[MicoDeviceManager sharedInstance] fetchDeviceListWithToken:token 		success:^(NSDictionary *result) {
+		NSLog(@"%@", result);    
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription)
+    }];
+```
+
+<div id='getDeviceInfo'>
+###*getDeviceInfo*
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceID     | NSString       | 设备 ID
+token		 | NSString		   | 登录 app 后获取的 token
+#####示例代码
+```
+    [[MicoDeviceManager sharedInstance] fetchDeviceInfoWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
+        NSLog(@"%@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
     }];
 ```
