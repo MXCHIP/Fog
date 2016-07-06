@@ -177,6 +177,16 @@ userid		  | NSString		| 欲移除权限的用户的 id
 * [绑定设备](#bindDevice)
 * [解绑设备](#unBindDevice)
 
+#####设备管理
+* [获取设备列表](#getDeviceList)
+* [获取设备信息](#getDeviceInfo)
+
+
+<!--#####权限管理
+* [获取用户列表](#getMemberList)
+* [移除用户权限](#)-->
+
+
 
 
 <div id='fetchCurrentSSID'>
@@ -251,6 +261,32 @@ token		 | NSString		   | 登录 app 后获取的 token
 #####代码示例
 ```
 	[[MicoDeviceManager sharedInstance] unBindDeviceWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
+        NSLog(@"%@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+```
+
+<div id='getDeviceList'>
+###*getDeviceList*
+#####示例代码
+```
+	[[MicoDeviceManager sharedInstance] fetchDeviceListWithToken:token 		success:^(NSDictionary *result) {
+		NSLog(@"%@", result);    
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription)
+    }];
+```
+
+<div id='getDeviceInfo'>
+###*getDeviceInfo*
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+deviceID     | NSString       | 设备 ID
+token		 | NSString		   | 登录 app 后获取的 token
+#####示例代码
+```
+    [[MicoDeviceManager sharedInstance] fetchDeviceInfoWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
         NSLog(@"%@", result);
     } failure:^(NSError *error) {
         NSLog(@"%@", error.localizedDescription);
