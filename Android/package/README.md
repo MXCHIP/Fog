@@ -135,11 +135,11 @@ __任务管理__
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-host     | String       | 服务器的域名(默认为https://iot.mxchip.com)
+host     | String       | 服务器的域名(默认为https://v2.fogcloud.io)
 
 ######示例代码
 ```java
-MiCO.init("https://iot.mxchip.com");
+MiCO.init("https://v2.fogcloud.io");
 ```
 
 <div id="getVerifyCode"></div>

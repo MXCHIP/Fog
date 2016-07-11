@@ -107,7 +107,7 @@ host
 ##示例代码
 
 ```java
-const host = {host:"https://iot.mxchip.com"};
+const host = {host:"https://v2.fogcloud.io"};
 var mico2 = api.require('mico2');
 mico2.init(host);
 ```
