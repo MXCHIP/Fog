@@ -966,12 +966,12 @@ micodevice.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
 #**startListenDevice**
     远程监听设备，获取设备上报的数据
 
-    startListenDevice(ListenDeviceParams listendevparams, ControlDeviceCallBack ctrldevcb)
+    startListenDevice(ListenDevParFog listendevparams, ControlDeviceCallBack ctrldevcb)
 
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-listendevparams     | ListenDeviceParams       | ListenDeviceParams至少包含以下的信息
+listendevparams     | ListenDevParFog       | ListenDevParFog至少包含以下的信息
 
 #####ShareDeviceParams
 参数名 | 类型 | 描述
@@ -982,6 +982,7 @@ port     | String       | 云端的port，默认为"1883"
 userName     | String       | enduserid
 passWord     | String       | devicepw, 与用户密码相同，或者与注册验证码相同
 clientID     | String       | enduserid，即用户登录后获取的enduserid
+isencrypt     | boolean       | 是否使用SSL加密
 
 #####callback
 ctrldevcb
@@ -991,7 +992,7 @@ ctrldevcb
 #####示例代码
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
-ListenDeviceParams listendevparams = new ListenDeviceParams();
+ListenDevParFog listendevparams = new ListenDevParFog();
 
 listendevparams.deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 listendevparams.host = "http://101.201.101.153";
@@ -999,6 +1000,7 @@ listendevparams.port = "1883";
 listendevparams.userName = enderuserid;
 listendevparams.passWord = "123456";
 listendevparams.clientID = enderuserid;
+listendevparams.isencrypt = false;
 micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {

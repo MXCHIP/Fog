@@ -1421,7 +1421,8 @@ var param = {
     username: "enduserid",
     password: "password",
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
-    clientid: "enduserid"
+    clientid: "enduserid",
+    isencrypt:false
 };
 mico2.startListenDevice(param, function (ret, err) {
     if (ret){
