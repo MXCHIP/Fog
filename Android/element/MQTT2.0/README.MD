@@ -2,7 +2,7 @@
 
 2016年06月28日
 
-对应库：easylink2.0.jar
+对应库：mqtt2.0.jar
 
 #####开启服务
 
@@ -40,6 +40,7 @@ userName         | int       | 用户名
 passWord         | int       | 密码
 clientID         | String     | 客户端id
 topic     | String       | 监听的主题
+isencrypt     | boolean       | 是否SSL加密(默认为false)
 
 #####callback
 ctrldevcb
@@ -57,6 +58,7 @@ ldp.userName = "admin";
 ldp.passWord = "admin";
 ldp.topic = "d64f517c/c8934691313c/out/read";
 ldp.clientID = "client-000";
+ldp.isencrypt = false;
 
 mqttapi.startListenDevice(ldp, new ListenDeviceCallBack() {
     @Override
