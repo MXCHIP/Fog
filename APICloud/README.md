@@ -1394,6 +1394,10 @@ clientid
 - 类型：字符串, 不可为空
 - 描述：enduserid，即用户登录后获取的enduserid
 
+isencrypt
+- 类型：boolean, 可为空
+- 描述：是否通过SSL通道发送数据
+
 ##callback
 
 ret
