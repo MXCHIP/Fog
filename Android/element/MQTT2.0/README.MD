@@ -35,7 +35,7 @@ listendevparams     | ListenDeviceParams       | ListenDeviceParams包含以下�
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:| -----------:
 host        | String       | host，域名或者IP
-port     | String       | 端口
+port     | String       | 端口(非必填)
 userName         | int       | 用户名
 passWord         | int       | 密码
 clientID         | String     | 客户端id
