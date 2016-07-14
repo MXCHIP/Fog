@@ -1011,8 +1011,8 @@ micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
         Log.d(TAG, code + " " + message);
     }
     @Override
-    public void onDeviceStatusReceived(String msgType, String messages) {
-        Log.d(TAG, msgType + " " + messages);
+    public void onDeviceStatusReceived(int code, String messages) {
+        Log.d("---" + code + "---", messages);
     }
 });
 ```
