@@ -107,7 +107,7 @@ host
 ##示例代码
 
 ```java
-const host = {host:"https://iot.mxchip.com"};
+const host = {host:"https://v2.fogcloud.io"};
 var mico2 = api.require('mico2');
 mico2.init(host);
 ```
@@ -1394,6 +1394,10 @@ clientid
 - 类型：字符串, 不可为空
 - 描述：enduserid，即用户登录后获取的enduserid
 
+isencrypt
+- 类型：boolean, 可为空
+- 描述：是否通过SSL通道发送数据
+
 ##callback
 
 ret
@@ -1417,7 +1421,8 @@ var param = {
     username: "enduserid",
     password: "password",
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
-    clientid: "enduserid"
+    clientid: "enduserid",
+    isencrypt:false
 };
 mico2.startListenDevice(param, function (ret, err) {
     if (ret){

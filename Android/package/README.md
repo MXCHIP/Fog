@@ -23,6 +23,22 @@
 
 6、如果是烤箱或者电饭煲等智能设备，也许需要用到云菜谱[ClodRecipe](#ClodRecipe)
 
+###**添加授权**
+
+```js
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.VIBRATE" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.FLASHLIGHT" />
+<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-feature android:name="android.hardware.camera" />
+<uses-feature android:name="android.hardware.camera.autofocus" />
+```
+
 --------------------------------------
 <div id="MiCO"></div>
 ##**MiCO** 全局设置
@@ -119,11 +135,11 @@ __任务管理__
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-host     | String       | 服务器的域名(默认为https://iot.mxchip.com)
+host     | String       | 服务器的域名(默认为https://v2.fogcloud.io)
 
 ######示例代码
 ```java
-MiCO.init("https://iot.mxchip.com");
+MiCO.init("https://v2.fogcloud.io");
 ```
 
 <div id="getVerifyCode"></div>
@@ -950,12 +966,12 @@ micodevice.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
 #**startListenDevice**
     远程监听设备，获取设备上报的数据
 
-    startListenDevice(ListenDeviceParams listendevparams, ControlDeviceCallBack ctrldevcb)
+    startListenDevice(ListenDevParFog listendevparams, ControlDeviceCallBack ctrldevcb)
 
 #####params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-listendevparams     | ListenDeviceParams       | ListenDeviceParams至少包含以下的信息
+listendevparams     | ListenDevParFog       | ListenDevParFog至少包含以下的信息
 
 #####ShareDeviceParams
 参数名 | 类型 | 描述
@@ -966,6 +982,7 @@ port     | String       | 云端的port，默认为"1883"
 userName     | String       | enduserid
 passWord     | String       | devicepw, 与用户密码相同，或者与注册验证码相同
 clientID     | String       | enduserid，即用户登录后获取的enduserid
+isencrypt     | boolean       | 是否使用SSL加密
 
 #####callback
 ctrldevcb
@@ -975,7 +992,7 @@ ctrldevcb
 #####示例代码
 ```java
 MiCODevice micodev = new MiCODevice(MainActivity.this);
-ListenDeviceParams listendevparams = new ListenDeviceParams();
+ListenDevParFog listendevparams = new ListenDevParFog();
 
 listendevparams.deviceid = "f71246d8-b9db-11e5-a739-00163e0204c0";
 listendevparams.host = "http://101.201.101.153";
@@ -983,6 +1000,7 @@ listendevparams.port = "1883";
 listendevparams.userName = enderuserid;
 listendevparams.passWord = "123456";
 listendevparams.clientID = enderuserid;
+listendevparams.isencrypt = false;
 micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
     @Override
     public void onSuccess(String message) {
@@ -993,8 +1011,8 @@ micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
         Log.d(TAG, code + " " + message);
     }
     @Override
-    public void onDeviceStatusReceived(String msgType, String messages) {
-        Log.d(TAG, msgType + " " + messages);
+    public void onDeviceStatusReceived(int code, String messages) {
+        Log.d("---" + code + "---", messages);
     }
 });
 ```
