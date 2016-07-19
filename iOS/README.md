@@ -2,7 +2,8 @@
 
 ###1. 解压 `FogCloud.zip` 引入解压后的 `FogCloud.framework`, `Others.Bundle`, `EasyLink.a`文件
 ###2. Pod 安装 `AFNetworking`
-###3. 引入头文件，如`#import <FogCloud/MicoUserManager.h>`
+###3. 点击项目文件，添加 `CoreData` 库
+###4. 引入头文件，如`#import <FogCloud/MicoUserManager.h>`
 
 </br>
 ##概述
