@@ -2,7 +2,8 @@
 
 ###1. 解压 `FogCloud.zip` 引入解压后的 `FogCloud.framework`, `Others.Bundle`, `EasyLink.a`文件
 ###2. Pod 安装 `AFNetworking`
-###3. 引入头文件，如`#import <FogCloud/MicoUserManager.h>`
+###3. 点击项目文件，添加 `CoreData` 库
+###4. 引入头文件，如`#import <FogCloud/MicoUserManager.h>`
 
 </br>
 ##概述
@@ -180,6 +181,7 @@ userid		  | NSString		| 欲移除权限的用户的 id
 #####设备管理
 * [获取设备列表](#getDeviceList)
 * [获取设备信息](#getDeviceInfo)
+* [修改设备名称](#updateDeviceAlias)
 
 
 <!--#####权限管理
@@ -287,6 +289,22 @@ token		 | NSString		   | 登录 app 后获取的 token
 #####示例代码
 ```
     [[MicoDeviceManager sharedInstance] fetchDeviceInfoWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
+        NSLog(@"%@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+```
+
+<div id='updateDeviceAlias'>
+###*updateDeviceAlias*
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+alias		  | NSString		| 设备别名
+deviceID     | NSString       | 设备 ID
+token		 | NSString		   | 登录 app 后获取的 token
+#####示例代码
+```
+	[[MicoDeviceManager sharedInstance] updateDeviceAlias:@"9412B" withDeviceID:@"" token:token success:^(NSDictionary *result) {
         NSLog(@"%@", result);
     } failure:^(NSError *error) {
         NSLog(@"%@", error.localizedDescription);
