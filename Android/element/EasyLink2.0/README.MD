@@ -4,6 +4,12 @@
 
 对应库：easylink2.0.jar
 
+```js
+dependencies {
+    compile 'io.fogcloud.sdk:easylink:0.0.3'
+}
+```
+
 ##**功能列表**
 
 * [获取SSID](#getSSID)
