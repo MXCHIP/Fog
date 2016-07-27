@@ -4,6 +4,12 @@
 
 对应库：mdns2.0.jar
 
+```js
+dependencies {
+    compile 'io.fogcloud.sdk:fog_mdns:0.1.0'
+}
+```
+
 ##**功能列表**
 
 * [搜索设备](#startSearchDevices)

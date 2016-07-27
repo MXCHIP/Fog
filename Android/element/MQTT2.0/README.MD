@@ -4,6 +4,12 @@
 
 对应库：mqtt2.0.jar
 
+```js
+dependencies {
+    compile 'io.fogcloud.sdk:fog_mqtt:0.1.0'
+}
+```
+
 #####开启服务
 
 需要现在manifest.xml中开启服务
