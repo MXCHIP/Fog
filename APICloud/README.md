@@ -653,10 +653,6 @@ ret
 - 描述：接口调用成功后的回调函数
 
 ```js
-{
-  "eyJhVlSV8I...": "eyJhbGcxxx44",
-  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
-}
 ```
 
 err
