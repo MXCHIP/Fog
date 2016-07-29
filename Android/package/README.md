@@ -532,7 +532,7 @@ micodev.stopSearchDevices(new SearchDeviceCallBack() {
 #**bindDevice**
     通过startSearchDevices获取准备绑定设备的信息，从中提取出IP地址，和deviceid，再通过此接口绑定设备
 
-    bindDevice(String ip, ManageDeviceCallBack managedevcb, String token)
+    bindDevice(String ip, String port, ManageDeviceCallBack managedevcb, String token)
 
 #####params
 参数名 | 类型 | 描述
