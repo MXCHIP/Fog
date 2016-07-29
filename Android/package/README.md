@@ -461,29 +461,21 @@ searchdevcb
 ```js
 [
   {
-    "MAC": "C8:93:46:91:81:3C",
-    "Binding": "false",
-    "Firmware Rev": "MK3288_1@1507211945",
-    "Hardware Rev": "MK3288_1",
-    "MICO OS Rev": "10880002.035-0709",
-    "Model": "MiCOKit-3288",
-    "Protocol": "com.mxchip.micokit",
-    "Manufacturer": "MXCHIP Inc.",
-    "Seed": "595"
-  },
-  {
-    "MAC": "D0:BA:E4:0C:2F:EE",
-    "Firmware Rev": "FOG_3165_TEST@",
-    "FogProductId": "6486b2d1-0ee9-4647-baa3-78b9cbc778f7",
-    "IsEasylinkOK": "true",
-    "IsHaveSuperUser": "true",
+    "Name": "EMW3081 Module#DA3F8E",
+    "IP": "192.168.31.114",
+    "Port": 8002,
+    "MAC": "C8:93:46:DA:3F:8E",
+    "Firmware Rev": "fog_3081_probe_device@002",
+    "FogProductId": "3311097c-17f5-11e6-a739-00163e0204c0",
+    "IsEasylinkOK": "false",
+    "IsHaveSuperUser": "false",
     "RemainingUserNumber": "3",
-    "Hardware Rev": "MK3165_1",
-    "MICO OS Rev": "31620002.042",
-    "Model": "MiCOKit-3165",
-    "Protocol": "com.mxchip.spp",
+    "Hardware Rev": "3081",
+    "MICO OS Rev": "30810002.049",
+    "Model": "EMW3081",
+    "Protocol": "com.mxchip.fog",
     "Manufacturer": "MXCHIP Inc.",
-    "Seed": "1366"
+    "Seed": "135"
   }
 ]
 ```
