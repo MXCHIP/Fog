@@ -15,6 +15,7 @@ dependencies {
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
+* [状态码](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/ERRORCODE.MD)
 
 
 <div id="getSSID"></div>

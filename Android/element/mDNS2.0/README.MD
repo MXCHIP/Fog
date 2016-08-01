@@ -14,6 +14,7 @@ dependencies {
 
 * [搜索设备](#startSearchDevices)
 * [停止搜索](#stopSearchDevices)
+* [状态码](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/ERRORCODE.MD)
 
 
 <div id="startSearchDevices"></div>
