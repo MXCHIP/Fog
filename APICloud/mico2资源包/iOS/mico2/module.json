@@ -1,0 +1,5 @@
+{
+	"name":"mico2",
+	"class":"Mico2",
+	"methods":["getVerifyCode", "checkVerifyCode", "setPassword", "login", "refreshToken", "removeBindRole", "getSSID", "startEasyLink", "stopEasyLink", "startSearchDevices", "stopSearchDevices", "bindDevice", "unBindDevice", "getDeviceList", "getDeviceInfo", "getShareVerCode", "addDeviceByVerCode", "startListenDevice", "addDeviceListener", "removeDeviceListener", "stopListenDevice", "getMemberList", "sendCommand", "getTaskList", "deleteTask", "createDelayTask", "updateDelayTask", "createScheduleTask", "updateScheduleTask", "init"]
+}
