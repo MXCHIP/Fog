@@ -4,7 +4,6 @@
 code | message |tag| 描述
 :-----------  | :-------------: | :-------------:
 0	|success	||	各种成功
-
 **EasyLink**|||
 4000	|success	||	stopeasylink成功
 4001	|invalid param	|1-99	|各种参数错误（tag用来定位具体的参数）
