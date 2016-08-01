@@ -4,20 +4,20 @@
 code | message |tag| 描述
 :-----------  | :-------------: | :-------------:
 0	|success	||	各种成功
-**EasyLink**|||
+<!-- **EasyLink**||| -->
 4000	|success	||	stopeasylink成功
 4001	|invalid param	|1-99	|各种参数错误（tag用来定位具体的参数）
 4002	|invalid context	||	无效的上下文
 4003	|easylink busy	||	EasyLink正在工作中
 4004	|easylink closed	||	EasyLink已经关闭
 4006	|exception	||	异常
-**mDNS**|||
+<!-- **mDNS**||| -->
 4101	|invalid param	|1-99	|各种参数错误（tag用来定位具体的参数）
 4102	|invalid context	||	无效的上下文
 4103	|mdns busy	||	mDNS正在工作中
 4104	|mdns closed	||	mDNS已经关闭
 4106	|exception	||	异常
-**MQTT**|||
+<!-- **MQTT**||| -->
 4201	|invalid param|	1-99	|各种参数错误（tag用来定位具体的参数）
 4202	|invalid context	||	无效的上下文
 4203	|mqtt busy	||	MQTT正在工作中
