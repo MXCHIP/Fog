@@ -68,7 +68,7 @@ ldp.isencrypt = false;
 
 mqttapi.startListenDevice(ldp, new ListenDeviceCallBack() {
     @Override
-    public void onSuccess(String message) {
+    public void onSuccess(int code, String message) {
         Log.d("---", message);
     }
     @Override
@@ -97,7 +97,7 @@ ctrldevcb
 ```java
 mqttapi.stopListenDevice(new ListenDeviceCallBack() {
     @Override
-    public void onSuccess(String message) {
+    public void onSuccess(int code, String message) {
         Log.d("---", message);
     }
     @Override
@@ -133,7 +133,7 @@ String command = "{\"4\":true}";
 mqttapi.sendCommand(sendtopic, command, 0, false,
         new ListenDeviceCallBack() {
             @Override
-            public void onSuccess(String message) {
+            public void onSuccess(int code, String message) {
                 Log.d("---", message);
             }
             @Override
@@ -166,7 +166,7 @@ ctrldevcb
 String addtopic = "d64f517c/c8934691813c/in/write";
 mqttapi.addDeviceListener(addtopic, 0, new ListenDeviceCallBack() {
     @Override
-    public void onSuccess(String message) {
+    public void onSuccess(int code, String message) {
         Log.d("---", message);
     }
     @Override
@@ -197,7 +197,7 @@ ctrldevcb
 String rmtopic = "d64f517c/c8934691813c/in/write";
 mqttapi.removeDeviceListener(rmtopic, new ListenDeviceCallBack() {
     @Override
-    public void onSuccess(String message) {
+    public void onSuccess(int code, String message) {
         Log.d("---", message);
     }
     @Override

@@ -84,7 +84,7 @@ mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
             Log.d("---mdns---", message);
         }
         @Override
-        public void onSuccess(String message) {
+        public void onSuccess(int code, String message) {
             Log.d("---mdns---", message);
         }
     });
@@ -105,7 +105,7 @@ searchdevcb
 #####示例代码
 ```java
 mdns.stopSearchDevices(new SearchDeviceCallBack() {
-    public void onSuccess(String message) {
+    public void onSuccess(int code, String message) {
         Log.d("---mdns---", message);
     };
     @Override
