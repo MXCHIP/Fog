@@ -6,7 +6,7 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:fog_mqtt:0.1.0'
+    compile 'io.fogcloud.sdk:fog_mqtt:0.1.1'
 }
 ```
 
@@ -23,7 +23,6 @@ dependencies {
 * [增加订阅](#addDeviceListener)
 * [移除订阅](#removeDeviceListener)
 * [发送指令](#sendCommand)
-* [状态码](#errorcode)
 * [附录](#appendixes)
 
 <div id="startListenDevice"></div>
@@ -206,29 +205,6 @@ mqttapi.removeDeviceListener(rmtopic, new ListenDeviceCallBack() {
     }
 });
 ```
-
-<div id="errorcode"></div>
-#**状态码**
-
-code | message | 描述
-:-----------  | :-------------: | :-------------:
-9400     | Parameters can not be empty.   |    参数不能为空
-9402     | It is progressing.   |    MQTT正在运行中
-9403     | It is closed.   |    MQTT已经被关闭了
-9404     | Qos must within (0,1,2)   |    QOS必须是0，1，2
-9405     | Context is null.  |    上下文不能为空
-||
-2000     |    |    现在返回的是payload信息，即设备上报的信息
-2001     |  Connected  |    连接上了
-2002     |  Stopped  |    连接断开
-2003     |  ReSubscribe success  | 订阅成功    
-2004     |  Connect Exception  |    连接异常
-2005     |  Lost  |    连接丢失
-2006     |  Publish success  | 发送成功   
-2007     |  Topic is empty  |  topic不可以为空  
-2008     |  MQTT is disconnect  |    MQTT未连接
-2009     |  Subscribe success  |    订阅成功
-2010     |  UnSubscribe success  |    取消订阅成功
 
 <div id="appendixes"></div>
 #**附录**

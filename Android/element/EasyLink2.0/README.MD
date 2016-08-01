@@ -6,7 +6,7 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:easylink:0.1.0'
+    compile 'io.fogcloud.sdk:easylink:0.1.1'
 }
 ```
 
@@ -15,7 +15,6 @@ dependencies {
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
-* [状态码](#errorcode)
 
 
 <div id="getSSID"></div>
@@ -107,14 +106,3 @@ elink.stopEasyLink(new EasyLinkCallBack() {
     }
 });
 ```
-<div id="errorcode"></div>
-#**状态码**
-
-code | message | 描述
-:-----------  | :-------------: | :-------------:
-1000     | success       | 打开EasyLink成功
-1001     | stop success   |    关闭EasyLink成功
-9400     | Parameters can not be empty.   |    参数不能为空
-9402     | It is progressing.   |    EasyLink正在运行中
-9403     | It is closed.   |    EasyLink已经被关闭了
-9405     | Context is null.  |    上下文不能为空
