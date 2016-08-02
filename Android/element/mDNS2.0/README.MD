@@ -6,7 +6,7 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:fog_mdns:0.1.0'
+    compile 'io.fogcloud.sdk:fog_mdns:0.1.1'
 }
 ```
 
@@ -14,7 +14,7 @@ dependencies {
 
 * [搜索设备](#startSearchDevices)
 * [停止搜索](#stopSearchDevices)
-* [状态码](#errorcode)
+* [状态码](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/ERRORCODE.MD)
 
 
 <div id="startSearchDevices"></div>
@@ -84,7 +84,7 @@ mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
             Log.d("---mdns---", message);
         }
         @Override
-        public void onSuccess(String message) {
+        public void onSuccess(int code, String message) {
             Log.d("---mdns---", message);
         }
     });
@@ -105,7 +105,7 @@ searchdevcb
 #####示例代码
 ```java
 mdns.stopSearchDevices(new SearchDeviceCallBack() {
-    public void onSuccess(String message) {
+    public void onSuccess(int code, String message) {
         Log.d("---mdns---", message);
     };
     @Override
@@ -114,12 +114,3 @@ mdns.stopSearchDevices(new SearchDeviceCallBack() {
     }
 });
 ```
-<div id="errorcode"></div>
-#**状态码**
-
-code | message | 描述
-:-----------  | :-------------: | :-------------:
-9400     | Parameters can not be empty.   |    参数不能为空
-9402     | It is progressing.   |    mDNS正在运行中
-9403     | It is closed.   |    mDNS已经被关闭了
-9405     | Context is null.  |    上下文不能为空
