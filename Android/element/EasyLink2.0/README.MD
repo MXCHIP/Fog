@@ -107,3 +107,39 @@ elink.stopEasyLink(new EasyLinkCallBack() {
     }
 });
 ```
+
+##实时更新SSID
+
+```java
+@Override
+protected void onCreate(@Nullable Bundle savedInstanceState) {
+    ...
+    listenwifichange();
+}
+
+private void listenwifichange() {
+    IntentFilter intentFilter = new IntentFilter();
+    intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+    registerReceiver(broadcastReceiver, intentFilter);
+}
+
+BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+            NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+            if (info.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
+                Log.d(TAG, "---heiheihei---");
+                wifissid.setText(elink.getSSID());
+            }
+        }
+    }
+};
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    unregisterReceiver(broadcastReceiver);
+}
+```
