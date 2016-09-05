@@ -33,10 +33,10 @@
 <div id='getVerifyCode'>
 ###*getVerifyCode*
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-loginName     | NSString       | 登录名，邮箱或者手机号
-appid         | NSString       | 在Fogcloud平台注册的APP的id
+| 参数名       |    类型    |                   描述 |
+| :-------- | :------: | -------------------: |
+| loginName | NSString |          登录名，邮箱或者手机号 |
+| appid     | NSString | 在Fogcloud平台注册的APP的id |
 
 #####代码示例
 ```
@@ -52,11 +52,11 @@ appid         | NSString       | 在Fogcloud平台注册的APP的id
 <div id='checkVerifyCode'>
 ###*checkVerifyCode*
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-loginName     | NSString       | 登录名，邮箱或者手机号
-appid         | NSString       | 在Fogcloud平台注册的APP的id
-vercode		  | NSString 		| 邮箱或者手机收到的验证码
+| 参数名       |    类型    |                   描述 |
+| :-------- | :------: | -------------------: |
+| loginName | NSString |          登录名，邮箱或者手机号 |
+| appid     | NSString | 在Fogcloud平台注册的APP的id |
+| vercode   | NSString |         邮箱或者手机收到的验证码 |
 
 #####代码示例 
 ```
@@ -75,12 +75,12 @@ vercode		  | NSString 		| 邮箱或者手机收到的验证码
 ###*register*
 
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-password1     | NSString       | 用户密码
-password2     | NSString       | 用户密码，确认用
-appid         | NSString       | 在Fogcloud平台注册的APP的id
-token		  | NSString		| 检查验证码返回的 token
+| 参数名       |    类型    |                   描述 |
+| :-------- | :------: | -------------------: |
+| password1 | NSString |                 用户密码 |
+| password2 | NSString |             用户密码，确认用 |
+| appid     | NSString | 在Fogcloud平台注册的APP的id |
+| token     | NSString |       检查验证码返回的 token |
 
 #####代码示例
 ```
@@ -96,11 +96,11 @@ token		  | NSString		| 检查验证码返回的 token
 ###*login*
 
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-loginName     | NSString       | 登录名，可以是邮箱或者手机号
-password      | NSString       | 用户密码
-appid		  | NSString		| 在 Fogcloud 平台注册的 app 的 id
+| 参数名       |    类型    |                        描述 |
+| :-------- | :------: | ------------------------: |
+| loginName | NSString |            登录名，可以是邮箱或者手机号 |
+| password  | NSString |                      用户密码 |
+| appid     | NSString | 在 Fogcloud 平台注册的 app 的 id |
 
 #####代码示例
 ```
@@ -114,9 +114,9 @@ appid		  | NSString		| 在 Fogcloud 平台注册的 app 的 id
 <div id='refreshToken'>
 ###*refreshToken*
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-token         | NSString       | 本地持久化的 token
+| 参数名   |    类型    |           描述 |
+| :---- | :------: | -----------: |
+| token | NSString | 本地持久化的 token |
 #####代码示例
 ```
     NSString *token = [TokenManager token];//老的 token
@@ -131,10 +131,10 @@ token         | NSString       | 本地持久化的 token
 <div id='fetchMemberList'>
 ###*getMemberList*
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-token         | NSString       | 本地持久化的 token
-deviceid	  |	NSString 		| 设备的 id
+| 参数名      |    类型    |           描述 |
+| :------- | :------: | -----------: |
+| token    | NSString | 本地持久化的 token |
+| deviceid | NSString |       设备的 id |
 #####代码示例
 ```
     NSString *token = [TokenManager token];
@@ -149,11 +149,11 @@ deviceid	  |	NSString 		| 设备的 id
 <div id='removeBindRole'>
 ###*removeBindRole*
 #####params
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-token         | NSString       | 本地持久化的 token
-deviceid	  |	NSString 		| 设备的 id
-userid		  | NSString		| 欲移除权限的用户的 id
+| 参数名      |    类型    |           描述 |
+| :------- | :------: | -----------: |
+| token    | NSString | 本地持久化的 token |
+| deviceid | NSString |       设备的 id |
+| userid   | NSString | 欲移除权限的用户的 id |
 
 #####代码示例
 ```
@@ -202,9 +202,9 @@ userid		  | NSString		| 欲移除权限的用户的 id
 
 <div id='startEasyLink'>
 ###*startEasyLink*
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-password      | NSString       | 当前连接的 wifi 的密码
+| 参数名      |    类型    |             描述 |
+| :------- | :------: | -------------: |
+| password | NSString | 当前连接的 wifi 的密码 |
 #####代码示例
 ```
 	[[MicoDeviceManager sharedInstance] startEasyLinkWithPassword:@"12345678" handler:^(BOOL isSuccess) {
@@ -223,28 +223,45 @@ password      | NSString       | 当前连接的 wifi 的密码
 
 <div id='startSearchDevices'>
 ###*startSearchDevices*
+
+**注意，此处有较大更新。**
+
+- 首先引入头文件 `#import <FogCloud/ZBBonjourService.h>`
+- 其次遵从协议 `@interface YourCustomClass () <ZBBonjourServiceDelegate>`
+- 再次请看下面代码示例
+
 #####代码示例
 ```
-	[[MicoDeviceManager sharedInstance] startSearchDevicesWithBlock:^(NSArray *devicesArray) {
-		NSLog(@"%@", devicesArray);//此处会返回搜索到的设备信息的数组
-	}];
-```     
+- (void)searchDevices {
+	[[ZBBonjourService sharedInstance] stopSerachDevice];//为保险起见，先停止搜索
+	[ZBBonjourService sharedInstance].delegate = self;
+	[[ZBBonjourService sharedInstance] startSearchDevice];
+}
+
+#pragma mark - ZBBonjourServiceDelegate
+- (void)bonjourService:(ZBBonjourService *)service didReturnDevicesArray:(NSArray *)array {
+ 	NSLog(@"%@", devicesArray);
+ 	//简单讲解一下，假设第一次搜索我搜索到两个设备，这时候会返回两个设备的数组
+ 	//当有一个新设备进来了，这个回调会再次调用，此时会返回三个设备的数组
+ 	//若有设备离线了，这个回调会再次调用，此时返回两个设备的数组
+ 	//也就是这个回调会在 搜索到的设备 数量变化的时候调用
+ 	//为方便起见，设备信息作为 NSDictionary 返回。一个 Key 是这个 NSNetService，方便开发者进行二次解析，另一个 Key 是返回service 的全部 RecordData，与之前版本返回值相同
+}
+```
 
 <div id='stopSearchDevices'>
 ###*stopSearchDevices*
 #####代码示例
 ```
-	[[MicoDeviceManager sharedInstance] stopSearchDevicesWithBlock:^(NSString *message) {
-		NSLog(@"停止搜索");//此处的 block 准备去除
-    }];
-```   
+[[ZBBonjourService sharedInstance] stopSerachDevice];
+```
 
 <div id='bindDevice'>
 ###*bindDevice*
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-deviceIP     | NSString       | 从 mDNS 中发现的设备的 IP 地址
-token		 | NSString		   | 登录 app 后获取的 token
+| 参数名      |    类型    |                   描述 |
+| :------- | :------: | -------------------: |
+| deviceIP | NSString | 从 mDNS 中发现的设备的 IP 地址 |
+| token    | NSString |    登录 app 后获取的 token |
 #####代码示例
 ```
 	[[MicoDeviceManager sharedInstance] bindDeviceWithDeviceIP:@"192.168.1.102" andToken:token success:^(NSDictionary *result) {
@@ -256,10 +273,10 @@ token		 | NSString		   | 登录 app 后获取的 token
 
 <div id='unBindDevice'>
 ###*unBindDevice*
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-deviceID     | NSString       | 想要解除绑定的设备 ID（在上面的绑定设备接口成功后会返回）
-token		 | NSString		   | 登录 app 后获取的 token
+| 参数名      |    类型    |                             描述 |
+| :------- | :------: | -----------------------------: |
+| deviceID | NSString | 想要解除绑定的设备 ID（在上面的绑定设备接口成功后会返回） |
+| token    | NSString |              登录 app 后获取的 token |
 #####代码示例
 ```
 	[[MicoDeviceManager sharedInstance] unBindDeviceWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
@@ -282,10 +299,10 @@ token		 | NSString		   | 登录 app 后获取的 token
 
 <div id='getDeviceInfo'>
 ###*getDeviceInfo*
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-deviceID     | NSString       | 设备 ID
-token		 | NSString		   | 登录 app 后获取的 token
+| 参数名      |    类型    |                描述 |
+| :------- | :------: | ----------------: |
+| deviceID | NSString |             设备 ID |
+| token    | NSString | 登录 app 后获取的 token |
 #####示例代码
 ```
     [[MicoDeviceManager sharedInstance] fetchDeviceInfoWithDeviceID:deviceID andToken:token success:^(NSDictionary *result) {
@@ -297,11 +314,11 @@ token		 | NSString		   | 登录 app 后获取的 token
 
 <div id='updateDeviceAlias'>
 ###*updateDeviceAlias*
-参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
-alias		  | NSString		| 设备别名
-deviceID     | NSString       | 设备 ID
-token		 | NSString		   | 登录 app 后获取的 token
+| 参数名      |    类型    |                描述 |
+| :------- | :------: | ----------------: |
+| alias    | NSString |              设备别名 |
+| deviceID | NSString |             设备 ID |
+| token    | NSString | 登录 app 后获取的 token |
 #####示例代码
 ```
 	[[MicoDeviceManager sharedInstance] updateDeviceAlias:@"9412B" withDeviceID:@"" token:token success:^(NSDictionary *result) {
