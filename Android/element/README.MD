@@ -1,18 +1,4 @@
-###element ：使用庆科的WIFI模块，但是云平台并非庆科云时使用element
-**以下是单个功能模块*
->[EasyLink2.0：给设备配网](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
-
->[mDNS2.0：发现局域网设备](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
-
->[MQTT2.0：通过MQTT与云通信](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
-
-#####演示地址
-[EasyLink2.0](http://fir.im/easylink2)
-
-[mDNS2.0](http://fir.im/mDNS2)
-
-[MQTT2.0](http://fir.im/MQTT2)
-
+###使用庆科的WIFI模块，但是云平台并非庆科云
 
 ##开发流程
 
@@ -28,9 +14,10 @@
 
 >3、断开EasyLink和mDNS
 
-4、解析出那台设备的IP，并通过HTTP方式连接上去，发送绑定请求
+4、解析出待绑定设备的IP，并通过HTTP方式连接上去，发送绑定请求
 
-5、以下操作视具体云平台而定
+5、以上是基础配网和通信的功能，剩下来的工作视具体云平台而定
+
 
 
 ##MQTT使用场景
@@ -38,3 +25,23 @@
 1、如果APP和云平台之间通过MQTT的方式来建立连接和通信，那么就可以使用MQTT2.0
 
 2、使用方式和标准的MQTT类似
+
+
+
+##以下是单个功能模块*
+>[EasyLink2.0 --> 给设备配网](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
+
+>[mDNS2.0 --> 发现局域网设备](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/mDNS.MD)
+
+>[MQTT2.0 --> 通过MQTT与云通信](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/MQTT.MD)
+
+>[状态码列表](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/ERRORCODE.MD)
+
+
+
+##演示地址
+[EasyLink2.0](http://fir.im/easylink2)
+
+[mDNS2.0](http://fir.im/mDNS2)
+
+[MQTT2.0](http://fir.im/MQTT2)
