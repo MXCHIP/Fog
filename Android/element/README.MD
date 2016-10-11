@@ -1,10 +1,10 @@
 ###element ：使用庆科的WIFI模块，但是云平台并非庆科云时使用element
 **以下是单个功能模块*
->EasyLink2.0：给设备配网
+>[EasyLink2.0：给设备配网](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
 
->mDNS2.0：发现局域网设备
+>[mDNS2.0：发现局域网设备](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
 
->MQTT2.0：通过MQTT与云通信
+>[MQTT2.0：通过MQTT与云通信](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
 
 #####演示地址
 [EasyLink2.0](http://fir.im/easylink2)

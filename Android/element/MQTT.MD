@@ -6,7 +6,7 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:fog_mqtt:0.1.1'
+    compile 'io.fogcloud.sdk:fog_mqtt:0.2.0'
 }
 ```
 

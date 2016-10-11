@@ -4,7 +4,7 @@
 
 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
 
-1、通过Fogcloud平台注册一个APP，得到appid，因为下面需要用到
+1、通过[Fogcloud平台](https://v2.fogcloud.io)注册一个APP，得到appid，因为下面需要用到
 
 2、对于一个新用户而言，首先需要注册用户，步骤：获取验证码、验证验证码、完成注册
 
@@ -142,10 +142,11 @@ ret
 ```js
 {
   "meta": {
-    "message": "验证邮件已发送",
+    "message": "Send E-mail successfully.",
     "code": 0
   },
   "data": {
+    
   }
 }
 ```
@@ -157,10 +158,11 @@ err
 ```js
 {
   "meta": {
-    "message": "请求参数错误",
-    "code": 23011
+    "message": "Params error",
+    "code": 23013
   },
   "data": {
+    
   }
 }
 ```
@@ -214,8 +216,8 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
-  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "clientid": "a015e6d6-1d6e-11e6-a739-00163e0204c0"
 }
 ```
 
@@ -226,10 +228,11 @@ err
 ```js
 {
   "meta": {
-    "message": "请求参数错误",
-    "code": 23010
+    "message": "Please use correct phone number or email address",
+    "code": 23013
   },
   "data": {
+    
   }
 }
 ```
@@ -281,7 +284,7 @@ ret
 ```js
 {
   "meta": {
-    "message": "用户密码修改成功",
+    "message": "Update password successfully.",
     "code": 0
   },
   "data": {
@@ -297,8 +300,8 @@ err
 ```js
 {
   "meta": {
-    "message": "请求参数错误",
-    "code": 23010
+    "message": "Params error",
+    "code": 23013
   },
   "data": {
     
@@ -355,8 +358,8 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
-  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "clientid": "a015e6d6-1d6e-11e6-a739-00163e0204c0"
 }
 ```
 
@@ -366,9 +369,17 @@ err
 
 ```js
 {
-  "non_field_errors": [
-    "密码错误"
-  ]
+  "meta": {
+    "message": {
+      "non_field_errors": [
+        "Password error."
+      ]
+    },
+    "code": 23010
+  },
+  "data": {
+    
+  }
 }
 ```
 
@@ -415,8 +426,8 @@ ret
 
 ```js
 {
-  "token": "eyJhbGcxxx44",
-  "clientid": "3aa9379a-xxxx-11e6-a739-00163e0204c0"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "clientid": "a015e6d6-1d6e-11e6-a739-00163e0204c0"
 }
 ```
 
@@ -426,9 +437,17 @@ err
 
 ```js
 {
-  "non_field_errors": [
-    "签名解析错误"
-  ]
+  "meta": {
+    "message": {
+      "non_field_errors": [
+        "Parser signature error."
+      ]
+    },
+    "code": 23010
+  },
+  "data": {
+    
+  }
 }
 ```
 
@@ -653,6 +672,7 @@ ret
 - 描述：接口调用成功后的回调函数
 
 ```js
+{message: "success"}
 ```
 
 err
@@ -660,6 +680,7 @@ err
 - 描述：接口调用失败后的回调函数
 
 ```js
+{code: 9403, message: "It is closed."}
 ```
 
 ##示例代码
@@ -1010,12 +1031,24 @@ ret
   },
   "data": [
     {
-      "device_pw": "7176",
+      "device_pw": "1486",
       "product_icon": "",
-      "device_name": "iBake",
+      "device_name": "mxchip-3031",
+      "mac": "d0bae45001e5",
+      "role": 1,
       "online": false,
-      "product_name": "iBake",
-      "device_id": "aa2dde14-0b8d-11e6-a739-00163e0204c0"
+      "product_name": "mxchip-3031",
+      "device_id": "e5dc25a4-700c-11e6-9baf-00163e120d98"
+    },
+    {
+      "device_pw": "5600",
+      "product_icon": "",
+      "device_name": "MiCOKit-3165",
+      "mac": "D0BAE4077AA4",
+      "role": 1,
+      "online": true,
+      "product_name": "MiCOKit-3165",
+      "device_id": "501370ec-86b7-11e6-9baf-00163e120d98"
     }
   ]
 }
