@@ -28,7 +28,7 @@
 
 
 
-##以下是单个功能模块*
+##以下是单个功能模块
 >[EasyLink2.0 --> 给设备配网](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/EasyLink.MD)
 
 >[mDNS2.0 --> 发现局域网设备](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/mDNS.MD)
