@@ -242,7 +242,7 @@ err
 ```java
 var param = {
     loginname: "8800000@qq.com",
-    vercode: "8865",
+    vercode: "886526",
     appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
 mico2.checkVerifyCode(param, function(ret, err) {
