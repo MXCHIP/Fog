@@ -1,4 +1,4 @@
-##MiCO2 
+##fog2模块使用说明 
 
 ##**概述**
 
@@ -108,8 +108,8 @@ host
 
 ```java
 const host = {host:"https://v2.fogcloud.io"};
-var mico2 = api.require('mico2');
-mico2.init(host);
+var fog2 = api.require('fog2');
+fog2.init(host);
 ```
 
 ##可用性
@@ -174,7 +174,7 @@ var param = {
     loginname: "8800000@qq.com",
     appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
-mico2.getVerifyCode(param, function(ret, err) {
+fog2.getVerifyCode(param, function(ret, err) {
     if (ret) {
         alert(JSON.stringify(ret));
     } else {
@@ -245,7 +245,7 @@ var param = {
     vercode: "886526",
     appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
-mico2.checkVerifyCode(param, function(ret, err) {
+fog2.checkVerifyCode(param, function(ret, err) {
     if (ret) {
         alert(JSON.stringify(ret));
     } else {
@@ -316,7 +316,7 @@ var param = {
     password: "123456",
     token: "eyJhVlSV8I..."
 };
-mico2.setPassword(param, function(ret, err) {
+fog2.setPassword(param, function(ret, err) {
     if (ret) {
         alert(JSON.stringify(ret));
     } else {
@@ -386,13 +386,13 @@ err
 ##示例代码
 
 ```java
-var mico2 = api.require('mico2');
+var fog2 = api.require('fog2');
 var param = {
     loginname: "8800000@qq.com",
     password: "123456",
     appid: "d8cdf9c6-de8c-11e5-a7-xxxx"
 };
-mico2.login(param, function(ret, err) {
+fog2.login(param, function(ret, err) {
     if (ret) {
         alert(JSON.stringify(ret));
     } else {
@@ -457,7 +457,7 @@ err
 var param = {
     token: "eyJhVlSV8I..."
 };
-mico2.refreshToken(param, function(ret, err) {
+fog2.refreshToken(param, function(ret, err) {
     if (ret) {
         alert(JSON.stringify(ret));
     } else {
@@ -529,7 +529,7 @@ var param = {
     deviceid: "db456b4a-17fc-xxxx",
     token: "eyJhVlSV8I..."
 };
-mico2.getMemberList(param, function(ret, err) {
+fog2.getMemberList(param, function(ret, err) {
     if (ret) {
         console.log(JSON.stringify(ret));
     } else {
@@ -598,7 +598,7 @@ var param = {
     enduserid: "e32bd592-1bf8-11e6-a739-00163e0204c0",
     token: "eyJhVlSV8I..."
 };
-mico2.removeBindRole(param, function(ret, err) {
+fog2.removeBindRole(param, function(ret, err) {
     if (ret) {
         console.log(JSON.stringify(ret));
     } else {
@@ -629,13 +629,13 @@ ssid
 - 描述：当前WIFI的名称
 
 ```js
-{ssid: "mico2"}
+{ssid: "fog2"}
 ```
 
 ##示例代码
 
 ```java
-mico2.getSSID(function(ret, err){
+fog2.getSSID(function(ret, err){
     alert(ret.ssid);
 });
 ```
@@ -687,11 +687,11 @@ err
 
 ```java
 var param = {
-    ssid: "mico2",
+    ssid: "fog2",
     password: "12345678",
     runSecond: 20000 //20秒后停止发包
 };
-mico2.startEasyLink(param, function(ret, err) {
+fog2.startEasyLink(param, function(ret, err) {
     if(ret)
         alert(ret);
     else
@@ -723,7 +723,7 @@ ret
 ##示例代码
 
 ```java
-mico2.stopEasyLink(function(ret, err) {
+fog2.stopEasyLink(function(ret, err) {
     if(ret)
         alert(ret);
     else
@@ -802,7 +802,7 @@ err
 ##示例代码
 
 ```java
-mico2.startSearchDevices(function(ret, err) {
+fog2.startSearchDevices(function(ret, err) {
     if (ret)
         alert(JSON.stringify(ret));
     else
@@ -839,7 +839,7 @@ err
 ##示例代码
 
 ```java
-mico2.stopSearchDevices(function(ret, err) {
+fog2.stopSearchDevices(function(ret, err) {
     if (ret)
         alert(ret);
     else
@@ -915,7 +915,7 @@ var param = {
     port: "8002",
     token:"eyJhVlSV8I..."
 };
-mico2.bindDevice(param, function(ret, err) {
+fog2.bindDevice(param, function(ret, err) {
     if (ret)
         alert(ret);
     else
@@ -992,7 +992,7 @@ var param = {
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     token: "eyJhVlSV8I..."
 };
-mico2.unBindDevice(param, function(ret, err) {
+fog2.unBindDevice(param, function(ret, err) {
     if (ret)
         alert(ret);
     else
@@ -1068,7 +1068,7 @@ err
 var param = {
     token: "eyJhVlSV8I..."
 };
-mico2.getDeviceList(param, function(ret, err) {
+fog2.getDeviceList(param, function(ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1143,7 +1143,7 @@ var param = {
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     token: "eyJhVlSV8I..."
 };
-mico2.getDeviceInfo(param, function (ret, err) {
+fog2.getDeviceInfo(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1205,7 +1205,7 @@ var param = {
     devicename: "好风尚",
     token: "eyJhVlSV8I..."
 };
-mico2.updateDeviceAlias(param, function (ret, err) {
+fog2.updateDeviceAlias(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1284,7 +1284,7 @@ var param = {
     deviceid: "81d79316-bb5a-11e5-a739-00163e0204c0",
     token: "eyJhVlSV8I..."
 };
-mico2.getShareVerCode(param, function (ret, err) {
+fog2.getShareVerCode(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1377,7 +1377,7 @@ var param = {
     bindingtype: "home",
     token: "eyJhVlSV8I..."
 };
-mico2.addDeviceByVerCode(param, function (ret, err) {
+fog2.addDeviceByVerCode(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1453,7 +1453,7 @@ var param = {
     clientid: "enduserid",
     isencrypt:false
 };
-mico2.startListenDevice(param, function (ret, err) {
+fog2.startListenDevice(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1526,7 +1526,7 @@ var param = {
     command: '{"KG_Bottom":"1"}',
     token: "eyJhVlSV8I..."
 };
-mico2.sendCommand(param, function (ret, err) {
+fog2.sendCommand(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1581,7 +1581,7 @@ var param = {
     topic: "d2c/" + deviceid + "/status",
     qos: 0
 };
-mico2.addDeviceListener(param, function (ret, err) {
+fog2.addDeviceListener(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1630,7 +1630,7 @@ err
 var param = {
     topic: "d2c/" + deviceid + "/status"
 };
-mico2.removeDeviceListener(param, function (ret, err) {
+fog2.removeDeviceListener(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1670,7 +1670,7 @@ err
 ##示例代码
 
 ```java
-mico2.stopListenDevice(function(ret, err){
+fog2.stopListenDevice(function(ret, err){
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1779,7 +1779,7 @@ var param = {
     minute: "*",
     token: "eyJhVlSV8I..."
 };
-mico2.createScheduleTask(param, function (ret, err) {
+fog2.createScheduleTask(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1851,7 +1851,7 @@ var param = {
     second: 61,
     token: "eyJhVlSV8I..."
 };
-mico2.createDelayTask(param, function (ret, err) {
+fog2.createDelayTask(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -1927,7 +1927,7 @@ var param = {
   tasktype: 1,
   token: "eyJhVlSV8I..."
 };
-mico2.getTaskList(param, function (ret, err) {
+fog2.getTaskList(param, function (ret, err) {
   if (ret){
       alert(JSON.stringify(ret));
   }else{
@@ -2002,7 +2002,7 @@ var param = {
     taskid: "5af8bb16-20b4-11e6-a739-00163e0204c0",
     token: "eyJhVlSV8I..."
 };
-mico2.deleteTask(param, function (ret, err) {
+fog2.deleteTask(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -2119,7 +2119,7 @@ var param = {
     minute: "*",
     token: "eyJhVlSV8I..."
 };
-mico2.updateScheduleTask(param, function (ret, err) {
+fog2.updateScheduleTask(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
@@ -2198,7 +2198,7 @@ var param = {
     second: 65,
     token: "eyJhVlSV8I..."
 };
-mico2.updateDelayTask(param, function (ret, err) {
+fog2.updateDelayTask(param, function (ret, err) {
     if (ret){
         alert(JSON.stringify(ret));
     }else{
