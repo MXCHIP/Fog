@@ -1,6 +1,7 @@
-# Fog2.0
+##迁移到[MCHIP](https://github.com/MXCHIP/Fog2.0)
 
 Fogcloud2.0的相关SDK
+
 
 #####Android，android原生开发使用
 
