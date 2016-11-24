@@ -86,15 +86,6 @@ __远程控制__
 * [移除订阅通道](#removeDeviceListener)
 * [停止监听设备](#stopListenDevice)
 
-<div id="ClodRecipe"></div>
-__云菜谱__
-
-* [通过类型获取菜谱列表](#getCookBookByType)
-* [通过名称获取菜谱列表](#getCookBookByName)
-* [获取菜谱详情](#getCookBookInfo)
-* [给菜谱点赞](#addCookBookLikeNo)
-* [取消点赞](#delCookBookLikeNo)
-
 <div id="CommandTask"></div>
 __任务管理__
 
