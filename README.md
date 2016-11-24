@@ -1,7 +1,7 @@
 ##欢迎使用Fogcloud2.0云服务开发app
 
 ####APP开发分三种类型
-* [Android](https://github.com/MXCHIP/Fog2.0/wiki/(Android)-Fog2.0(%E4%BA%91)-&-MiCO(%E6%A8%A1%E5%9D%97)--%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
+* [Android](https://github.com/MXCHIP/Fog2.0/wiki/(Android)-Fog2.0(%E4%BA%91)-&-MiCO(%E6%A8%A1%E5%9D%97)-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
 
 * [iOS](https://github.com/MXCHIP/Fog2.0/wiki/(iOS)-Fog2.0(%E4%BA%91)-&-MiCO(%E6%A8%A1%E5%9D%97)-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97)
 
