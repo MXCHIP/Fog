@@ -843,8 +843,8 @@ timeout     | int       | 父设备等待的超时间
 extend     | json string       | 扩展字段(可为空)
 
 #####callback
-managedevcb
-- 类型：ManageDeviceCallBack
+micocb
+- 类型：MiCOCallBack
 - 描述：接口调用成功后的回调函数
 ```js
 {
@@ -891,8 +891,8 @@ format     | string       | payload格式，目前固定值为“json”,可为�
 flag     | int       | 功能启用标识，可为空。(flag采用各bit位是否为1标识是否启用对应的功能，对应关系如下： 0位→是否发送mqtt消息到设备topic(c2d/deviceid/commands) 1位→是否将payload数据存入数据库 默认情况下会发送mqtt消息和存储payload到数据库),如果既要保存进数据库又要发送给设备，那么flag为3
 
 #####callback
-managedevcb
-- 类型：ManageDeviceCallBack
+ctrldevcb
+- 类型：ControlDeviceCallBack
 - 描述：接口调用成功后的回调函数
 ```js
 {
