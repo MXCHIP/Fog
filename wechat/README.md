@@ -1,5 +1,5 @@
-# wechat_ws
-websoket，可供微信使用
+## wechat
+<!-- websoket，可供微信使用
 
 1、微信授权
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb9838927f21c4ab3&redirect_uri=http://32278f14-8507-4b77-8193-7775d34faff1.app.easylink.io/oauth.php%3Fwxappid%3Dwxb76dd57f05c5922b&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect
@@ -16,17 +16,13 @@ AppID(应用ID): wxb9838927f21c4ab3
 
 AppSecret(应用密钥): d45f7431352bdce63ad299b23a4ce35c
 
-Token(令牌): 90af9e672807cb7066a05a3c9d06d8ad
+Token(令牌): 90af9e672807cb7066a05a3c9d06d8ad -->
 
 
-# wxfog
 部署在fog上的微信的信息
 
 
 #####获取code
-
-https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb9838927f21c4ab3&redirect_uri=http://32278f14-8507-4b77-8193-7775d34faff1.app.easylink.io/oauth.php%3Fwxappid%3Dwxb76dd57f05c5922b&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect
-
 
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb9838927f21c4ab3&redirect_uri=http://wxtest.fogcloud.io/index.html&response_type=code&scope=snsapi_userinfo&state=565#wechat_redirect
 
