@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/ctrltoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:title="Fog2.0" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/jsoncommandet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:text='{"topic":"d2c/d95366fe-06c0-11e6-a739-00163e0204c0/status","payload":{"deviceid":"d95366fe-06c0-11e6-a739-00163e0204c0","attrSet":["KG_Start","KG_Fan","KG_Turn","KG_Light","WorkTime","WorkStatus","EC","WF","KG_Preheat","Temp_Top","Temp_Bottom","WF_CurrentStep","WF_TimeLeft","Cur_TempBottom","Cur_TempTop"],"KG_Start":"1","KG_Fan":"0","KG_Turn":"0","KG_Light":"1","WorkTime":"58","WorkStatus":"2","EC":"0","WF":{"value":"0","extra":{"WorkMode":"1","WF_ID":"0","Type":"0","StepNum":"0","TimeTotal":"0"}},"KG_Preheat":"0","Temp_Top":"240","Temp_Bottom":"240","WF_CurrentStep":"0","WF_TimeLeft":"58","Cur_TempBottom":"27","Cur_TempTop":"27"}}'
+                    android:textSize="@dimen/textsize" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fab_margin"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/fab_margin"
+                    android:paddingRight="@dimen/fab_margin">
+
+                    <Button
+                        android:id="@+id/addsubdev"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/colorAccent"
+                        android:text="添加子设备"
+                        android:textColor="@color/whitebutton" />
+                    <Button
+                        android:id="@+id/sendcmdsub"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/colorAccent"
+                        android:text="发送子设备指令"
+                        android:textColor="@color/whitebutton" />
+
+                    <Button
+                        android:id="@+id/sendcommandbtn"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:text="发送指令"
+                        android:textColor="@color/whitebutton" />
+
+                    <TextView
+                        android:id="@+id/showcmdcb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:text=""
+                        android:textSize="@dimen/textsize" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

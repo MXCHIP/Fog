@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_devicelist"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="设备列表" />
+        <item
+            android:id="@+id/nav_easylink"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="配网" />
+        <item
+            android:id="@+id/nav_userinfo"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="用户信息" />
+        <item
+            android:id="@+id/nav_cloudrecipe"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="云食谱" />
+        <!--<item-->
+            <!--android:id="@+id/nav_other"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="其他" />-->
+    </group>
+
+
+
+    <item android:title="其他">
+        <menu>
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="退出登陆"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/whitebutton">
+            </item>
+        </menu>
+    </item>
+
+</menu>

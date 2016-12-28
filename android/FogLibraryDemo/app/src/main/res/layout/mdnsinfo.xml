@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingRight="@dimen/textsize">
+
+    <TextView
+        android:id="@+id/mdnskey"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:gravity="center_vertical|right"
+        android:text="MAC"
+        android:textSize="@dimen/textsize"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/mdnsvalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/textsize"
+        android:text="D0:BA:E4:0C:2F:EE"
+        android:textSize="@dimen/textsize" />
+</LinearLayout>

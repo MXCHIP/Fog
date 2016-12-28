@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/adddevtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:title="Fog2.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/fab_margin"
+            android:paddingRight="@dimen/fab_margin">
+
+            <EditText
+                android:id="@+id/sharecodeet"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:hint="输入绑定码"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/deviceidet"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:hint="输入设备ID"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/devicepwet"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:hint="输入设备PW"
+                android:textSize="@dimen/textsize" />
+
+
+            <Button
+                android:id="@+id/adddevbycode"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:background="@color/colorAccent"
+                android:text="添加设备"
+                android:textColor="@color/whitebutton" />
+
+            <TextView
+                android:id="@+id/showaddinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:text="" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

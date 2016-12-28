@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f7f8"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/registertoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:title="Fog2.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whitebutton"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/fab_margin"
+            android:paddingRight="@dimen/fab_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:text="服务器域名"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/nav_header_vertical_spacing" />
+
+            <AutoCompleteTextView
+                android:id="@+id/initfoghost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:text="http"
+                android:textSize="@dimen/textsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whitebutton"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/fab_margin"
+            android:paddingRight="@dimen/fab_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:text="APPID"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/nav_header_vertical_spacing" />
+
+            <EditText
+                android:id="@+id/initappid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_input_height"
+                android:layout_gravity="center_horizontal"
+                android:hint="输入APPID"
+                android:textSize="@dimen/textsize" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/fab_margin">
+
+            <Button
+                android:id="@+id/finishinitbtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_input_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:background="@color/colorAccent"
+                android:text="完成设置"
+                android:textColor="@color/whitebutton" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
