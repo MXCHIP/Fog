@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <title>wechat</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./css/bootstrap-theme.min.css"> -->
+</head>
+<style>
+.info-box {
+    padding: 10px 20px;
+}
+.bg-info{
+    padding: 5px;
+    margin-top: 10px;
+}
+</style>
+
+<body>
+    <div id="app">
+        <div class="info-box">
+            <div class="form-group">
+                <label for="exampleInputEmail1">APPID</label>
+                <input type="email" class="form-control" v-model='appid' placeholder="APPID">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">SECRET</label>
+                <input type="email" class="form-control" v-model='secret' placeholder="SECRET">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">WXCODE</label>
+                <input type="email" class="form-control" v-model='code' placeholder="微信CODE">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">STATE</label>
+                <input type="email" class="form-control" v-model='state' placeholder="微信STATE">
+            </div>
+            <button type="button" class="btn btn-primary" @click='getacctoken'>获取JWT</button>
+            <button type="button" class="btn btn-primary" @click='refreshjwt'>刷新JWT</button>
+            <button type="button" class="btn btn-success" @click='getuserinfo'>获取用户信息</button>
+            <button type="button" class="btn btn-success" @click='getDevList'>获取设备列表</button>
+            <p class="bg-info">{{jsret}}</p>
+        </div>
+    </div>
+</body>
+<script src="./js/vue2.js"></script>
+<script src="./js/jquery-2.1.3.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+const _TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnX2lhdCI6MTQ4MjgyMzc0NywiaWRlbnRpZmljYXRpb24iOiIiLCJleHAiOjE0ODM0Mjg1NDcsImFwcGlkIjoiZDhjZGY5YzYtZGU4Yy0xMWU1LWE3MzktMDAxNjNlMDIwNGMwIiwidXNlcl9pZCI6NDAwMDIsImVuZHVzZXJpZCI6IjZiZDhkZjEwLWNiMWQtMTFlNi04NmMzLTAwMTYzZTEwNTM2MSJ9.sh8z9vA6UNLywu7giab9btAQ_nA72Wb8NiSQ-0hYywo';
+
+new Vue({
+    el: '#app',
+    data: {
+        code: '031sKU1L0LVym42ES32L0h8Y1L0sKU1K',
+        appid: 'wxb9838927f21c4ab3',
+        state: '',
+        jsret: '',
+        secret: 'd45f7431352bdce63ad299b23a4ce35c',
+        jwt:_TOKEN
+    },
+    created: function() {
+        // this.code = getParameterByName('code');
+        // this.state = getParameterByName('state');
+    },
+    methods: {
+        getacctoken: function() {
+            var that = this;
+            var tkurl = 'https://v2dev.fogcloud.io/wechat/codetest/';
+            $.ajax({
+                url: tkurl,
+                type: 'POST',
+                data: {
+                    "appid": that.appid,
+                    "secret": that.secret,
+                    "code": that.code
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                success: function(ret) {
+                    that.jsret = JSON.stringify(ret);
+                },
+                error: function(err) {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        getuserinfo: function() {
+
+        },
+        refreshjwt:function(){
+            var that = this;
+            var tkurl = 'https://v2dev.fogcloud.io/enduser/refreshToken/';
+            $.ajax({
+                url: tkurl,
+                type: 'POST',
+                data: {
+                    "token": that.jwt,
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                },
+                success: function(ret) {
+                    that.jsret = JSON.stringify(ret);
+                },
+                error: function(err) {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        getDevList:function(){
+            var that = this;
+            var tkurl = 'https://v2dev.fogcloud.io/enduser/devicelistbyenduser/';
+            $.ajax({
+                url: tkurl,
+                type: 'GET',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+                    'Authorization': "JWT " + that.jwt
+                },
+                success: function(ret) {
+                    that.jsret = JSON.stringify(ret);
+                },
+                error: function(err) {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        }
+    }
+});
+
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+//6bd8df10-cb1d-11e6-86c3-00163e105361
+//wechat
+//{"enduserid":"6bd8df10-cb1d-11e6-86c3-00163e105361","jwt":""}
+</script>
+
+</html>

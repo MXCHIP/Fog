@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <title>微信控制</title>
+    <style>
+    #debug {
+        margin-top: 44px;
+        background-color: white;
+        height: 300px;
+        overflow: scroll;
+        color: black;
+        font-size: 12px;
+    }
+    
+    #debug p {
+        padding: 3px 5px;
+        word-wrap: break-word;
+    }
+    
+    .gray {
+        background-color: #ddd;
+    }
+    
+    #debug span {
+        display: block;
+        word-wrap: break-word;
+        margin-bottom: 2px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="bar bar-header bar-assertive">
+        <h1 class="title" id="device_id"></h1>
+    </div>
+    <div id="debug"></div>
+    <div class="button-bar">
+        <a class="button" style="background:white; color:black" id="led_on">On</a>
+        <a class="button" style="background:black; color:white" id="led_off">Off</a>
+    </div>
+    </div>
+    <script src="./js/mqttws31.js"></script>
+    <script>
+    // 从url中获取某个参数的值
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+    // 得到设备ID
+    // var device_id = getParameterByName('device_id');
+    var device_id = 'd64f517c/c8934691813c';
+    // 如果设备ID不为空，则执行连接MQTT的操作
+    if (device_id !== null) {
+        ez_connect(device_id);
+    }
+
+    // 连接MQTT服务
+    function ez_connect(device_id) {
+        // 获取access_token
+        // access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
+        // 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
+        var access_token = getParameterByName('access_token');
+
+        document.getElementById('device_id').innerHTML = device_id;
+
+        // websocket连接
+        // wsbroker:host
+        // wsport:端口 默认1983
+        // Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
+        var wsbroker = "api.easylink.io"; //mqtt websocket enabled broker
+        var wsport = 1983 // port for above
+        var client = new Paho.MQTT.Client(wsbroker, wsport, "v1-web-" + parseInt(Math.random() * 1000000, 12));
+
+        // 基本参数配置
+        // 连接丢失所对应的callback函数
+        client.onConnectionLost = onConnectionLost;
+        // 消息到达所对应的callback函数
+        client.onMessageArrived = onMessageArrived;
+        // 连接成功所对应的callback函数
+        client.connect({
+            onSuccess: onConnect
+        });
+
+        // 连接成功
+        function onConnect() {
+            var subtopic = device_id + '/#';
+            // Once a connection has been made, make a subscription and send a message.
+            // 向某个通道发送指令
+            // topic：通道
+            // commond：指令
+            client.publish = function(topic, commond) {
+                console.log("现在执行-->:" + commond);
+                message = new Paho.MQTT.Message(commond);
+                message.destinationName = topic;
+                client.send(message);
+            }
+            console.log("device_id:" + device_id);
+            console.log("onConnect");
+            client.subscribe(subtopic, {
+                qos: 0
+            });
+        }
+        // 连接丢失
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0)
+                console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+        // 消息到达
+        function onMessageArrived(message) {
+            console.log(message.topic + ': ' + message.payloadString);
+        }
+
+        function led_on() {
+            var topic = device_id + '/in/write/0012';
+            var commond = '{"4":true}';
+            client.publish(topic, commond);
+        }
+        // document.querySelector('#led_on').addEventListener('touchstart', led_on);
+        document.querySelector('#led_on').addEventListener('click', led_on);
+
+        function led_off() {
+            var topic = device_id + '/in/write/0012';
+            var commond = '{"4":false}';
+            client.publish(topic, commond);
+        }
+        // document.querySelector('#led_off').addEventListener('touchstart', led_off);
+        document.querySelector('#led_off').addEventListener('click', led_off);
+    }
+
+    // 日志打印在页面的部分    
+    var i = 0;
+    console.log = (function(old_funct, div_log) {
+        return function(text) {
+            old_funct(text);
+            var p = '';
+            if (i % 2 == 0)
+                p = '<p>';
+            else
+                p = '<p class=\'gray\'>';
+
+            if (typeof text === "object")
+                div_log.innerHTML += p + JSON.stringify(text) + '</p>';
+            else
+                div_log.innerHTML += p + text + '</p>';
+
+            div_log.scrollTop = div_log.scrollHeight;
+            i += 1;
+        };
+    }(console.log.bind(console), document.getElementById("debug")));
+    console.error = console.debug = console.info = console.log;
+    </script>
+</body>
+
+</html>
