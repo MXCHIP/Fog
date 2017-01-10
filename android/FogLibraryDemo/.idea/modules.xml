@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://D:/develop/androids/Fog2_container/Fog2_container.iml" filepath="D:/develop/androids/Fog2_container/Fog2_container.iml" />
       <module fileurl="file://$PROJECT_DIR$/FogLibraryDemo.iml" filepath="$PROJECT_DIR$/FogLibraryDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:/develop/androids/Fog2_container/fog2_sdk/fog2_sdk.iml" filepath="D:/develop/androids/Fog2_container/fog2_sdk/fog2_sdk.iml" />
     </modules>
   </component>
 </project>

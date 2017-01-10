@@ -12,9 +12,11 @@
 .info-box {
     padding: 10px 20px;
 }
-.bg-info{
+
+.bg-info {
     padding: 5px;
     margin-top: 10px;
+    word-wrap: break-word;
 }
 </style>
 
@@ -25,10 +27,10 @@
                 <label for="exampleInputEmail1">APPID</label>
                 <input type="email" class="form-control" v-model='appid' placeholder="APPID">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="exampleInputEmail1">SECRET</label>
                 <input type="email" class="form-control" v-model='secret' placeholder="SECRET">
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="exampleInputEmail1">WXCODE</label>
                 <input type="email" class="form-control" v-model='code' placeholder="微信CODE">
@@ -37,94 +39,210 @@
                 <label for="exampleInputEmail1">STATE</label>
                 <input type="email" class="form-control" v-model='state' placeholder="微信STATE">
             </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">signUrl</label>
+                <input type="email" class="form-control" v-model='signUrl' placeholder="signUrl">
+            </div>
             <button type="button" class="btn btn-primary" @click='getacctoken'>获取JWT</button>
             <button type="button" class="btn btn-primary" @click='refreshjwt'>刷新JWT</button>
-            <button type="button" class="btn btn-success" @click='getuserinfo'>获取用户信息</button>
-            <button type="button" class="btn btn-success" @click='getDevList'>获取设备列表</button>
+            <button type="button" class="btn btn-info" @click='getuserinfo'>获取用户信息</button>
+            <!-- <button type="button" class="btn btn-success" @click='getDevList'>获取设备列表</button>
+            <button type="button" class="btn btn-success" @click='getDeviceInfo'>获取设备信息</button>
+            <button type="button" class="btn btn-success" @click='updateDeviceAlias'>修改设备别名</button> -->
+            <button type="button" class="btn btn-danger" @click='getsign'>获取签名</button>
+            <!-- <button type="button" class="btn btn-danger" @click='unbinddev'>解绑设备</button> -->
+            <!-- <button type="button" class="btn btn-success" @click='sendCommand'>发送指令</button> -->
+            <button type="button" class="btn btn-success" @click='sharewx'>微信分享</button>
             <p class="bg-info">{{jsret}}</p>
         </div>
     </div>
 </body>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="./js/vue2.js"></script>
 <script src="./js/jquery-2.1.3.js"></script>
 <script src="./js/bootstrap.min.js"></script>
+<script src="./js/fog2.js"></script>
 <script>
-const _TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnX2lhdCI6MTQ4MjgyMzc0NywiaWRlbnRpZmljYXRpb24iOiIiLCJleHAiOjE0ODM0Mjg1NDcsImFwcGlkIjoiZDhjZGY5YzYtZGU4Yy0xMWU1LWE3MzktMDAxNjNlMDIwNGMwIiwidXNlcl9pZCI6NDAwMDIsImVuZHVzZXJpZCI6IjZiZDhkZjEwLWNiMWQtMTFlNi04NmMzLTAwMTYzZTEwNTM2MSJ9.sh8z9vA6UNLywu7giab9btAQ_nA72Wb8NiSQ-0hYywo';
+var storage = window.localStorage;
+const _JWTKEY = 'jwt';
 
 new Vue({
     el: '#app',
     data: {
-        code: '031sKU1L0LVym42ES32L0h8Y1L0sKU1K',
-        appid: 'wxb9838927f21c4ab3',
+        code: '0017CD1u098nWc1pLq2u0vWH1u07CD1W',
+        // appid: 'wxb9838927f21c4ab3',
+        appid: '0628bb1c-ce75-11e6-86c3-00163e105361',
         state: '',
         jsret: '',
-        secret: 'd45f7431352bdce63ad299b23a4ce35c',
-        jwt:_TOKEN
+        // secret: 'd45f7431352bdce63ad299b23a4ce35c',
+        jwt: '',
+        signUrl:''
     },
     created: function() {
-        // this.code = getParameterByName('code');
-        // this.state = getParameterByName('state');
+        this.code = getParameterByName('code');
+        this.state = getParameterByName('state');
+        
+        this.jwt = this.getlocals(_JWTKEY);
+        if (null == this.jwt || 'undefined' == this.jwt) {
+            alert('需要获取jwt')
+        }else{
+            alert(this.jwt)
+            // this.updateJWT(this.jwt);
+        }
+
+        // this.wxconfig();
+        this.signUrl = window.location.href;
     },
     methods: {
+        wxconfig:function(signParas){
+            var that = this;
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wxb9838927f21c4ab3', // 必填，公众号的唯一标识
+                timestamp: signParas.timestamp, // 必填，生成签名的时间戳
+                nonceStr: signParas.noncestr, // 必填，生成签名的随机串
+                signature: signParas.signature,// 必填，签名，见附录1
+                jsApiList: ['onMenuShareTimeline', 'getWXDeviceTicket'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            wx.ready(function(){
+                // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                console.log('ready');
+                that.jsret = 'ready';
+            });
+            wx.error(function(res){
+                // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                console.log(res);
+                that.jsret = JSON.stringify(res);
+            });
+        },
+        sharewx:function(){
+            alert('sharewx')
+            wx.onMenuShareTimeline({
+                title: '好名字', // 分享标题
+                link: 'https://mp.weixin.qq.com/wiki', // 分享链接
+                imgUrl: 'http://img5.duitang.com/uploads/item/201504/05/20150405H4142_kRv3Z.thumb.224_0.jpeg', // 分享图标
+                success: function () { 
+                    // 用户确认分享后执行的回调函数
+                    console.log('success');
+                },
+                cancel: function () { 
+                    // 用户取消分享后执行的回调函数
+                    console.log('cancel');
+                }
+            });
+        },
+        updateJWT: function(token) {
+            this.jwt = token;
+            this.addlocals(_JWTKEY, token);
+        },
         getacctoken: function() {
             var that = this;
-            var tkurl = 'https://v2dev.fogcloud.io/wechat/codetest/';
-            $.ajax({
-                url: tkurl,
-                type: 'POST',
-                data: {
-                    "appid": that.appid,
-                    "secret": that.secret,
-                    "code": that.code
-                },
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-                },
-                success: function(ret) {
+            Fog.getAcctoken(this.appid, this.code, function(ret, err) {
+                if (ret) {
+                    alert(ret.jwt);
+                    that.updateJWT(ret.jwt);
                     that.jsret = JSON.stringify(ret);
-                },
-                error: function(err) {
+                } else {
                     that.jsret = JSON.stringify(err);
                 }
             });
         },
         getuserinfo: function() {
-
-        },
-        refreshjwt:function(){
             var that = this;
-            var tkurl = 'https://v2dev.fogcloud.io/enduser/refreshToken/';
-            $.ajax({
-                url: tkurl,
-                type: 'POST',
-                data: {
-                    "token": that.jwt,
-                },
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-                },
-                success: function(ret) {
+            Fog.getUserInfo(this.jwt, function(ret, err) {
+                if (ret) {
                     that.jsret = JSON.stringify(ret);
-                },
-                error: function(err) {
+                } else {
                     that.jsret = JSON.stringify(err);
                 }
             });
         },
-        getDevList:function(){
+        refreshjwt: function() {
             var that = this;
-            var tkurl = 'https://v2dev.fogcloud.io/enduser/devicelistbyenduser/';
-            $.ajax({
-                url: tkurl,
-                type: 'GET',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-                    'Authorization': "JWT " + that.jwt
-                },
-                success: function(ret) {
+            Fog.refreshToken(this.jwt, function(ret, err) {
+                if (ret) {
+                    that.updateJWT(ret.token);
                     that.jsret = JSON.stringify(ret);
-                },
-                error: function(err) {
+                } else {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        getDevList: function() {
+            var that = this;
+            Fog.getDeviceList(this.jwt, function(ret, err) {
+                if (ret) {
+                    that.jsret = JSON.stringify(ret);
+                } else {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        getDeviceInfo: function() {
+            var that = this;
+            var deviceid = 'f3ac2130-0d14-11e6-a9dc-b82a72bf862a';
+            Fog.getDeviceInfo(deviceid, this.jwt, function(ret, err) {
+                if (ret) {
+                    that.jsret = JSON.stringify(ret);
+                } else {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+
+        },
+        sendCommand: function() {
+            var that = this;
+            var deviceid = 'f3ac2130-0d14-11e6-a9dc-b82a72bf862a';
+            var devicepw = 'wechat';
+            var payload = '{"KG_POWER":1}';
+
+            Fog.sendCommand(deviceid, devicepw, payload, this.jwt, function(ret, err) {
+                if (ret) {
+                    that.jsret = JSON.stringify(ret);
+                } else {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        updateDeviceAlias: function() {
+            var that = this;
+            var deviceid = 'f3ac2130-0d14-11e6-a9dc-b82a72bf862a';
+            var alias = '嘿嘿';
+
+            Fog.updateDeviceAlias(deviceid, alias, this.jwt, function(ret, err) {
+                if (ret) {
+                    that.jsret = JSON.stringify(ret);
+                } else {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        addlocals: function(key, value) {
+            storage.setItem(key, value);
+        },
+        getlocals: function(key) {
+            return storage.getItem(key);
+        },
+        getsign: function() {
+            var that = this;
+            
+            Fog.getSignature(this.signUrl, this.jwt, function(ret, err) {
+                if (ret) {
+                    that.jsret = JSON.stringify(ret);
+                    console.log(ret.jsapi_ticket)
+                    that.wxconfig(ret);
+                } else {
+                    that.jsret = JSON.stringify(err);
+                }
+            });
+        },
+        unbinddev: function() {
+            var that = this;
+            var deviceid = 'f3ac2130-0d14-11e6-a9dc-b82a72bf862a';
+            Fog.unBindDevice(deviceid, this.appid, this.jwt, function(ret, err) {
+                if (ret) {
+                    that.jsret = JSON.stringify(ret);
+                } else {
                     that.jsret = JSON.stringify(err);
                 }
             });
@@ -139,7 +257,7 @@ function getParameterByName(name) {
 
 //6bd8df10-cb1d-11e6-86c3-00163e105361
 //wechat
-//{"enduserid":"6bd8df10-cb1d-11e6-86c3-00163e105361","jwt":""}
+//{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnX2lhdCI6MTQ4MjgyMzc0NywiaWRlbnRpZmljYXRpb24iOiJcdThiYjhcdTVjMGZcdTc2N2QiLCJleHAiOjE0ODM1MTQ1NTIsImFwcGlkIjoiZDhjZGY5YzYtZGU4Yy0xMWU1LWE3MzktMDAxNjNlMDIwNGMwIiwidXNlcl9pZCI6NDAwMDIsImVuZHVzZXJpZCI6IjZiZDhkZjEwLWNiMWQtMTFlNi04NmMzLTAwMTYzZTEwNTM2MSJ9.oOLeXerEZKwHGlUOD7TtQyRLWE3NGC1wQuNG6fVjOWk","clientid":"6bd8df10-cb1d-11e6-86c3-00163e105361"}
 </script>
 
 </html>
