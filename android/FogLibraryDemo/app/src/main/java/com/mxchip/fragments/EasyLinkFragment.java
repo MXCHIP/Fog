@@ -96,7 +96,7 @@ public class EasyLinkFragment extends Fragment {
 
                     String ssid = ssid_et.getText().toString().trim();
                     String password = password_et.getText().toString().trim();
-                    micodev.startEasyLink(ssid, password, false, 40000, 20, "", "", new EasyLinkCallBack() {
+                    micodev.startEasyLink(ssid, password, true, 40000, 20, "", "", new EasyLinkCallBack() {
                         @Override
                         public void onSuccess(int code,String message) {
                             Log.d(TAG, message);

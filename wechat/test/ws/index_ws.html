@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+    <title>微信控制</title>
+    <link rel="stylesheet" href="./css/foundation.css">
+</head>
+<style>
+body,
+html,
+input {
+    font-size: 14px;
+}
+
+.connect-btn {
+    text-align: right;
+}
+
+.item-title {
+    color: #999;
+}
+
+.item-msg {
+    color: #2973b7;
+}
+</style>
+
+<body>
+    <div id="wechatapp">
+        <div class="row">
+            <div class="large-4 medium-4 columns">
+                <label>Host</label>
+                <input type="text" placeholder="host-input" v-model='host' />
+            </div>
+            <div class="large-4 medium-4 columns">
+                <label>Port</label>
+                <input type="text" placeholder="Port" v-model='port' />
+            </div>
+            <div class="large-4 medium-4 columns">
+                <label>ClientID</label>
+                <input type="text" placeholder="ClientID" v-model='clientid' />
+            </div>
+            <div class="large-4 medium-4 columns">
+                <label>SubscribeTopic</label>
+                <input type="text" placeholder="SubscribeTopic" v-model='subtopic' />
+            </div>
+            <div class="large-4 medium-4 columns">
+                <label>PublishTopic</label>
+                <input type="text" placeholder="ClientID" v-model='pubtopic' />
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns connect-btn">
+                <a href="#" class="button" @click='ezconnect'>Connect</a>
+                <a href="#" class="button" @click='ezdisconnect'>DisConnect</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 medium-4 columns">
+                <a href="#" class="button" @click='ledon'>开灯</a>
+                <a href="#" class="button" @click='ledoff'>关灯</a>
+                <a href="#" class="button" @click='addtopic'>打开订阅</a>
+                <a href="#" class="button" @click='rmtopic'>关闭订阅</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="primary callout">
+                    <template v-for='(item, index) in items'>
+                        <p>
+                            [{{index}}]
+                            <span class="item-title">Topic:</span>
+                            <span class="item-msg">{{item.topic}}</span> ,
+                            <span class="item-title">Message:</span>
+                            <span class="item-msg">{{item.message}}</span>
+                        </p>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/mqttws31.js"></script>
+<script src="./js/vue2.js"></script>
+<script>
+var client;
+var wechatapp = new Vue({
+    el: '#wechatapp',
+    data: {
+        host: 'mqtt.fogcloud.io',
+        port: 3443,
+        // port: 3000,
+        clientid: 'f60e5d3c-65aa-11e6-9d95-00163e103941',
+        userName: 'f60e5d3c-65aa-11e6-9d95-00163e103941',
+        password: '000000',
+        subtopic: 'd2c/11a50060-7ed7-11e6-9baf-00163e120d98/status',
+        pubtopic: '28600318-bb8b-11e6-9d95-00163e103941',
+        useSSL: true,
+        // host: 'api.easylink.io',
+        // port: 1983,
+        // clientid: 'clientId-oZu5eijs0m',
+        // subtopic: 'd64f517c/c8934691813c/out/read/#',
+        // pubtopic: 'd64f517c/c8934691813c/in/write/0012',
+        device_id: 'd64f517c/c8934691813c',
+        items: []
+    },
+    created() {
+        // websocket连接
+        // wsbroker:host
+        // wsport:端口 默认1983
+        // Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
+        // this.clientid = "v1-web-" + parseInt(Math.random() * 1000000000000, 12);
+        client = new Paho.MQTT.Client(this.host, this.port, this.clientid);
+    },
+    methods: {
+        ezconnect: function() {
+            do_ezconnect(this.subtopic);
+        },
+        ledon: function() {
+            var commond = '{"4":true}';
+            client.publish(this.pubtopic, commond);
+        },
+        ledoff: function() {
+            var commond = '{"4":false}';
+            client.publish(this.pubtopic, commond);
+        },
+        rmtopic: function() {
+            client.unsubscribe(this.subtopic);
+        },
+        addtopic: function() {
+            client.subscribe(this.subtopic);
+        },
+        ezdisconnect: function() {
+            client.disconnect();
+        }
+    }
+});
+
+function do_ezconnect(subtopic) {
+    // 获取access_token
+    // access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。
+    // 正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效
+    // websocket连接
+    // wsbroker:host
+    // wsport:端口 默认1983
+    // Client-ID ： v1_web_[MAC]  //版本号_app_手机MAC(必须是12位小写)
+    client = new Paho.MQTT.Client(wechatapp.host, wechatapp.port, wechatapp.clientid);
+
+    // 基本参数配置
+    // 连接丢失所对应的callback函数
+    client.onConnectionLost = onConnectionLost;
+    // 消息到达所对应的callback函数
+    client.onMessageArrived = onMessageArrived;
+    //消息成功publish出去
+    client.onMessageDelivered = onMessageDelivered;
+    // 连接成功所对应的callback函数
+    client.connect({
+        onSuccess: onConnect,
+        userName: wechatapp.userName,
+        password: wechatapp.password,
+        useSSL: wechatapp.useSSL
+    });
+
+    // 连接成功
+    function onConnect() {
+        // Once a connection has been made, make a subscription and send a message.
+        // 向某个通道发送指令
+        // topic：通道
+        // commond：指令
+        client.publish = function(topic, commond) {
+            message = new Paho.MQTT.Message(commond);
+            message.destinationName = topic;
+            client.send(message);
+        }
+        console.log("onConnect");
+        client.subscribe(subtopic, {
+            qos: 0
+        });
+    }
+    // 连接丢失
+    function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0)
+            console.log("onConnectionLost:" + responseObject.errorMessage);
+    }
+    // 消息到达
+    function onMessageArrived(message) {
+        // console.log(message);
+
+        var tempval = {};
+        tempval.topic = message.destinationName;
+        tempval.message = message.payloadString;
+        wechatapp.items.push(tempval);
+    }
+    //消息published
+    function onMessageDelivered(message) {
+        console.log("Publish success.")
+        // console.log(message);
+    }
+}
+</script>
+
+</html>
