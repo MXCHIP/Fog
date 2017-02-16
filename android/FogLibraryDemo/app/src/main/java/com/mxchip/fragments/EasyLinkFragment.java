@@ -142,6 +142,84 @@ public class EasyLinkFragment extends Fragment {
                         }
                     });
                 }
+
+
+
+                if ("start".equals(mdns_btn.getTag().toString().trim())) {
+                    mdns_btn.setTag("stop");
+                    mdns_btn.setText("停止搜索");
+                    mdns_btn.setBackgroundColor(Color.parseColor("#FF4081"));
+
+                    String serviceName = "_easylink._tcp.local.";
+                    micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
+                        @Override
+                        public void onSuccess(int code, String message) {
+                            Log.d(TAG, message);
+                            Message msg = new Message();
+                            msg.what = CommonPara._UPDATEVIEW;
+                            msg.obj = message;
+                            myhandle.sendMessage(msg);
+                        }
+
+                        @Override
+                        public void onFailure(int code, String message) {
+                            Log.d(TAG, message);
+                            Message msg = new Message();
+                            msg.what = CommonPara._UPDATEVIEW;
+                            msg.obj = message;
+                            myhandle.sendMessage(msg);
+                        }
+
+                        @Override
+                        public void onDevicesFind(int code, JSONArray deviceStatus) {
+                            Log.d(TAG, deviceStatus.toString());
+//                            String macs = "";
+//                            for (int i = 0; i < deviceStatus.length(); i++) {
+//                                try {
+//                                    macs += ((JSONObject)deviceStatus.get(i)).getString("MAC")+" ";
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                            Log.d(TAG, deviceStatus.length() + " -- " + macs);
+
+//                            Message msg = new Message();
+//                            msg.what = CommonPara._UPDATEVIEW;
+//                            msg.obj = deviceStatus.toString();
+//                            myhandle.sendMessage(msg);
+
+                            Message msg = new Message();
+                            msg.what = EasyHandler._DEVLIST;
+                            msg.obj = deviceStatus.toString();
+                            myhandle.sendMessage(msg);
+                        }
+                    });
+
+                } else {
+                    mdns_btn.setTag("start");
+                    mdns_btn.setText("搜索设备");
+                    mdns_btn.setBackgroundColor(Color.parseColor("#81C784"));
+
+                    micodev.stopSearchDevices(new SearchDeviceCallBack() {
+                        @Override
+                        public void onSuccess(int code, String message) {
+                            Log.d(TAG, message);
+                            Message msg = new Message();
+                            msg.what = CommonPara._UPDATEVIEW;
+                            msg.obj = message;
+                            myhandle.sendMessage(msg);
+                        }
+
+                        @Override
+                        public void onFailure(int code, String message) {
+                            Log.d(TAG, message);
+                            Message msg = new Message();
+                            msg.what = CommonPara._UPDATEVIEW;
+                            msg.obj = message;
+                            myhandle.sendMessage(msg);
+                        }
+                    });
+                }
             }
         });
         mdns_btn.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,5 @@
 include ':app'
 
-include ':Fog2_container'
-project(':Fog2_container').projectDir = new File('../../../../../develop/androids/Fog2_container/')
-include ':Fog2_container:fog2_sdk'
+//include ':Fog2_container'
+//project(':Fog2_container').projectDir = new File('../../../../../develop/androids/Fog2_container/')
+//include ':Fog2_container:fog2_sdk'

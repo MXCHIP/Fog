@@ -7,8 +7,6 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="D:/develop/androids/Fog2_container" />
-            <option value="D:/develop/androids/Fog2_container/fog2_sdk" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
           </set>
