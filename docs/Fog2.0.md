@@ -31,7 +31,7 @@
 
 ## **MiCOUser** 用户管理
 
-__基础功能__
+#### 基础功能
 
 * [获取验证码](#getVerifyCode)
 * [验证验证码](#checkVerifyCode)
@@ -43,24 +43,25 @@ __基础功能__
 
 ## **MiCODevice** 设备管理
 
-__设备配网__
+#### 设备配网
 
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
 * [停止配网](#stopEasyLink)
 
-__搜索设备__
+#### 搜索设备
 
 * [开始搜索设备](#startSearchDevices)
 * [停止搜索设备](#stopSearchDevices)
 
-__绑定设备__
+#### 绑定设备
 
 * [绑定设备](#bindDevice)
 * [解绑设备](#unBindDevice)
 
 <div id="ManageDevices"></div>
-__设备管理__
+
+#### 设备管理
 
 * [获取设备列表](#getDeviceList)
 * [获取设备详情](#getDeviceInfo)
@@ -68,13 +69,14 @@ __设备管理__
 * [获取设备分享码](#getShareVerCode)
 * [通过分享码绑定设备](#addDeviceByVerCode)
 
-__权限管理__
+#### 权限管理
 
 * [获取用户列表](#getMemberList)
 * [移除用户权限](#removeBindRole)
 
 <div id="ControlRemoteDevice"></div>
-__远程控制__
+
+#### 远程控制
 
 * [监听远程设备](#startListenDevice)
 * [发送指令](#sendCommand)
@@ -83,7 +85,8 @@ __远程控制__
 * [停止监听设备](#stopListenDevice)
 
 <div id="CommandTask"></div>
-__任务管理__
+
+#### 任务管理
 
 * [创建定时任务](#createScheduleTask)
 * [创建延时任务](#creatDelayTask)
