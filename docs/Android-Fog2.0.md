@@ -1,4 +1,4 @@
-##MiCOSDK开发指南
+## MiCOSDK开发指南
 
 这里有测试Demo，[传送门](https://github.com/MXCHIP/FogLibraryDemo)
 
@@ -27,12 +27,14 @@
 
 --------------------------------------
 <div id="MiCO"></div>
-## MiCO 全局设置
+
+## #  MiCO 全局设置
 
 * [初始化](#init)
 
 <div id="MiCOUser"></div>
-## MiCOUser 用户管理
+
+## #  MiCOUser 用户管理
 
 __基础功能__
 
@@ -43,7 +45,8 @@ __基础功能__
 * [刷新Token](#refreshToken)
 
 <div id="MiCODevice"></div>
-## MiCODevice 设备管理
+
+## #  MiCODevice 设备管理
 
 __设备配网__
 
@@ -62,6 +65,7 @@ __绑定设备__
 * [解绑设备](#unBindDevice)
 
 <div id="ManageDevices"></div>
+
 __设备管理__
 
 * [获取设备列表](#getDeviceList)
@@ -77,6 +81,7 @@ __权限管理__
 * [移除用户权限](#removeBindRole)
 
 <div id="ControlRemoteDevice"></div>
+
 __远程控制__
 
 * [监听远程设备](#startListenDevice)
@@ -87,6 +92,7 @@ __远程控制__
 * [停止监听设备](#stopListenDevice)
 
 <div id="CommandTask"></div>
+
 __任务管理__
 
 * [创建定时任务](#createScheduleTask)
@@ -99,7 +105,8 @@ __任务管理__
 --------------------------------------
 
 <div id="init">初始化</div>
-#获取验证码init
+
+##  获取验证码init
     初始化host，因为连接的服务器分为测试环境和生产环境
 
     init(String host)
@@ -115,7 +122,8 @@ MiCO.init("https://v2.fogcloud.io");
 ```
 
 <div id="getVerifyCode">获取验证码</div>
-#getVerifyCode
+
+## # getVerifyCode
     获取验证码，目前仅支持大陆手机号，海外用户请使用邮箱注册
 
     getVerifyCode(String loginname, String appid, MiCOCallBack micocb)
@@ -159,7 +167,8 @@ micoUser.getVerifyCode(loginname, appid, new MiCOCallBack() {
 ```
 
 <div id="checkVerifyCode">验证验证码</div>
-#checkVerifyCode
+
+## #  checkVerifyCode
     验证获取到的手机验证码
 
     checkVerifyCode(String loginname, String vercode, String appid, MiCOCallBack micocb)
@@ -201,7 +210,8 @@ micoUser.checkVerifyCode(loginname, vercode, appid, new MiCOCallBack() {
 ```
 
 <div id="setPassword">设置初始密码</div>
-#setPassword
+
+## setPassword
     验证码验证成功后，输入密码注册新用户
 
     setPassword(String password, String appid, MiCOCallBack micocb, String token)
@@ -250,7 +260,8 @@ micoUser.register(password, appid, new MiCOCallBack() {
 ```
 
 <div id="login">登录</div>
-#login
+
+## login
     用户登录
 
     login(String phone, String password, String appid, MiCOCallBack micocb)
@@ -292,7 +303,8 @@ micoUser.login(userName, password, appid, new MiCOCallBack() {
 ```
 
 <div id="refreshToken">刷新Token</div>
-#refreshToken
+
+## refreshToken
     刷新用户的token，服务器端默认7天内生效，刷新后可以后延7天，失效了就需要重新登录
 
     refreshToken(String token, MiCOCallBack micocb)
@@ -333,7 +345,8 @@ micoUser.refreshToken(userToken, new MiCOCallBack() {
 ## 以下是设备管理部分 
 
 <div id="getSSID">获取SSID</div>
-#getSSID
+
+## getSSID
     获取当前手机连接的WIFI的名称，即ssid
 
     String getSSID()
@@ -350,7 +363,8 @@ Log.d(TAG, micodev.getSSID());
 ```
 
 <div id="startEasyLink">开始配网</div>
-#startEasyLink
+
+## startEasyLink
     发送数据包(包含ssid和password)给设备，每10ms发一次，连续发10s，再停止10s，继续发，如此反复
 
     startEasyLink(String ssid, String password, int runSecond, int sleeptime, EasyLinkCallBack easylinkcb, String extraData)
@@ -389,7 +403,8 @@ micodev.startEasyLink(ssidStr, passwordStr, runs, new EasyLinkCallBack() {
 ```
 
 <div id="stopEasyLink">停止配网</div>
-#stopEasyLink
+
+## stopEasyLink
     停止发送数据包
 
     stopEasyLink(EasyLinkCallBack easylinkcb)
@@ -415,7 +430,8 @@ micodev.stopEasyLink(new EasyLinkCallBack() {
 ```
 
 <div id="startSearchDevices">开始搜索设备</div>
-#startSearchDevices
+
+## startSearchDevices
     设备连上WIFI路由器后，我就可以通过这个接口来发现他，
 
     当然，前提是手机和设备必须在同一个网段
@@ -476,7 +492,8 @@ micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
 ```
 
 <div id="stopSearchDevices">停止搜索设备</div>
-#stopSearchDevices
+
+## stopSearchDevices
     停止发现设备，发现了需要激活的设备，主动调用此接口
 
     stopSearchDevices(SearchDeviceCallBack searchdevcb)
@@ -502,7 +519,8 @@ micodev.stopSearchDevices(new SearchDeviceCallBack() {
 ```
 
 <div id="bindDevice">绑定设备</div>
-#bindDevice
+
+## bindDevice
     通过startSearchDevices获取准备绑定设备的信息，从中提取出IP地址，和deviceid，再通过此接口绑定设备
 
     bindDevice(String ip, String port, ManageDeviceCallBack managedevcb, String token)
@@ -554,7 +572,8 @@ micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
 ```
 
 <div id="unBindDevice">解绑设备</div>
-#unBindDevice
+
+## unBindDevice
     用户不准备使用此设备时候，调用此接口解绑设备，
 
     1）如果是普通用户或者普通管理员，解绑只会解绑自己和设备的绑定关系
@@ -605,7 +624,8 @@ micodev.unBindDevice(deviceid, new ManageDeviceCallBack() {
 ```
 
 <div id="getDeviceList">获取设备列表</div>
-#getDeviceList
+
+## getDeviceList
     获取本账号名下的所有相关设备
 
     getDeviceList(MiCOCallBack micocb, String token)
@@ -636,7 +656,8 @@ micoUser.getDeviceList(new MiCOCallBack() {
 ```
 
 <div id="getDeviceInfo">获取设备详情</div>
-#getDeviceInfo
+
+## getDeviceInfo
     获取设备信息
 
     getDeviceInfo(String deviceid, MiCOCallBack micocb, String token)
@@ -687,7 +708,8 @@ micodev.getDeviceInfo(deviceid, new MiCOCallBack() {
 ```
 
 <div id="updateDeviceAlias">修改设备名称</div>
-#updateDeviceAlias
+
+## updateDeviceAlias
     获取设备信息
 
     updateDeviceAlias(String deviceid, String alias, ManageDeviceCallBack managedevcb, String token)
@@ -726,7 +748,8 @@ micodev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
 ```
 
 <div id="getShareVerCode">获取设备分享码</div>
-#getShareVerCode
+
+## getShareVerCode
     我是超级管理员或者普通管理员，那么我就能把我名下的设备分享给别人，首先需要获取分享码
 
     getShareVerCode(String deviceid, ManageDeviceCallBack managedevcb, String token)
@@ -760,7 +783,8 @@ getShareVerCode(deviceid, new ManageDeviceCallBack() {
 ```
 
 <div id="addDeviceByVerCode">通过分享码绑定设备</div>
-#addDeviceByVerCode
+
+## addDeviceByVerCode
     解析出二维码里的内容，并通过此接口绑定被授权的设备
 
     addDeviceByVerCode(ShareDeviceParams sdevp, ManageDeviceCallBack managedevcb, String token)
@@ -824,7 +848,8 @@ micodev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
 ```
 
 <div id="addSubDevice">添加子设备</div>
-#addSubDevice
+
+## addSubDevice
     添加子设备
 
     addSubDevice(String deviceid, String productid, int timeout, String extend, MiCOCallBack micocb, String token)
@@ -871,7 +896,8 @@ micodev.addSubDevice(deviceid, "", 10, "", new MiCOCallBack() {
 ```
 
 <div id="sendCommandSub">发送命令至子设备</div>
-#sendCommandSub
+
+## sendCommandSub
     应用端发送命令至子设备；子设备的Mqtt消息由父设备接收。
 
     sendCommandSub(CommandPara cmdpara, final ControlDeviceCallBack ctrldevcb, String token)
@@ -924,7 +950,8 @@ micodev.sendCommandSub(cmdPara, new ControlDeviceCallBack() {
 ```
 
 <div id="getMemberList">获取用户列表</div>
-#getMemberList
+
+## getMemberList
     获取此设备名下的用户，只能看到自己以外的用户
 
     getMemberList(String deviceid, MiCOCallBack micocb, String token)
@@ -982,7 +1009,8 @@ micodevice.getMemberList(deviceid, new MiCOCallBack() {
 ```
 
 <div id="removeBindRole">移除用户权限</div>
-#removeBindRole
+
+## removeBindRole
     删除某人的设备管理权限
 
     removeBindRole(String deviceid, String enduserid, MiCOCallBack micocb, String token)
@@ -1032,7 +1060,8 @@ micodevice.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
 ```
 
 <div id="startListenDevice">监听远程设备</div>
-#startListenDevice
+
+## startListenDevice
     远程监听设备，获取设备上报的数据
 
     startListenDevice(ListenDevParFog listendevparams, ControlDeviceCallBack ctrldevcb)
@@ -1087,7 +1116,8 @@ micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 ```
 
 <div id="sendCommand">发送指令</div>
-#sendCommand
+
+## sendCommand
     发送指令给设备端
     sendCommand(String deviceid, String devicepw, String command, String commandType,  ControlDeviceCallBack ctrldevcb, String token)
 
@@ -1128,7 +1158,8 @@ micodev.sendCommandSub(cmdPara, new ControlDeviceCallBack() {
 ```
 
 <div id="addDeviceListener">增加订阅通道</div>
-#addDeviceListener
+
+## addDeviceListener
     增加订阅的频道
 
     addDeviceListener(String topic, int qos, ControlDeviceCallBack ctrldevcb)
@@ -1161,7 +1192,8 @@ micodev.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
 ```
 
 <div id="removeDeviceListener">移除订阅通道</div>
-#removeDeviceListener
+
+## removeDeviceListener
     移除某个监听的topic
 
     removeDeviceListener(String topic, ControlDeviceCallBack ctrldevcb)
@@ -1192,7 +1224,8 @@ micodev.removeDeviceListener(topic, qos, new ControlDeviceCallBack() {
 ```
 
 <div id="stopListenDevice">停止监听设备</div>
-#stopListenDevice
+
+## stopListenDevice
     停止监听设备
 
     stopListenDevice(ControlDeviceCallBack ctrldevcb)
@@ -1218,7 +1251,8 @@ micodev.stopListenDevice(new ControlDeviceCallBack() {
 ```
 
 <div id="createScheduleTask">创建定时任务</div>
-#createScheduleTask
+
+## createScheduleTask
     创建定时任务
 
     createScheduleTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
@@ -1298,7 +1332,8 @@ micodev.createScheduleTask(stp, new ControlDeviceCallBack() {
 ```
 
 <div id="creatDelayTask">创建延时任务</div>
-#creatDelayTask
+
+## creatDelayTask
     创建延时任务
 
     creatDelayTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
@@ -1351,7 +1386,8 @@ micodev.creatDelayTask(stp, new ControlDeviceCallBack() {
 ```
 
 <div id="getTaskList">获取任务列表</div>
-#getTaskList
+
+## getTaskList
     获取任务列表
 
     getTaskList(String deviceid, int taskType, ControlDeviceCallBack ctrldevcb, String token)
@@ -1390,7 +1426,8 @@ micodev.getTaskList("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDevice
 ```
 
 <div id="deleteTask">移除任务</div>
-#deleteTask
+
+## deleteTask
     移除某个任务
 
     deleteTask(String deviceid, String taskid, ControlDeviceCallBack ctrldevcb, String token)
@@ -1437,7 +1474,8 @@ micodev.deleteTask(deviceid, taskid, new ControlDeviceCallBack() {
 ```
 
 <div id="updateScheduleTask">更新定时任务</div>
-#updateScheduleTask
+
+## updateScheduleTask
     更新某个任务
 
     updateScheduleTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)
@@ -1519,7 +1557,8 @@ micodev.updateScheduleTask(stp, new ControlDeviceCallBack() {
 ```
 
 <div id="updateDelayTask">更新延时任务</div>
-#updateDelayTask
+
+## updateDelayTask
     更新某个延时任务
 
     updateDelayTask(ScheduleTaskParam stp, ControlDeviceCallBack ctrldevcb, String token)

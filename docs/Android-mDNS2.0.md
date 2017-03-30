@@ -1,4 +1,4 @@
-##元素版本: mDNS2.0
+## 元素版本: mDNS2.0
 
 2017年02月16日
 
@@ -8,7 +8,7 @@ dependencies {
 }
 ```
 
-##**功能列表**
+## **功能列表**
 
 * [搜索设备](#startSearchDevices)
 * [停止搜索](#stopSearchDevices)
@@ -16,17 +16,18 @@ dependencies {
 
 
 <div id="startSearchDevices"></div>
-#**startSearchDevices**
+
+## **startSearchDevices**
     开始搜索设备，每3秒返回一次搜索结果，以json数组形式返回
 
     startSearchDevices(String serviceName, SearchDeviceCallBack searchdevcb)
 
-#####params
+##### params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 serviceName     | 字符串       | mdns服务的名称, 如果使用庆科模块，那么此信息为“_easylink._tcp.local.”
 
-#####callback
+##### callback
 searchdevcb
 - 类型：SearchDeviceCallBack
 - 描述：接口调用成功后的回调函数
@@ -66,7 +67,7 @@ searchdevcb
 ]
 ```
 
-#####示例代码
+##### 示例代码
 ```java
 MDNS mdns = new MDNS(context);
 String serviceInfo = "_easylink._tcp.local.";
@@ -90,17 +91,18 @@ mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
 ```
 
 <div id="stopEasyLink"></div>
-#**stopEasyLink**
+
+## **stopEasyLink**
     停止搜索设备
 
     stopSearchDevices(SearchDeviceCallBack searchdevcb)
 
-#####callback
+##### callback
 searchdevcb
 - 类型：SearchDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+##### 示例代码
 ```java
 mdns.stopSearchDevices(new SearchDeviceCallBack() {
     public void onSuccess(int code, String message) {

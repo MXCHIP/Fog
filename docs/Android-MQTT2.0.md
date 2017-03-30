@@ -1,4 +1,4 @@
-##元素版本: MQTT2.0
+## 元素版本: MQTT2.0
 
 2016年06月28日
 
@@ -10,13 +10,13 @@ dependencies {
 }
 ```
 
-#####开启服务
+##### 开启服务
 
 需要现在manifest.xml中开启服务
 
 < service android:name="com.mxchip.mqttservice2.MqttService" ></ service>
 
-##**功能列表**
+## **功能列表**
 
 * [开始监听设备](#startListenDevice)
 * [停止监听设备](#stopListenDevice)
@@ -27,17 +27,18 @@ dependencies {
 * [附录](#appendixes)
 
 <div id="startListenDevice"></div>
-#**startListenDevice**
+
+## **startListenDevice**
     开始监听设备，建立MQTT连接，假如断开会自动重连
 
     startListenDevice(ListenDeviceParams listendevparams, ListenDeviceCallBack ctrldevcb)
 
-#####params
+##### params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 listendevparams     | ListenDeviceParams       | ListenDeviceParams包含以下的信息
 
-#####ListenDeviceParams
+##### ListenDeviceParams
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:| -----------:
 host        | String       | host，域名或者IP
@@ -48,12 +49,12 @@ clientID         | String     | 客户端id
 topic     | String       | 监听的主题
 isencrypt     | boolean       | 是否SSL加密(默认为false)
 
-#####callback
+##### callback
 ctrldevcb
 - 类型：ListenDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+##### 示例代码
 ```java
 MQTT mqttapi = new MQTT(ctx);
 
@@ -83,17 +84,18 @@ mqttapi.startListenDevice(ldp, new ListenDeviceCallBack() {
 ```
 
 <div id="stopListenDevice"></div>
-#**stopListenDevice**
+
+## **stopListenDevice**
     停止监听设备
 
     stopListenDevice(ListenDeviceCallBack ctrldevcb)
 
-#####callback
+##### callback
 ctrldevcb
 - 类型：ListenDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+##### 示例代码
 ```java
 mqttapi.stopListenDevice(new ListenDeviceCallBack() {
     @Override
@@ -108,12 +110,13 @@ mqttapi.stopListenDevice(new ListenDeviceCallBack() {
 ```
 
 <div id="sendCommand"></div>
-#**sendCommand**
+
+## **sendCommand**
     发送指令给设备
 
     sendCommand(String topic, String command, int qos, boolean retained, ListenDeviceCallBack ctrldevcb)
 
-#####params
+##### params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:| -----------:
 topic     | String       | 发送指令的通道
@@ -121,12 +124,12 @@ command        | String       | 指令
 qos     | int       | 建议为0(描述见[附录](#appendixes))
 retained         | boolean       | 建议为false(设置是否在服务器中保存消息体)
 
-#####callback
+##### callback
 ctrldevcb
 - 类型：ListenDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+##### 示例代码
 ```java
 String sendtopic = "d64f517c/c8934691813c/in/write";
 String command = "{\"4\":true}";
@@ -144,24 +147,25 @@ mqttapi.sendCommand(sendtopic, command, 0, false,
 ```
 
 <div id="addDeviceListener"></div>
-#**addDeviceListener**
+
+## **addDeviceListener**
     增加订阅的通道
 
     addDeviceListener(String topic, int qos, ListenDeviceCallBack ctrldevcb)
 
-#####params
+##### params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:| -----------:
 topic     | String       | 订阅的通道
 qos     | int       | 建议为0(描述见[附录](#appendixes))
 
 
-#####callback
+##### callback
 ctrldevcb
 - 类型：ListenDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+##### 示例代码
 ```java
 String addtopic = "d64f517c/c8934691813c/in/write";
 mqttapi.addDeviceListener(addtopic, 0, new ListenDeviceCallBack() {
@@ -177,22 +181,23 @@ mqttapi.addDeviceListener(addtopic, 0, new ListenDeviceCallBack() {
 ```
 
 <div id="removeDeviceListener"></div>
-#**removeDeviceListener**
+
+## **removeDeviceListener**
     移除一个订阅的通道
 
     removeDeviceListener(String topic, ListenDeviceCallBack ctrldevcb)
 
-#####params
+##### params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:| -----------:
 topic     | String       | 订阅的通道
 
-#####callback
+##### callback
 ctrldevcb
 - 类型：ListenDeviceCallBack
 - 描述：接口调用成功后的回调函数
 
-#####示例代码
+##### 示例代码
 ```java
 String rmtopic = "d64f517c/c8934691813c/in/write";
 mqttapi.removeDeviceListener(rmtopic, new ListenDeviceCallBack() {
@@ -208,7 +213,8 @@ mqttapi.removeDeviceListener(rmtopic, new ListenDeviceCallBack() {
 ```
 
 <div id="appendixes"></div>
-#**附录**
+
+## **附录**
 
 >QoS=0：最多一次，有可能重复或丢失
 

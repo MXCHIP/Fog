@@ -1,6 +1,6 @@
-##可以直接参考APICloud模块手册[Fog2](http://docs.apicloud.com/Client-API/Open-SDK/fog2)
+## 可以直接参考APICloud模块手册[Fog2](http://docs.apicloud.com/Client-API/Open-SDK/fog2)
 
-##**概述**
+## **概述**
 
 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
 
@@ -22,12 +22,14 @@
 
 <br/>
 <div id="MiCO"></div>
-##**MiCO** 全局设置
+
+## **MiCO** 全局设置
 
 * [初始化](#init)
 
 <div id="MiCOUser"></div>
-##**MiCOUser** 用户管理
+
+## **MiCOUser** 用户管理
 
 __基础功能__
 
@@ -38,7 +40,8 @@ __基础功能__
 * [刷新Token](#refreshToken)
 
 <div id="MiCODevice"></div>
-##**MiCODevice** 设备管理
+
+## **MiCODevice** 设备管理
 
 __设备配网__
 
@@ -92,19 +95,20 @@ __任务管理__
 <br/>
 <br/>
 <div id="init"></div>
-#**init**
+
+## **init**
 
     初始化，设置服务器域名
 
     init({params})
 
-##params
+## params
 
 host
 - 类型：字符串, 不可为空
 - 描述：服务器域名
 
-##示例代码
+## 示例代码
 
 ```java
 const host = {host:"https://v2.fogcloud.io"};
@@ -112,18 +116,19 @@ var fog2 = api.require('fog2');
 fog2.init(host);
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="getVerifyCode"></div>
-#**getVerifyCode**
+
+## **getVerifyCode**
 
     获取验证码，填入的内容需要为手机号码或者邮箱
 
     getVerifyCode({params}, callback(ret, err))
 
-##params
+## params
 
 loginname
 - 类型：字符串, 不可为空
@@ -133,7 +138,7 @@ appid
 - 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -167,7 +172,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -183,18 +188,19 @@ fog2.getVerifyCode(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="checkVerifyCode"></div>
-#**checkVerifyCode**
+
+## **checkVerifyCode**
 
     验证获取到的手机验证码
 
     checkVerifyCode({params}, callback(ret, err))
 
-##params
+## params
 
 loginname
 - 类型：字符串, 不可为空
@@ -208,7 +214,7 @@ appid
 - 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -237,7 +243,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -254,18 +260,19 @@ fog2.checkVerifyCode(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="setPassword"></div>
-#**setPassword**
+
+## **setPassword**
 
     验证码验证成功后，设置初始密码，这一步可以跳过
 
     setPassword({params}, callback(ret, err))
 
-##params
+## params
 
 password
 - 类型：字符串, 不可为空
@@ -275,7 +282,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：验证验证码后返回的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -309,7 +316,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -325,18 +332,19 @@ fog2.setPassword(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="login"></div>
-#**login**
+
+## **login**
 
     用户登录
 
     login({params}, callback(ret, err))
 
-##params
+## params
 
 loginname
 - 类型：字符串, 不可为空
@@ -350,7 +358,7 @@ appid
 - 类型：字符串, 不可为空
 - 描述：在Fogcloud平台注册的APP的id
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -383,7 +391,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var fog2 = api.require('fog2');
@@ -401,24 +409,25 @@ fog2.login(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="refreshToken"></div>
-#**refreshToken**
+
+## **refreshToken**
 
     刷新用户的token，服务器端默认7天内生效，刷新后可以后延7天，失效了就需要重新登录
 
     refreshToken({params}, callback(ret, err))
 
-##params
+## params
 
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -451,7 +460,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -466,18 +475,19 @@ fog2.refreshToken(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="getMemberList"></div>
-#**getMemberList**
+
+## **getMemberList**
 
     获取此设备名下的用户，只能看到自己以外的用户
 
     getMemberList({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -487,7 +497,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -522,7 +532,7 @@ err
 
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -538,18 +548,19 @@ fog2.getMemberList(param, function(ret, err) {
 }); 
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="removeBindRole"></div>
-#**removeBindRole**
+
+## **removeBindRole**
 
     删除某人的设备管理权限
 
     removeBindRole({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -563,7 +574,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -589,7 +600,7 @@ err
 
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var enduserid = "";
@@ -607,22 +618,23 @@ fog2.removeBindRole(param, function(ret, err) {
 }); 
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 
-##**以下是设备管理部分** 
+## **以下是设备管理部分** 
 
 
 <div id="getSSID"></div>
-#**getSSID**
+
+## **getSSID**
 
     获取当前手机连接的WIFI的名称，即ssid
 
     getSSID(callback(ret, err))
 
-##callback
+## callback
 
 ssid
 - 类型：字符串
@@ -632,7 +644,7 @@ ssid
 {ssid: "fog2"}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 fog2.getSSID(function(ret, err){
@@ -640,18 +652,19 @@ fog2.getSSID(function(ret, err){
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="startEasyLink"></div>
-#**startEasyLink**
+
+## **startEasyLink**
 
     发送数据包(包含ssid和password)给设备，每10ms发一次，连续发10s，再停止10s，继续发，如此反复
 
     startEasyLink({params}, callback(ret, err))
 
-##params
+## params
 
 ssid
 - 类型：字符串, 不可为空
@@ -665,7 +678,7 @@ runSecond
 - 类型：int, 不可为空，单位ms
 - 描述：发送持续的时间，到点了就停止发送
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -683,7 +696,7 @@ err
 {code: 9403, message: "It is closed."}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -699,18 +712,19 @@ fog2.startEasyLink(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="stopEasyLink"></div>
-#**stopEasyLink**
+
+## **stopEasyLink**
 
     停止发送数据包
 
     stopEasyLink(callback(ret, err))
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -720,7 +734,7 @@ ret
 {message: "stop success"}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 fog2.stopEasyLink(function(ret, err) {
@@ -731,12 +745,13 @@ fog2.stopEasyLink(function(ret, err) {
 }); 
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="startSearchDevices"></div>
-#**startSearchDevices**
+
+## **startSearchDevices**
 
     设备连上WIFI路由器后，我就可以通过这个接口来发现他，
 
@@ -744,7 +759,7 @@ fog2.stopEasyLink(function(ret, err) {
 
     startSearchDevices(callback(ret, err))
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -799,7 +814,7 @@ err
 {code: 9403, message: "It is closed."}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 fog2.startSearchDevices(function(ret, err) {
@@ -810,18 +825,19 @@ fog2.startSearchDevices(function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="stopSearchDevices"></div>
-#**stopSearchDevices**
+
+## **stopSearchDevices**
 
     停止发现设备，发现了需要激活的设备，主动调用此接口
 
     stopSearchDevices(callback(ret, err))
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -836,7 +852,7 @@ err
 - 描述：接口调用失败后的回调函数
 
 
-##示例代码
+## 示例代码
 
 ```java
 fog2.stopSearchDevices(function(ret, err) {
@@ -847,18 +863,19 @@ fog2.stopSearchDevices(function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="bindDevice"></div>
-#**bindDevice**
+
+## **bindDevice**
 
     通过startSearchDevices获取准备绑定设备的信息，从中提取出IP地址，和deviceid，再通过此接口绑定设备
 
     bindDevice({params}, callback(ret, err))
 
-##params
+## params
 
 ip
 - 类型：字符串, 不可为空
@@ -872,7 +889,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -907,7 +924,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -923,12 +940,13 @@ fog2.bindDevice(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="unBindDevice"></div>
-#**unBindDevice**
+
+## **unBindDevice**
 
     用户不准备使用此设备时候，调用此接口解绑设备，
 
@@ -938,7 +956,7 @@ fog2.bindDevice(param, function(ret, err) {
 
     unBindDevice({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -949,7 +967,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -985,7 +1003,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1000,24 +1018,25 @@ fog2.unBindDevice(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="getDeviceList"></div>
-#**getDeviceList**
+
+## **getDeviceList**
 
     获取本账号名下的所有相关设备
 
     getDeviceList({params}, callback(ret, err))
 
-##params
+## params
 
 token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1062,7 +1081,7 @@ err
 {"code":401,"message":{"detail":"签名解码错误"}}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1077,18 +1096,19 @@ fog2.getDeviceList(param, function(ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="getDeviceInfo"></div>
-#**getDeviceInfo**
+
+## **getDeviceInfo**
 
     获取设备信息
 
     getDeviceInfo({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1098,7 +1118,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1136,7 +1156,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1152,18 +1172,19 @@ fog2.getDeviceInfo(param, function (ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="updateDeviceAlias"></div>
-#**updateDeviceAlias**
+
+## **updateDeviceAlias**
 
     修改设备名称
 
     updateDeviceAlias({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1177,7 +1198,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1197,7 +1218,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1214,18 +1235,19 @@ fog2.updateDeviceAlias(param, function (ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="getShareVerCode"></div>
-#**getShareVerCode**
+
+## **getShareVerCode**
 
     我是超级管理员或者普通管理员，那么我就能把我名下的设备分享给别人，首先需要获取分享码
 
     getShareVerCode({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1235,7 +1257,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1277,7 +1299,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1293,18 +1315,19 @@ fog2.getShareVerCode(param, function (ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="addDeviceByVerCode"></div>
-#**addDeviceByVerCode**
+
+## **addDeviceByVerCode**
 
     解析出二维码里的内容，并通过此接口绑定被授权的设备
 
     addDeviceByVerCode({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1334,7 +1357,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后获取的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1366,7 +1389,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1386,18 +1409,19 @@ fog2.addDeviceByVerCode(param, function (ret, err) {
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="startListenDevice"></div>
-#**startListenDevice**
+
+## **startListenDevice**
 
     远程监听设备，获取设备上报的数据
 
     startListenDevice({params}, callback(ret, err))
 
-##params
+## params
 
 host
 - 类型：字符串, 不可为空
@@ -1427,7 +1451,7 @@ isencrypt
 - 类型：boolean, 可为空
 - 描述：是否通过SSL通道发送数据
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1441,7 +1465,7 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1462,18 +1486,19 @@ fog2.startListenDevice(param, function (ret, err) {
 });  
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="sendCommand"></div>
-#**sendCommand**
+
+## **sendCommand**
 
 	发送指令给设备端
 
     sendCommand({params}, callback(ret, err))
 
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1492,7 +1517,7 @@ token
 - 描述：用户的token
 
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1517,7 +1542,7 @@ err
 {"message":"Json Exception"}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1535,18 +1560,19 @@ fog2.sendCommand(param, function (ret, err) {
 });  
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="addDeviceListener"></div>
-#**addDeviceListener**
+
+## **addDeviceListener**
 
 	增加订阅的频道
 
     addDeviceListener({params}, callback(ret, err))
 
-##params
+## params
 
 topic
 - 类型：字符串, 不可为空
@@ -1556,7 +1582,7 @@ qos
 - 类型：int, 不可为空
 - 描述：0
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1574,7 +1600,7 @@ err
 {"message":"success"}
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1590,24 +1616,25 @@ fog2.addDeviceListener(param, function (ret, err) {
 });   
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="removeDeviceListener"></div>
-#**removeDeviceListener**
+
+## **removeDeviceListener**
 
     移除某个监听的topic
 
     removeDeviceListener({params}, callback(ret, err))
 
-##params
+## params
 
 topic
 - 类型：字符串, 不可为空
 - 描述：需要定义的topic
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1624,7 +1651,7 @@ err
 ```js
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1639,18 +1666,19 @@ fog2.removeDeviceListener(param, function (ret, err) {
 });   
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="stopListenDevice"></div>
-#**stopListenDevice**
+
+## **stopListenDevice**
 
 	停止监听设备
 
     stopListenDevice(callback(ret, err))
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1667,7 +1695,7 @@ err
 ```js
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 fog2.stopListenDevice(function(ret, err){
@@ -1679,17 +1707,18 @@ fog2.stopListenDevice(function(ret, err){
 });
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="createScheduleTask"></div>
-#**createScheduleTask**
+
+## **createScheduleTask**
 
     创建定时任务
 
     createScheduleTask({params}, callback(ret, err))
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1743,7 +1772,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1763,7 +1792,7 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-##示例代码
+## 示例代码
 
 ```java
 var command = '{"KG_Start":"1","WorkMode":"1"}';
@@ -1788,17 +1817,18 @@ fog2.createScheduleTask(param, function (ret, err) {
 }); 
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="creatDelayTask"></div>
-#**creatDelayTask**
+
+## **creatDelayTask**
 
     创建延时任务
 
     creatDelayTask({params}, callback(ret, err))
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1820,7 +1850,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1840,7 +1870,7 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-##示例代码
+## 示例代码
 
 ```java
 var command = '{"KG_Start":"1","WorkMode":"1"}'
@@ -1860,18 +1890,19 @@ fog2.createDelayTask(param, function (ret, err) {
 });  
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 
 <div id="getTaskList"></div>
-#**creatDelayTask**
+
+## **creatDelayTask**
 
     获取任务列表
 
     getTaskList({params}, callback(ret, err))
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1885,7 +1916,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1919,7 +1950,7 @@ err
 - 描述：接口调用失败后的回调函数
 
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -1936,17 +1967,18 @@ fog2.getTaskList(param, function (ret, err) {
 });  
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="deleteTask"></div>
-#**deleteTask**
+
+## **deleteTask**
 
     删除任务
 
     deleteTask({params}, callback(ret, err))
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -1960,7 +1992,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -1994,7 +2026,7 @@ err
 }
 ```
 
-##示例代码
+## 示例代码
 
 ```java
 var param = {
@@ -2011,17 +2043,18 @@ fog2.deleteTask(param, function (ret, err) {
 });   
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="updateScheduleTask"></div>
-#**updateScheduleTask**
+
+## **updateScheduleTask**
 
     更新定时任务
 
     updateScheduleTask({params}, callback(ret, err))
-##params
+## params
 
 
 deviceid
@@ -2080,7 +2113,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -2101,7 +2134,7 @@ err
 - 描述：接口调用失败后的回调函数
 
 
-##示例代码
+## 示例代码
 
 ```java
 var command = "{\"KG_Start\":\"44\",\"WorkMode\":\"55\"}";
@@ -2128,17 +2161,18 @@ fog2.updateScheduleTask(param, function (ret, err) {
 });  
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 <div id="updateDelayTask"></div>
-#**updateDelayTask**
+
+## **updateDelayTask**
 
     更新延时任务
 
     updateDelayTask({params}, callback(ret, err))
-##params
+## params
 
 deviceid
 - 类型：字符串, 不可为空
@@ -2164,7 +2198,7 @@ token
 - 类型：字符串, 不可为空
 - 描述：用户登录后服务器端返回的token
 
-##callback
+## callback
 
 ret
 - 类型：JSON 对象
@@ -2184,7 +2218,7 @@ err
 - 类型：JSON 对象
 - 描述：接口调用失败后的回调函数
 
-##示例代码
+## 示例代码
 
 ```java
 var command = "{\"KG_Start\":\"44\",\"WorkMode\":\"55\"}";
@@ -2207,12 +2241,12 @@ fog2.updateDelayTask(param, function (ret, err) {
 });   
 ```
 
-##可用性
+## 可用性
 
     Android系统4.0+
 
 
-##错误码摘要
+## 错误码摘要
 
 - 0,     success
 - 1003,  取消
