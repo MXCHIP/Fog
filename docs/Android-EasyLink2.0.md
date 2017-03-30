@@ -19,6 +19,7 @@ dependencies {
 
 
 <div id="getSSID"></div>
+
 ## getSSID
 
     获取当前手机连接的WIFI的名称，即ssid
@@ -37,6 +38,7 @@ elink.getSSID()
 ```
 
 <div id="startEasyLink"></div>
+
 ## startEasyLink
 
     发送数据包(包含ssid和password)给设备，连续发10s，再停止3s，再继续发，如此反复
@@ -85,6 +87,7 @@ elink.startEasyLink(easylinkPara, new EasyLinkCallBack() {
 ```
 
 <div id="stopEasyLink"></div>
+
 ## stopEasyLink
     
     停止发送数据包
