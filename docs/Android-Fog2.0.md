@@ -28,13 +28,13 @@
 --------------------------------------
 <div id="MiCO"></div>
 
-## #  MiCO 全局设置
+### MiCO 全局设置
 
 * [初始化](#init)
 
 <div id="MiCOUser"></div>
 
-## #  MiCOUser 用户管理
+### MiCOUser 用户管理
 
 __基础功能__
 
@@ -46,7 +46,7 @@ __基础功能__
 
 <div id="MiCODevice"></div>
 
-## #  MiCODevice 设备管理
+### MiCODevice 设备管理
 
 __设备配网__
 
@@ -116,14 +116,14 @@ __任务管理__
 :-----------  | :-------------:| -----------:
 host     | String       | 服务器的域名(默认为https://v2.fogcloud.io)
 
-##### #示例代码
+######示例代码
 ```java
 MiCO.init("https://v2.fogcloud.io");
 ```
 
 <div id="getVerifyCode">获取验证码</div>
 
-## # getVerifyCode
+### getVerifyCode
     获取验证码，目前仅支持大陆手机号，海外用户请使用邮箱注册
 
     getVerifyCode(String loginname, String appid, MiCOCallBack micocb)
@@ -149,7 +149,7 @@ micocb
 }
 ```
 
-##### #示例代码
+######示例代码
 ```java
 MiCOUser micoUser = new MiCOUser();
 String loginname = "13122222222";
@@ -168,7 +168,7 @@ micoUser.getVerifyCode(loginname, appid, new MiCOCallBack() {
 
 <div id="checkVerifyCode">验证验证码</div>
 
-## #  checkVerifyCode
+### checkVerifyCode
     验证获取到的手机验证码
 
     checkVerifyCode(String loginname, String vercode, String appid, MiCOCallBack micocb)

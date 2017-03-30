@@ -14,7 +14,9 @@ dependencies {
 
 需要现在manifest.xml中开启服务
 
+```js
 < service android:name="com.mxchip.mqttservice2.MqttService" ></ service>
+```
 
 ## **功能列表**
 
@@ -34,13 +36,15 @@ dependencies {
     startListenDevice(ListenDeviceParams listendevparams, ListenDeviceCallBack ctrldevcb)
 
 ##### params
+
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
 listendevparams     | ListenDeviceParams       | ListenDeviceParams包含以下的信息
 
 ##### ListenDeviceParams
+
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:| -----------:
+:-----------  | :-------------:| -----------:
 host        | String       | host，域名或者IP
 port     | String       | 端口(非必填)
 userName         | int       | 用户名
@@ -118,7 +122,7 @@ mqttapi.stopListenDevice(new ListenDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:| -----------:
+:-----------  | :-------------:| -----------:
 topic     | String       | 发送指令的通道
 command        | String       | 指令
 qos     | int       | 建议为0(描述见[附录](#appendixes))
@@ -155,7 +159,7 @@ mqttapi.sendCommand(sendtopic, command, 0, false,
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:| -----------:
+:-----------  | :-------------:| -----------:
 topic     | String       | 订阅的通道
 qos     | int       | 建议为0(描述见[附录](#appendixes))
 
@@ -189,7 +193,7 @@ mqttapi.addDeviceListener(addtopic, 0, new ListenDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:| -----------:
+:-----------  | :-------------:| -----------:
 topic     | String       | 订阅的通道
 
 ##### callback
