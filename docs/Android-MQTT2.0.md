@@ -25,7 +25,7 @@ dependencies {
 * [增加订阅](#addDeviceListener)
 * [移除订阅](#removeDeviceListener)
 * [发送指令](#sendCommand)
-* [状态码](https://github.com/mxchipSDK/Fog2.0/blob/master/Android/element/ERRORCODE.MD)
+* [状态码](https://github.com/MXCHIP/Fog2.0/blob/master/docs/Error-code.md)
 * [附录](#appendixes)
 
 <div id="startListenDevice"></div>
