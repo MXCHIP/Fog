@@ -87,10 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                 micouser.login(username, password, CommonPara._APPID(), new MiCOCallBack() {
                     @Override
                     public void onSuccess(String message) {
-                        if (CheckHelper.checkPara(JsonHelper.getFogToken(JsonHelper.getFogData(message)))) {
+                        if (CheckHelper.checkPara(JsonHelper.getFogToken(message))) {
                             sph.addData(CommonPara.SHARE_USERNAME, username);
-                            sph.addData(CommonPara.SHARE_TOKEN, JsonHelper.getFogToken(JsonHelper.getFogData(message)));
-                            sph.addData(CommonPara.SHARE_USERID, JsonHelper.getFogEndUserid(JsonHelper.getFogData(message)));
+                            sph.addData(CommonPara.SHARE_TOKEN, JsonHelper.getFogToken(message));
+                            sph.addData(CommonPara.SHARE_USERID, JsonHelper.getFogEndUserid(message));
                             Log.d(TAG, sph.getData(CommonPara.SHARE_TOKEN));
                             Intent intent = new Intent(LoginActivity.this, IndexFragmentActivity.class);
                             startActivity(intent);

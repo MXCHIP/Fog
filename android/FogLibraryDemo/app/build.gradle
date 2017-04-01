@@ -40,6 +40,6 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 
-    compile project(':Fog2_container:fog2_sdk')
-//    compile 'io.fogcloud.sdk:fog2_sdk:0.1.1'
+//    compile project(':Fog2_container:fog2_sdk')
+    compile 'io.fogcloud.sdk:fog2_sdk:0.1.1'
 }

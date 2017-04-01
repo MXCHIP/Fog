@@ -7,7 +7,6 @@ import android.graphics.Color;
  */
 public class CommonPara {
 
-//    public static String _APPID = "68c72ab0-0fc0-11e7-a5bc-dc536017523b";
     public static String _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
     public static String _PRODUCTID = "3311097c-17f5-11e6-a739-00163e0204c0";
 

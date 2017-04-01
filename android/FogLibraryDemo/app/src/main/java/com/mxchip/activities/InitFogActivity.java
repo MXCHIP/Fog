@@ -65,8 +65,7 @@ public class InitFogActivity extends AppCompatActivity {
         if(CheckHelper.checkPara(sph.getData(CommonPara._FOG_APPID))){
             initappid.setText(sph.getData(CommonPara._FOG_APPID));
         }else{
-            initappid.setText("5cdb7ebc-32bd-11e6-a739-00163e0204c0");
-//            initappid.setText("db456b4a-17fc-11e6-a739-00163e0204c0");
+            initappid.setText("db456b4a-17fc-11e6-a739-00163e0204c0");
         }
     }
 

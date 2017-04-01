@@ -124,14 +124,13 @@ public class DeviceListFragment extends Fragment {
                         String online = Boolean.parseBoolean(temp.getString("online")) ? "online" : "offline";
                         String img = temp.getString("product_icon");
                         String deviceid = temp.getString("device_id");
-//                        String devicepw = temp.getString("device_pw");
+                        String devicepw = temp.getString("device_pw");
 
                         // TODO 设备是否在线
                         if (!CheckHelper.checkPara(img)) {
                             img = "http://img0.pchouse.com.cn/pchouse/1403/15/576135_2.jpg";
                         }
-//                        adapter.addBook(name, online, img, deviceid, devicepw);
-                        adapter.addBook(name, online, img, deviceid);
+                        adapter.addBook(name, online, img, deviceid, devicepw);
                     }
                     mydevlistlistviewid.setAdapter(adapter);
 
