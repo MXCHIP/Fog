@@ -34,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.fog.callbacks.ControlDeviceCallBack;
 import io.fog.callbacks.ManageDeviceCallBack;
 import io.fog.fog2sdk.MiCODevice;
 import io.fogcloud.easylink.helper.EasyLinkCallBack;
@@ -142,167 +143,119 @@ public class EasyLinkFragment extends Fragment {
                         }
                     });
                 }
-
-
-
-                if ("start".equals(mdns_btn.getTag().toString().trim())) {
-                    mdns_btn.setTag("stop");
-                    mdns_btn.setText("停止搜索");
-                    mdns_btn.setBackgroundColor(Color.parseColor("#FF4081"));
-
-                    String serviceName = "_easylink._tcp.local.";
-                    micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
-                        @Override
-                        public void onSuccess(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-
-                        @Override
-                        public void onFailure(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-
-                        @Override
-                        public void onDevicesFind(int code, JSONArray deviceStatus) {
-                            Log.d(TAG, deviceStatus.toString());
-//                            String macs = "";
-//                            for (int i = 0; i < deviceStatus.length(); i++) {
-//                                try {
-//                                    macs += ((JSONObject)deviceStatus.get(i)).getString("MAC")+" ";
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                            Log.d(TAG, deviceStatus.length() + " -- " + macs);
-
-//                            Message msg = new Message();
-//                            msg.what = CommonPara._UPDATEVIEW;
-//                            msg.obj = deviceStatus.toString();
-//                            myhandle.sendMessage(msg);
-
-                            Message msg = new Message();
-                            msg.what = EasyHandler._DEVLIST;
-                            msg.obj = deviceStatus.toString();
-                            myhandle.sendMessage(msg);
-                        }
-                    });
-
-                } else {
-                    mdns_btn.setTag("start");
-                    mdns_btn.setText("搜索设备");
-                    mdns_btn.setBackgroundColor(Color.parseColor("#81C784"));
-
-                    micodev.stopSearchDevices(new SearchDeviceCallBack() {
-                        @Override
-                        public void onSuccess(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-
-                        @Override
-                        public void onFailure(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-                    });
-                }
             }
         });
         mdns_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if ("start".equals(mdns_btn.getTag().toString().trim())) {
-                    mdns_btn.setTag("stop");
-                    mdns_btn.setText("停止搜索");
-                    mdns_btn.setBackgroundColor(Color.parseColor("#FF4081"));
+                binddevicev3();
 
-                    String serviceName = "_easylink._tcp.local.";
-                    micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
-                        @Override
-                        public void onSuccess(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-
-                        @Override
-                        public void onFailure(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-
-                        @Override
-                        public void onDevicesFind(int code, JSONArray deviceStatus) {
-                            Log.d(TAG, deviceStatus.toString());
-//                            String macs = "";
-//                            for (int i = 0; i < deviceStatus.length(); i++) {
-//                                try {
-//                                    macs += ((JSONObject)deviceStatus.get(i)).getString("MAC")+" ";
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                            Log.d(TAG, deviceStatus.length() + " -- " + macs);
-
+//                if ("start".equals(mdns_btn.getTag().toString().trim())) {
+//                    mdns_btn.setTag("stop");
+//                    mdns_btn.setText("停止搜索");
+//                    mdns_btn.setBackgroundColor(Color.parseColor("#FF4081"));
+//
+//                    String serviceName = "_easylink._tcp.local.";
+//                    micodev.startSearchDevices(serviceName, new SearchDeviceCallBack() {
+//                        @Override
+//                        public void onSuccess(int code, String message) {
+//                            Log.d(TAG, message);
 //                            Message msg = new Message();
 //                            msg.what = CommonPara._UPDATEVIEW;
+//                            msg.obj = message;
+//                            myhandle.sendMessage(msg);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(int code, String message) {
+//                            Log.d(TAG, message);
+//                            Message msg = new Message();
+//                            msg.what = CommonPara._UPDATEVIEW;
+//                            msg.obj = message;
+//                            myhandle.sendMessage(msg);
+//                        }
+//
+//                        @Override
+//                        public void onDevicesFind(int code, JSONArray deviceStatus) {
+//                            Log.d(TAG, deviceStatus.toString());
+////                            String macs = "";
+////                            for (int i = 0; i < deviceStatus.length(); i++) {
+////                                try {
+////                                    macs += ((JSONObject)deviceStatus.get(i)).getString("MAC")+" ";
+////                                } catch (JSONException e) {
+////                                    e.printStackTrace();
+////                                }
+////                            }
+////                            Log.d(TAG, deviceStatus.length() + " -- " + macs);
+//
+////                            Message msg = new Message();
+////                            msg.what = CommonPara._UPDATEVIEW;
+////                            msg.obj = deviceStatus.toString();
+////                            myhandle.sendMessage(msg);
+//
+//                            Message msg = new Message();
+//                            msg.what = EasyHandler._DEVLIST;
 //                            msg.obj = deviceStatus.toString();
 //                            myhandle.sendMessage(msg);
-
-                            Message msg = new Message();
-                            msg.what = EasyHandler._DEVLIST;
-                            msg.obj = deviceStatus.toString();
-                            myhandle.sendMessage(msg);
-                        }
-                    });
-
-                } else {
-                    mdns_btn.setTag("start");
-                    mdns_btn.setText("搜索设备");
-                    mdns_btn.setBackgroundColor(Color.parseColor("#81C784"));
-
-                    micodev.stopSearchDevices(new SearchDeviceCallBack() {
-                        @Override
-                        public void onSuccess(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-
-                        @Override
-                        public void onFailure(int code, String message) {
-                            Log.d(TAG, message);
-                            Message msg = new Message();
-                            msg.what = CommonPara._UPDATEVIEW;
-                            msg.obj = message;
-                            myhandle.sendMessage(msg);
-                        }
-                    });
-                }
+//                        }
+//                    });
+//
+//                } else {
+//                    mdns_btn.setTag("start");
+//                    mdns_btn.setText("搜索设备");
+//                    mdns_btn.setBackgroundColor(Color.parseColor("#81C784"));
+//
+//                    micodev.stopSearchDevices(new SearchDeviceCallBack() {
+//                        @Override
+//                        public void onSuccess(int code, String message) {
+//                            Log.d(TAG, message);
+//                            Message msg = new Message();
+//                            msg.what = CommonPara._UPDATEVIEW;
+//                            msg.obj = message;
+//                            myhandle.sendMessage(msg);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(int code, String message) {
+//                            Log.d(TAG, message);
+//                            Message msg = new Message();
+//                            msg.what = CommonPara._UPDATEVIEW;
+//                            msg.obj = message;
+//                            myhandle.sendMessage(msg);
+//                        }
+//                    });
+//                }
             }
         });
+    }
+
+    private void binddevicev3(){
+        sph = new SharePreHelper(getContext());
+//        String deviceid = "33de05b00fc211e7a997dc536017523b";
+//        micodev.bindDeviceV3(deviceid, new ManageDeviceCallBack() {
+//            @Override
+//            public void onSuccess(String message) {
+//                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFailure(int code, String message) {
+//                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+//            }
+//        }, sph.getData(CommonPara.SHARE_TOKEN));
+//        String deviceid = "33de05b00fc211e7a997dc536017523b";
+        micodev.getMqttInfo(new ControlDeviceCallBack() {
+            @Override
+            public void onSuccess(String message) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(int code, String message) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        }, sph.getData(CommonPara.SHARE_TOKEN));
     }
 
     class EasyHandler extends Handler {

@@ -20,6 +20,7 @@ import io.fog.fog2sdk.MiCODevice;
 import io.fog.helper.CommandPara;
 import io.fog.helper.Configuration;
 import io.fog.helper.ListenDevParFog;
+import io.fog.helper.ScheduleTaskParam;
 
 /**
  * Created by Rocke on 2016/06/13.
@@ -155,13 +156,20 @@ public class DevCtrlActivity extends AppCompatActivity {
         ListenDevParFog listendevparams = new ListenDevParFog();
 
         String enderuserid = sph.getData(CommonPara.SHARE_USERID);
-        listendevparams.deviceid = deviceid;
-        listendevparams.host = Configuration.MQTTHOST();
+        listendevparams.topic = "4e3d7f000fc011e7beeddc536017523b/a603050f0fc111e78807dc536017523b/33de05b00fc211e7a997dc536017523b/status";
+        listendevparams.host = "4e3d7f000fc011e7beeddc536017523b.mqtt.iot.gz.baidubce.com";
         listendevparams.port = "1883";
-        listendevparams.userName = enderuserid;
-        listendevparams.passWord = "123456";
-        listendevparams.clientID = enderuserid;
+        listendevparams.userName = "4e3d7f000fc011e7beeddc536017523b/53dee7de104311e7a931dc536017523b";
+        listendevparams.passWord = "/o+jVaZhhE2cD7mvqS0XXOt8qcCj+3lEXaYvF4fuPy4=";
+        listendevparams.clientID = "53dee7de104311e7a931dc536017523b";
         listendevparams.isencrypt = false;
+//        listendevparams.deviceid = deviceid;
+//        listendevparams.host = Configuration.MQTTHOST();
+//        listendevparams.port = "1883";
+//        listendevparams.userName = enderuserid;
+//        listendevparams.passWord = "123456";
+//        listendevparams.clientID = enderuserid;
+//        listendevparams.isencrypt = false;
         micodev.startListenDevice(listendevparams, new ControlDeviceCallBack() {
             @Override
             public void onSuccess(String message) {
@@ -210,25 +218,57 @@ public class DevCtrlActivity extends AppCompatActivity {
         cmdPara.devicepw = devicepw;
         cmdPara.command = command;
 
-        micodev.sendCommand(cmdPara, new ControlDeviceCallBack() {
+        ScheduleTaskParam stp = new ScheduleTaskParam();
+        stp.day_of_month = "28";
+        stp.commands = "123";
+        stp.device_id = "e22cfa2e-9752-11e6-9baf-00163e120d98";
+        stp.hour = "16";
+        stp.minute = "10";
+        stp.month = "3";
+
+
+
+
+
+
+        micodev.createScheduleTask(stp, new ControlDeviceCallBack() {
             @Override
             public void onSuccess(String message) {
-                Log.d(TAG + "onSuccess", message);
-                Message msg = new Message();
-                msg.what = _REFRESHTEXTVIEW;
-                msg.obj = message;
-                myhandle.sendMessage(msg);
+                super.onSuccess(message);
             }
 
             @Override
             public void onFailure(int code, String message) {
-                Log.d(TAG + "onFailure", code + " " + message);
-                Message msg = new Message();
-                msg.what = _REFRESHTEXTVIEW;
-                msg.obj = message;
-                myhandle.sendMessage(msg);
+                super.onFailure(code, message);
             }
-        }, token);
+
+            @Override
+            public void onDeviceStatusReceived(int code, String messages) {
+                super.onDeviceStatusReceived(code, messages);
+            }
+        }, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmlnX2lhdCI6MTQ5MDY4NzI3NCwiaWRlbnRpZmljYXRpb24iOiJ6aGFuZ3JnQG14Y2hpcC5jb20iLCJleHAiOjE0OTEyOTIwNzQsImFwcGlkIjoiODkyYmZjNzItZWY1MC0xMWU1LWE3MzktMDAxNjNlMDIwNGMwIiwidXNlcl9pZCI6MzIyMTgsImVuZHVzZXJpZCI6IjQ2NmY0OTFhLTk3NTMtMTFlNi05YmFmLTAwMTYzZTEyMGQ5OCJ9.hr0SN-T00nhRSy0mCOvPdnul4kB2e8dQJp9sqafwwow");
+
+
+
+//        micodev.sendCommand(cmdPara, new ControlDeviceCallBack() {
+//            @Override
+//            public void onSuccess(String message) {
+//                Log.d(TAG + "onSuccess", message);
+//                Message msg = new Message();
+//                msg.what = _REFRESHTEXTVIEW;
+//                msg.obj = message;
+//                myhandle.sendMessage(msg);
+//            }
+//
+//            @Override
+//            public void onFailure(int code, String message) {
+//                Log.d(TAG + "onFailure", code + " " + message);
+//                Message msg = new Message();
+//                msg.what = _REFRESHTEXTVIEW;
+//                msg.obj = message;
+//                myhandle.sendMessage(msg);
+//            }
+//        }, token);
     }
 
     class MyHandle extends Handler {

@@ -44,14 +44,15 @@ public class ListViewAdapter  extends BaseAdapter {
 
     int i = 0;
 
-    public void addBook(String book_name, String out_book_online, String out_book_pic, String out_book_deviceid, String out_book_devicepw) {
+    public void addBook(String book_name, String out_book_online, String out_book_pic, String out_book_deviceid) {
+//    public void addBook(String book_name, String out_book_online, String out_book_pic, String out_book_deviceid, String out_book_devicepw) {
 //        Log.d(TAG + "addbook", i++ + "");
         BookModel model = new BookModel();
         model.book_name = book_name;
         model.out_book_online = out_book_online;
         model.out_book_pic = out_book_pic;
         model.out_book_deviceid = out_book_deviceid;
-        model.out_book_devicepw = out_book_devicepw;
+//        model.out_book_devicepw = out_book_devicepw;
         mModels.add(model);
     }
 
