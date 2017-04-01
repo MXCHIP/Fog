@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity{
                 @Override
                 public void onSuccess(String message) {
                     SharePreHelper sph = new SharePreHelper(SplashActivity.this);
-                    sph.addData(CommonPara.SHARE_TOKEN, JsonHelper.getFogToken(message));
+                    sph.addData(CommonPara.SHARE_TOKEN, JsonHelper.getFogToken(JsonHelper.getFogData(message)));
 
                     Intent intent = new Intent(SplashActivity.this, IndexFragmentActivity.class);
                     startActivity(intent);
