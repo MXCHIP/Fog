@@ -7,7 +7,7 @@ FogCloud提供移动端，服务端整体解决方案，为移动应用开发者
 * [ios](https://github.com/MXCHIP/Fog2.0/blob/master/docs/iOS-Fog2.0.md)
 * [apicloud](https://github.com/MXCHIP/Fog2.0/blob/master/docs/APICloud-Fog2.0.md)
 
-##  资源库
+##  基础资源库
 
 如果设备端使用MiCO系统的wifi模组，云平台使用自建云平台的或者第三方的云服务，那么配合wifi模组的使用需要以下三种基础功能库，分别为easylink配网、mDNS发现局域网设备、MQTT数据收发
 * [EasyLink2.0 (android)](https://github.com/MXCHIP/Fog2.0/blob/master/docs/Android-EasyLink2.0.md)
