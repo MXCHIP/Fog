@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f7f8"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/registertoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:title="Fog2.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whitebutton"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/fab_margin"
+            android:paddingRight="@dimen/fab_margin">
+
+            <EditText
+                android:id="@+id/regloginname"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_input_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:hint="邮箱或手机号"
+                android:textSize="@dimen/textsize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/smsvercode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/login_input_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:hint="验证码"
+                    android:textSize="@dimen/textsize" />
+
+                <TextView
+                    android:id="@+id/getvercode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/fab_margin"
+                    android:paddingRight="@dimen/fab_margin"
+                    android:text="获取验证码" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/fab_margin">
+
+            <Button
+                android:id="@+id/checkcodebtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_input_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:background="@color/colorAccent"
+                android:text="验证手机"
+                android:textColor="@color/whitebutton" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

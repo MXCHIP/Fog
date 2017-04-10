@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/textsize"
+    android:paddingRight="@dimen/textsize">
+
+    <LinearLayout
+        android:id="@+id/mdnsinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/mydevice_icon_device_online" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/textsize">
+
+            <TextView
+                android:id="@+id/mdnsname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMW3081" />
+
+            <TextView
+                android:id="@+id/mdnsmac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAC:c8:34:e3:4f:ae:5f" />
+
+            <TextView
+                android:id="@+id/mdnsip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IP:192.168.1.25" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/mdnsbtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/okcheck" />
+</LinearLayout>
