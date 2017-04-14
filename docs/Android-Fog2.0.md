@@ -1,6 +1,6 @@
 ## MiCOSDK开发指南
 
-这里有测试Demo，[传送门](https://github.com/MXCHIP/FogLibraryDemo)
+这里有测试Demo，[传送门](https://github.com/MXCHIP/Fog2.0/tree/master/examples/android)
 
 ## 概述
 
