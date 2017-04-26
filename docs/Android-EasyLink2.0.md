@@ -10,6 +10,8 @@ dependencies {
 }
 ```
 
+eclipse版本使用此demo[传送门](https://github.com/MXCHIP/EasyLinkMin)
+
 ## **功能列表**
 
 * [获取SSID](#getSSID)
