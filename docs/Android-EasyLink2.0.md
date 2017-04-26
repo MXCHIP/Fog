@@ -2,7 +2,7 @@
 
     2016年06月23日
 
-Android Studio引入的资源
+##### Android Studio引入的资源
 
 ```js
 dependencies {
@@ -10,10 +10,9 @@ dependencies {
 }
 ```
 
-eclipse版本使用此demo
-```js
+##### eclipse版本使用此demo
+
 [传送门](https://github.com/MXCHIP/EasyLinkMin)
-```
 
 ## **功能列表**
 
