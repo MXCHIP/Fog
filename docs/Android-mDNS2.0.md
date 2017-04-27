@@ -4,7 +4,7 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:fog_mdns:0.1.3'
+    compile 'io.fogcloud.sdk:fog_mdns:0.1.6'
 }
 ```
 
