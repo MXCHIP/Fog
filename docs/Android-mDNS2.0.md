@@ -1,12 +1,16 @@
 ## 元素版本: mDNS2.0
 
-2017年02月16日
+##### Android Studio引入的资源
 
 ```js
 dependencies {
     compile 'io.fogcloud.sdk:fog_mdns:0.1.3'
 }
 ```
+
+##### eclipse版本使用此demo
+
+[传送门](https://github.com/MXCHIP/mDNSmin)
 
 ## **功能列表**
 
