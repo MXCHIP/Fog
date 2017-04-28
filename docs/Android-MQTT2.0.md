@@ -15,25 +15,27 @@ dependencies {
 需要现在manifest.xml中开启服务
 
 ```js
-< service android:name="com.mxchip.mqttservice2.MqttService" ></ service>
+<uses-permission android:name="android.permission.INTERNET" />
+    
+< service android:name="io.fogcloud.fog_mqtt.service.MqttService"></ service>
 ```
 
 ## **功能列表**
 
-* [开始监听设备](#startListenDevice)
-* [停止监听设备](#stopListenDevice)
-* [增加订阅](#addDeviceListener)
-* [移除订阅](#removeDeviceListener)
-* [发送指令](#sendCommand)
+* [开始监听设备](#startMqtt)
+* [停止监听设备](#stopMqtt)
+* [增加订阅](#subscribe)
+* [移除订阅](#unsubscribe)
+* [发送指令](#publish)
 * [状态码](https://github.com/MXCHIP/Fog2.0/blob/master/docs/Error-code.md)
 * [附录](#appendixes)
 
-<div id="startListenDevice"></div>
+<div id="startMqtt"></div>
 
-## **startListenDevice**
+## **startMqtt**
     开始监听设备，建立MQTT连接，假如断开会自动重连
 
-    startListenDevice(ListenDeviceParams listendevparams, ListenDeviceCallBack ctrldevcb)
+    startMqtt(ListenDeviceParams listendevparams, ListenDeviceCallBack ctrldevcb)
 
 ##### params
 
@@ -60,7 +62,7 @@ ctrldevcb
 
 ##### 示例代码
 ```java
-MQTT mqttapi = new MQTT(ctx);
+MQTT mqtt = new MQTT(ctx);
 
 ListenDeviceParams ldp = new ListenDeviceParams();
 ldp.host = "api.easylink.io";
@@ -71,7 +73,7 @@ ldp.topic = "d64f517c/c8934691313c/out/read";
 ldp.clientID = "client-000";
 ldp.isencrypt = false;
 
-mqttapi.startListenDevice(ldp, new ListenDeviceCallBack() {
+mqtt.startMqtt(ldp, new ListenDeviceCallBack() {
     @Override
     public void onSuccess(int code, String message) {
         Log.d("---", message);
@@ -87,12 +89,12 @@ mqttapi.startListenDevice(ldp, new ListenDeviceCallBack() {
 });
 ```
 
-<div id="stopListenDevice"></div>
+<div id="stopMqtt"></div>
 
-## **stopListenDevice**
+## **stopMqtt**
     停止监听设备
 
-    stopListenDevice(ListenDeviceCallBack ctrldevcb)
+    stopMqtt(ListenDeviceCallBack ctrldevcb)
 
 ##### callback
 ctrldevcb
@@ -101,7 +103,7 @@ ctrldevcb
 
 ##### 示例代码
 ```java
-mqttapi.stopListenDevice(new ListenDeviceCallBack() {
+mqtt.stopMqtt(new ListenDeviceCallBack() {
     @Override
     public void onSuccess(int code, String message) {
         Log.d("---", message);
@@ -113,12 +115,12 @@ mqttapi.stopListenDevice(new ListenDeviceCallBack() {
 });
 ```
 
-<div id="sendCommand"></div>
+<div id="publish"></div>
 
-## **sendCommand**
+## **publish**
     发送指令给设备
 
-    sendCommand(String topic, String command, int qos, boolean retained, ListenDeviceCallBack ctrldevcb)
+    publish(String topic, String command, int qos, boolean retained, ListenDeviceCallBack ctrldevcb)
 
 ##### params
 参数名 | 类型 | 描述
@@ -137,7 +139,7 @@ ctrldevcb
 ```java
 String sendtopic = "d64f517c/c8934691813c/in/write";
 String command = "{\"4\":true}";
-mqttapi.sendCommand(sendtopic, command, 0, false,
+mqtt.publish(sendtopic, command, 0, false,
         new ListenDeviceCallBack() {
             @Override
             public void onSuccess(int code, String message) {
@@ -150,12 +152,12 @@ mqttapi.sendCommand(sendtopic, command, 0, false,
         });
 ```
 
-<div id="addDeviceListener"></div>
+<div id="subscribe"></div>
 
-## **addDeviceListener**
+## **subscribe**
     增加订阅的通道
 
-    addDeviceListener(String topic, int qos, ListenDeviceCallBack ctrldevcb)
+    subscribe(String topic, int qos, ListenDeviceCallBack ctrldevcb)
 
 ##### params
 参数名 | 类型 | 描述
@@ -172,7 +174,7 @@ ctrldevcb
 ##### 示例代码
 ```java
 String addtopic = "d64f517c/c8934691813c/in/write";
-mqttapi.addDeviceListener(addtopic, 0, new ListenDeviceCallBack() {
+mqtt.subscribe(addtopic, 0, new ListenDeviceCallBack() {
     @Override
     public void onSuccess(int code, String message) {
         Log.d("---", message);
@@ -184,12 +186,12 @@ mqttapi.addDeviceListener(addtopic, 0, new ListenDeviceCallBack() {
 });
 ```
 
-<div id="removeDeviceListener"></div>
+<div id="unsubscribe"></div>
 
-## **removeDeviceListener**
+## **unsubscribe**
     移除一个订阅的通道
 
-    removeDeviceListener(String topic, ListenDeviceCallBack ctrldevcb)
+    unsubscribe(String topic, ListenDeviceCallBack ctrldevcb)
 
 ##### params
 参数名 | 类型 | 描述
@@ -204,7 +206,7 @@ ctrldevcb
 ##### 示例代码
 ```java
 String rmtopic = "d64f517c/c8934691813c/in/write";
-mqttapi.removeDeviceListener(rmtopic, new ListenDeviceCallBack() {
+mqtt.unsubscribe(rmtopic, new ListenDeviceCallBack() {
     @Override
     public void onSuccess(int code, String message) {
         Log.d("---", message);
