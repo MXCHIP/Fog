@@ -10,6 +10,10 @@ dependencies {
 }
 ```
 
+##### eclipse版本使用此demo
+
+[传送门](https://github.com/MXCHIP/mqttmin)
+
 ##### 开启服务
 
 需要现在manifest.xml中开启服务
