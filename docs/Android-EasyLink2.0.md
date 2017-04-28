@@ -14,6 +14,17 @@ dependencies {
 
 [传送门](https://github.com/MXCHIP/EasyLinkMin)
 
+##### 开启服务
+
+需要现在manifest.xml中开启服务
+```js
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+```
+
 ## **功能列表**
 
 * [获取SSID](#getSSID)

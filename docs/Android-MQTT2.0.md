@@ -16,8 +16,8 @@ dependencies {
 
 ```js
 <uses-permission android:name="android.permission.INTERNET" />
-    
-< service android:name="io.fogcloud.fog_mqtt.service.MqttService"></ service>
+
+<service android:name="io.fogcloud.fog_mqtt.service.MqttService"></service>
 ```
 
 ## **功能列表**

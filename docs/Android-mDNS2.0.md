@@ -3,6 +3,7 @@
 ##### Android Studio引入的资源
 
 ```js
+
 dependencies {
     compile 'io.fogcloud.sdk:fog_mdns:0.1.6'
 }
@@ -11,6 +12,17 @@ dependencies {
 ##### eclipse版本使用此demo
 
 [传送门](https://github.com/MXCHIP/mDNSmin)
+
+##### 开启服务
+
+需要现在manifest.xml中开启服务
+```js
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+```
 
 ## **功能列表**
 
