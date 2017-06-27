@@ -6,7 +6,7 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:easylinkv3:0.1.3'
+    compile 'io.fogcloud.sdk:easylinkv3:0.1.4'
 }
 ```
 
