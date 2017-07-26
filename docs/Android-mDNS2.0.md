@@ -108,7 +108,7 @@ mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
 
 <div id="stopEasyLink"></div>
 
-## **stopEasyLink**
+## **stopSearchDevices**
     停止搜索设备
 
     stopSearchDevices(SearchDeviceCallBack searchdevcb)
