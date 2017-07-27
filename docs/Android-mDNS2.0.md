@@ -5,7 +5,7 @@
 ```js
 
 dependencies {
-    compile 'io.fogcloud.sdk:mqtt:0.0.3'
+    compile 'io.fogcloud.sdk:mdns:0.0.3'
 }
 ```
 
@@ -106,7 +106,7 @@ mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
 }
 ```
 
-<div id="stopEasyLink"></div>
+<div id="stopSearchDevices"></div>
 
 ## **stopSearchDevices**
     停止搜索设备
