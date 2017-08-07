@@ -1,6 +1,4 @@
-## 元素版本: EasyLink2.0
-
-    2016年06月23日
+## 元素版本: EasyLink3.0
 
 ##### Android Studio引入的资源
 
