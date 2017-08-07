@@ -73,7 +73,6 @@ __设备管理__
 * [修改设备名称](#updateDeviceAlias)
 * [获取设备分享码](#getShareVerCode)
 * [通过分享码绑定设备](#addDeviceByVerCode)
-* [添加子设备](#addSubDevice)
 
 __权限管理__
 
@@ -86,7 +85,6 @@ __远程控制__
 
 * [监听远程设备](#startListenDevice)
 * [发送指令](#sendCommand)
-* [发送命令至子设备](#sendCommandSub)
 * [增加订阅通道](#addDeviceListener)
 * [移除订阅通道](#removeDeviceListener)
 * [停止监听设备](#stopListenDevice)
