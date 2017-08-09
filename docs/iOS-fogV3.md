@@ -185,7 +185,7 @@ NSString *deviceid = @"xxx-asdfasdf-asdfasdfas";
 }];
 ```
 
-## #FogDevice 设备管理
+## FogDevice 设备管理
 #### EasyLink
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
@@ -383,7 +383,7 @@ NSLog(@"%@", error.localizedDescription)
 }];
 ```
 
-## #FogMQTT 管理
+## FogMQTT 管理
 #### MQTT
 
 * [获取mqtt信息](#getMqttInfo)
