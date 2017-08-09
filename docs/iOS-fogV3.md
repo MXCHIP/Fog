@@ -4,6 +4,7 @@
 2. `Build Settings`->`Other linker Flags` 添加`-ObjC`
 3. 引入头文件，如`#import <Fog/Fog.h>`
 4. 网络请求全局配置(本静态库采用XMNetWorking) 如：
+
 #### 代码示例
 ```
 [XMCenter setupConfig:^(XMConfig *config) {
@@ -15,7 +16,10 @@ config.consoleLog = YES;
 }];
 ```
 
+
 </br>
+
+
 ## 概述
 #### 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
 
@@ -29,7 +33,7 @@ config.consoleLog = YES;
 
 >3)绑定它(bindDevice)
 
-## #FogUser 用户管理
+## FogUser 用户管理
 #### 基础功能
 * [获取验证码](#getVerifyCode)
 * [检查验证码](#checkVerifyCode)
