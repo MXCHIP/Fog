@@ -19,12 +19,6 @@
 
 4、我可以将我名下的设备分享给别人使用，这些在[ManageDevices](#ManageDevices)部分
 
-## 添加授权
-
-```js
-    compile 'io.fogcloud.sdk:fog2_sdk:0.1.2'
-```
-
 --------------------------------------
 <div id="MiCO"></div>
 
@@ -1128,3 +1122,532 @@ fog.stopListenDevice(new ControlDeviceCallBack() {
 });
 ```
 
+## 元素版本: EasyLink3.0
+
+##### Android Studio引入的资源
+
+```js
+dependencies {
+    compile 'io.fogcloud.sdk:easylinkv3:0.1.4'
+}
+```
+
+##### eclipse版本使用此demo
+
+[传送门](https://github.com/MXCHIP/EasyLinkMin)
+
+##### 开启服务
+
+需要现在manifest.xml中开启服务
+```js
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+```
+
+## **功能列表**
+
+* [获取SSID](#getSSID)
+* [开始配网](#startEasyLink)
+* [停止配网](#stopEasyLink)
+* [状态码](https://github.com/MXCHIP/Fog2.0/blob/master/docs/Error-code.md)
+
+
+<div id="getSSID"></div>
+
+## getSSID
+
+    获取当前手机连接的WIFI的名称，即ssid
+
+    String getSSID()
+
+##### callback
+ssid
+- 类型：String
+- 描述：当前WIFI的名称
+
+##### 示例代码
+```java
+EasyLink elink = new EasyLink(context);
+elink.getSSID()
+```
+
+<div id="startEasyLink"></div>
+
+## startEasyLink
+
+    发送数据包(包含ssid和password)给设备，连续发10s，再停止3s，再继续发，如此反复
+
+    startEasyLink(EasyLinkParams easylinkPara, EasyLinkCallBack easylinkcb)
+
+##### params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+easylinkPara     | EasyLinkParams       | EasyLinkParams包含以下的信息
+
+##### EasyLinkParams
+参数名 | 类型 | 默认值 | 描述
+:-----------  | :-------------:| -----------:| -----------:
+ssid        | String       | 无默认值，不可为空 | 当前wifi的名称
+password     | String       | 无默认值，可为空 | 当前wifi的密码(8-64个字节，越长配网速度越慢)
+isSendIP     | Boolean       | 默认值为false，可为空|是否发送手机的IP，默认不发送，如果此参数为false，那么extraData也不可用
+runSecond         | int       | 默认值60000，可为空 | 发送持续的时间，到点了就停止发送, 单位ms
+sleeptime         | int       | 默认值50，可为空 | 每包数据的间隔时间，建议20-200, 单位ms
+extraData         | String     | 无默认值，可为空   | 需要发送给设备的额外信息
+rc4key     | String       | 无默认值，可为空 | 如果需要RC4加密，这里就输入字符串密钥
+
+##### callback
+easylinkcb
+- 类型：EasyLinkCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+EasyLinkParams easylinkPara = new EasyLinkParams();
+easylinkPara.ssid = "mxchip";
+easylinkPara.password = "12345678";
+easylinkPara.runSecond = 20000;
+easylinkPara.sleeptime = 50;
+
+elink.startEasyLink(easylinkPara, new EasyLinkCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+});
+```
+
+<div id="stopEasyLink"></div>
+
+## stopEasyLink
+    
+    停止发送数据包
+
+    stopEasyLink(EasyLinkCallBack easylinkcb)
+
+##### callback
+easylinkcb
+- 类型：EasyLinkCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+elink.stopEasyLink(new EasyLinkCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d(TAG, code + message);
+    }
+});
+```
+
+## 实时更新SSID
+
+```java
+@Override
+protected void onCreate(@Nullable Bundle savedInstanceState) {
+    ...
+    listenwifichange();
+}
+
+private void listenwifichange() {
+    IntentFilter intentFilter = new IntentFilter();
+    intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+    registerReceiver(broadcastReceiver, intentFilter);
+}
+
+BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+            NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+            if (info.getDetailedState() == NetworkInfo.DetailedState.CONNECTED) {
+                Log.d(TAG, "---heiheihei---");
+                wifissid.setText(elink.getSSID());
+            }
+        }
+    }
+};
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    unregisterReceiver(broadcastReceiver);
+}
+```
+## 元素版本: mDNS3.0
+
+##### Android Studio引入的资源
+
+```js
+
+dependencies {
+    compile 'io.fogcloud.sdk:mdns:0.0.3'
+}
+```
+
+##### eclipse版本使用此demo
+
+[传送门](https://github.com/MXCHIP/mDNSmin)
+
+##### 开启服务
+
+需要现在manifest.xml中开启服务
+```js
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+```
+
+## **功能列表**
+
+* [搜索设备](#startSearchDevices)
+* [停止搜索](#stopSearchDevices)
+* [状态码](https://github.com/MXCHIP/Fog2.0/blob/master/docs/Error-code.md)
+
+
+<div id="startSearchDevices"></div>
+
+## **startSearchDevices**
+    开始搜索设备，每3秒返回一次搜索结果，以json数组形式返回
+
+    startSearchDevices(String serviceName, SearchDeviceCallBack searchdevcb)
+
+##### params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+serviceName     | 字符串       | mdns服务的名称, 如果使用庆科模块，那么此信息为“_easylink._tcp.local.”
+
+##### callback
+searchdevcb
+- 类型：SearchDeviceCallBack
+- 描述：接口调用成功后的回调函数
+```js
+[
+  {
+    "Name": "MiCOKit 3165#0762C6",
+    "IP": "192.168.18.119",
+    "Port": 8002,
+    "MAC": "D0:BA:E4:07:62:C6",
+    "Firmware Rev": "fog_3165_Michael@001",
+    "FogProductId": "0b3270da-393d-11e6-a739-00163e0204c0",
+    "IsEasylinkOK": "true",
+    "IsHaveSuperUser": "false",
+    "RemainingUserNumber": "3",
+    "Hardware Rev": "MK3165_1",
+    "MICO OS Rev": "31620002.046",
+    "Model": "MiCOKit-3165",
+    "Protocol": "com.mxchip.basic",
+    "Manufacturer": "MXCHIP Inc.",
+    "Seed": "8"
+  },
+  {
+    "Name": "MiCOKit 3288#91813C",
+    "IP": "192.168.18.121",
+    "Port": 8080,
+    "MAC": "C8:93:46:91:81:3C",
+    "Binding": "true",
+    "Firmware Rev": "MK3288_1@1507211945",
+    "Hardware Rev": "MK3288_1",
+    "MICO OS Rev": "10880002.035-0709",
+    "Model": "MiCOKit-3288",
+    "Protocol": "com.mxchip.micokit",
+    "Manufacturer": "MXCHIP Inc.",
+    "Seed": "708"
+  }
+]
+```
+
+##### 示例代码
+```java
+MDNS mdns = new MDNS(context);
+String serviceInfo = "_easylink._tcp.local.";
+mdns.startSearchDevices(serviceInfo, new SearchDeviceCallBack() {
+        @Override
+        public void onDevicesFind(JSONArray deviceStatus) {
+            if (!deviceStatus.equals("")) {
+                Log.d("---mdns---", deviceStatus.toString());
+            }
+        }
+        @Override
+        public void onFailure(int code, String message) {
+            Log.d("---mdns---", message);
+        }
+        @Override
+        public void onSuccess(int code, String message) {
+            Log.d("---mdns---", message);
+        }
+    });
+}
+```
+
+<div id="stopSearchDevices"></div>
+
+## **stopSearchDevices**
+    停止搜索设备
+
+    stopSearchDevices(SearchDeviceCallBack searchdevcb)
+
+##### callback
+searchdevcb
+- 类型：SearchDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+mdns.stopSearchDevices(new SearchDeviceCallBack() {
+    public void onSuccess(int code, String message) {
+        Log.d("---mdns---", message);
+    };
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d("---mdns---", message);
+    }
+});
+```
+
+## 元素版本: MQTT3.0
+
+2016年06月28日
+
+对应库：mqtt2.0.jar
+
+```js
+dependencies {
+    compile 'io.fogcloud.sdk:mqtt:0.0.3'
+}
+```
+
+##### eclipse版本使用此demo
+
+[传送门](https://github.com/MXCHIP/mqttmin)
+
+##### 开启服务
+
+需要现在manifest.xml中开启服务
+
+```js
+<uses-permission android:name="android.permission.INTERNET" />
+
+<service android:name="io.fogcloud.fog_mqtt.service.MqttService"></service>
+```
+
+## **功能列表**
+
+* [开始监听设备](#startMqtt)
+* [停止监听设备](#stopMqtt)
+* [增加订阅](#subscribe)
+* [移除订阅](#unsubscribe)
+* [发送指令](#publish)
+* [状态码](https://github.com/MXCHIP/Fog2.0/blob/master/docs/Error-code.md)
+* [附录](#appendixes)
+
+<div id="startMqtt"></div>
+
+## **startMqtt**
+    开始监听设备，建立MQTT连接，假如断开会自动重连
+
+    startMqtt(ListenDeviceParams listendevparams, ListenDeviceCallBack ctrldevcb)
+
+##### params
+
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+listendevparams     | ListenDeviceParams       | ListenDeviceParams包含以下的信息
+
+##### ListenDeviceParams
+
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+host        | String       | host，域名或者IP
+port     | String       | 端口(非必填)
+userName         | int       | 用户名
+passWord         | int       | 密码
+clientID         | String     | 客户端id
+topic     | String       | 监听的主题
+isencrypt     | boolean       | 是否SSL加密(默认为false)
+
+##### callback
+ctrldevcb
+- 类型：ListenDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+MQTT mqtt = new MQTT(ctx);
+
+ListenDeviceParams ldp = new ListenDeviceParams();
+ldp.host = "api.easylink.io";
+ldp.port = "1883";
+ldp.userName = "admin";
+ldp.passWord = "admin";
+ldp.topic = "d64f517c/c8934691313c/out/read";
+ldp.clientID = "client-000";
+ldp.isencrypt = false;
+
+mqtt.startMqtt(ldp, new ListenDeviceCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d("---", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d("---", code + " - " + message);
+    }
+    @Override
+    public void onDeviceStatusReceived(int code, String messages) {
+        Log.d("---" + code + "---", messages);
+    }
+});
+```
+
+<div id="stopMqtt"></div>
+
+## **stopMqtt**
+    停止监听设备
+
+    stopMqtt(ListenDeviceCallBack ctrldevcb)
+
+##### callback
+ctrldevcb
+- 类型：ListenDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+mqtt.stopMqtt(new ListenDeviceCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d("---", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d("---", code + " - " + message);
+    }
+});
+```
+
+<div id="publish"></div>
+
+## **publish**
+    发送指令给设备
+
+    publish(String topic, String command, int qos, boolean retained, ListenDeviceCallBack ctrldevcb)
+
+##### params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+topic     | String       | 发送指令的通道
+command        | String       | 指令
+qos     | int       | 建议为0(描述见[附录](#appendixes))
+retained         | boolean       | 建议为false(设置是否在服务器中保存消息体)
+
+##### callback
+ctrldevcb
+- 类型：ListenDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+String sendtopic = "d64f517c/c8934691813c/in/write";
+String command = "{\"4\":true}";
+mqtt.publish(sendtopic, command, 0, false,
+        new ListenDeviceCallBack() {
+            @Override
+            public void onSuccess(int code, String message) {
+                Log.d("---", message);
+            }
+            @Override
+            public void onFailure(int code, String message) {
+                Log.d("---", code + " - " + message);
+            }
+        });
+```
+
+<div id="subscribe"></div>
+
+## **subscribe**
+    增加订阅的通道
+
+    subscribe(String topic, int qos, ListenDeviceCallBack ctrldevcb)
+
+##### params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+topic     | String       | 订阅的通道
+qos     | int       | 建议为0(描述见[附录](#appendixes))
+
+
+##### callback
+ctrldevcb
+- 类型：ListenDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+String addtopic = "d64f517c/c8934691813c/in/write";
+mqtt.subscribe(addtopic, 0, new ListenDeviceCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d("---", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d("---", code + " - " + message);
+    }
+});
+```
+
+<div id="unsubscribe"></div>
+
+## **unsubscribe**
+    移除一个订阅的通道
+
+    unsubscribe(String topic, ListenDeviceCallBack ctrldevcb)
+
+##### params
+参数名 | 类型 | 描述
+:-----------  | :-------------:| -----------:
+topic     | String       | 订阅的通道
+
+##### callback
+ctrldevcb
+- 类型：ListenDeviceCallBack
+- 描述：接口调用成功后的回调函数
+
+##### 示例代码
+```java
+String rmtopic = "d64f517c/c8934691813c/in/write";
+mqtt.unsubscribe(rmtopic, new ListenDeviceCallBack() {
+    @Override
+    public void onSuccess(int code, String message) {
+        Log.d("---", message);
+    }
+    @Override
+    public void onFailure(int code, String message) {
+        Log.d("---", code + " - " + message);
+    }
+});
+```
+
+<div id="appendixes"></div>
+
+## **附录**
+
+>QoS=0：最多一次，有可能重复或丢失
+
+>QoS=1：至少一次，有可能重复
+
+>QoS=2：只有一次，确保消息只到达一次（用于比较严格的计费系统）
