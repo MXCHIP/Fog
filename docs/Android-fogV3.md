@@ -97,12 +97,12 @@ __远程控制__
 ##### params
 参数名 | 类型 | 描述
 :-----------  | :-------------:| -----------:
-host     | String       | 服务器的域名(默认为https://v2.fogcloud.io)
+host     | String       | 服务器的域名(默认为https://v3devapi.fogcloud.io/v3)
 
 ##### 示例代码
 ```java
 Fog fog = new Fog(this.getApplicationContext());
-fog.init("https://v2.fogcloud.io")
+fog.init("https://api.fogcloud.io/v3")
 ```
 
 <div id="getVerifyCode">获取验证码</div>
