@@ -8,9 +8,9 @@
 
 1、通过Fogcloud平台注册一个APP，得到appid，因为下面需要用到
 
-2、对于一个新用户而言，首先需要注册用户，获取验证码、验证验证码、注册登录等，这些都在[MiCOUser](#MiCOUser)部分
+2、对于一个新用户而言，首先需要注册用户，获取验证码、验证验证码、注册登录等，这些都在[fogUser ](#fogUser)部分
 
-3、注册完成后，我还没有一个可以控制的设备，我需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器，这些都在[fogice](#fogice)部分
+3、注册完成后，我还没有一个可以控制的设备，我需要绑定一个设备，绑定之前需要先让设备连上WIFI路由器，这些都在[fogDevice](#fogDevice)部分
 >1)让设备连上路由器(EasyLink)，
 
 >2)连上以后找到这个设备的IP(SearchDevice)，
@@ -26,9 +26,9 @@
 
 * [初始化](#init)
 
-<div id="MiCOUser"></div>
+<div id="fogUser"></div>
 
-### MiCOUser 用户管理
+### fogUser 用户管理
 
 __基础功能__
 
@@ -241,7 +241,7 @@ Fog fog = new Fog(this.getApplicationContext());
 String password = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
 String token = "xxx81d79316-bb5a-11e5-a739-00163e0204c0xxx";
-micoUser.register(password, appid, new FogCallBack() {
+fog.register(password, appid, new FogCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
@@ -277,11 +277,11 @@ fogcb
 
 ##### 示例代码
 ```java
-MiCOUser micoUser = new MiCOUser();
+fog fog = new Fog(this.getApplicationContext());
 String userName = "13122222222";
 String password = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
-micoUser.login(userName, password, appid, new FogCallBack() {
+fog.login(userName, password, appid, new FogCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
@@ -315,9 +315,9 @@ fogcb
 
 ##### 示例代码
 ```java
-MiCOUser micoUser = new MiCOUser();
+Fog fog = new Fog(this.getApplicationContext());
 String userToken = "XXX...";
-micoUser.refreshToken(userToken, new FogCallBack() {
+fog.refreshToken(userToken, new FogCallBack() {
     @Override
     public void onSuccess(String message) {
         Log.d(TAG, message);
