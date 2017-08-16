@@ -96,13 +96,19 @@ __远程控制__
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 host     | String       | 服务器的域名(默认为https://v3devapi.fogcloud.io/v3)
 
 ##### 示例代码
-```java
+
+
+```
+
+java
+
 Fog fog = new Fog(this.getApplicationContext());
 fog.init("https://api.fogcloud.io/v3")
+
 ```
 
 <div id="getVerifyCode">获取验证码</div>
@@ -112,17 +118,23 @@ fog.init("https://api.fogcloud.io/v3")
 
     getVerifyCode(String loginname, String appid, FogCallBack fogcallback)
 
+
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 loginName     | String       | 登录名，邮箱或者手机号
 appid         | String       | 在Fogcloud平台注册的APP的id
 
 ##### callback
+
+
 fogcb
 - 类型：FogCallBack
 - 描述：接口调用成功后的回调函数
+
+
 ```js
+
 {
     "meta":
         {
@@ -136,7 +148,11 @@ fogcb
 ```
 
 ##### 示例代码
+
+
 ```java
+
+
 Fog fog = new Fog(this.getApplicationContext());
 String loginname = "13122222222";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
@@ -150,6 +166,7 @@ fog.getVerifyCode(loginname, appid, new FogCallBack() {
         Log.d(TAG, code + " " + message);
     }
 });
+
 ```
 
 <div id="checkVerifyCode">验证验证码</div>
@@ -161,7 +178,7 @@ fog.getVerifyCode(loginname, appid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 loginName     | String       | 登录名，邮箱或者手机号
 vercode         | String       | 手机收到的验证码
 appid         | String       | 在Fogcloud平台注册的APP的id
@@ -170,7 +187,10 @@ appid         | String       | 在Fogcloud平台注册的APP的id
 fogcb
 - 类型：FogCallBack
 - 描述：接口调用成功后的回调函数
+- 
+
 ```js
+
 {
     "meta":
         {
@@ -183,10 +203,13 @@ fogcb
     }
     
 }
+
 ```
 
 ##### 示例代码
+
 ```java
+
 Fog fog = new Fog(this.getApplicationContext());
 String loginname = "13122222222";
 String vercode = "556897";
@@ -201,6 +224,7 @@ Fog.checkVerifyCode(loginname, vercode, appid, new FogCallBack() {
         Log.d(TAG, code + " " + message);
     }
 });
+
 ```
 
 <div id="setPassword">设置初始密码</div>
@@ -212,15 +236,17 @@ Fog.checkVerifyCode(loginname, vercode, appid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 password     | String       | 登录名，邮箱或者手机号
 
 
 ##### callback
 fogcb
 - 类型：FogCallBack
-- 描述：接口调用成功后的回调函数
+- 描述：接口调用成功后的回调函数 
+
 ```js
+
 {
     "meta":
         {
@@ -236,7 +262,9 @@ fogcb
 - 描述：用户登录后获取的token
 
 ##### 示例代码
+
 ```java
+
 Fog fog = new Fog(this.getApplicationContext());
 String password = "123456";
 String appid = "81d79316-bb5a-11e5-a739-00163e0204c0";
@@ -251,6 +279,7 @@ fog.register(password, appid, new FogCallBack() {
         Log.d(TAG, code + " " + message);
     }
 }, token);
+
 ```
 
 <div id="login">登录</div>
@@ -262,7 +291,7 @@ fog.register(password, appid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 loginName     | String       | 登录名，邮箱或者手机号
 password     | String       | 用户密码
 appid         | String       | 在Fogcloud平台注册的APP的id
@@ -271,12 +300,19 @@ appid         | String       | 在Fogcloud平台注册的APP的id
 fogcb
 - 类型：FogCallBack
 - 描述：接口调用成功后的回调函数
+
+
 ```js
 {"meta":{"message":"ok","code":0},"data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbmR1c2VyaWQiOiIzODMxNDVlNDc2N2IxMWU3YTU1NGZhMTYzZTg3NjE2NCIsIm9yaWdfaWF0IjoxNTAyMDczMzU0LCJpZGVudGlmaWNhdGlvbiI6IjEzODE2Nzk1MjI1IiwiZXhwIjoxNTAyNjc4MTU0LCJhcHBpZCI6ImYxNmZhMDcyLTc2NzItMTFlNy1hNTU0LWZhMTYzZTg3NjE2NCJ9.zIJSbbLd1yt02T5KMgNrSpGWh1ySBZVOzybie6BKe1o","clientid":"383145e4767b11e7a554fa163e876164"}}
+
+
 ```
 
 ##### 示例代码
+
+
 ```java
+
 fog fog = new Fog(this.getApplicationContext());
 String userName = "13122222222";
 String password = "123456";
@@ -291,6 +327,7 @@ fog.login(userName, password, appid, new FogCallBack() {
         Log.d(TAG, code + " " + message);
     }
 });
+
 ```
 
 <div id="refreshToken">刷新Token</div>
@@ -302,7 +339,7 @@ fog.login(userName, password, appid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 token     | String       | 用户登录后服务器端返回的token值，一般保存在localstorege里，以便下一次获取使用
 
 ##### callback
@@ -359,7 +396,7 @@ Log.d(TAG, fog.getSSID());
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 ssid     | String       | 准备发送的ssid
 password     | String       | SSID对应的WIFI密码
 isSendIP     | boolean       | 是否发送手机的ip给设备,默认false不发送
@@ -428,7 +465,7 @@ fog.stopEasyLink(new EasyLinkCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 serviceName     | String       | 不可为空, 一般"_easylink._tcp.local."只要你使用的是庆科的模块，这个名字是不会变的
 
 ##### callback
@@ -507,7 +544,7 @@ fog.stopSearchDevices(new SearchDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备id
 
 ##### callback
@@ -563,7 +600,7 @@ fog.bindDevice(deviceId, new ManageDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 
 ##### callback
@@ -643,7 +680,7 @@ micoUser.getDeviceList(new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 
 ##### callback
@@ -695,7 +732,7 @@ fog.getDeviceInfo(deviceid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 alias     | String       | 设备名称
 
@@ -735,7 +772,7 @@ fog.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 role     | int       | 设备的权限
 token         | String       | 用户登录后获取的token
@@ -772,12 +809,12 @@ getShareVerCode(deviceid, new ManageDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 sdevp     | ShareDeviceParams       | ShareDeviceParams至少包含以下的信息
 
 ##### ShareDeviceParams
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 bindvercode     | String       | getShareVerCode接口获取的sharcode, 不可为空
 iscallback         | boolean       | 是否返回绑定状态，此版本请都设置为false, 不可为空
 
@@ -831,7 +868,7 @@ fog.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 
 ##### callback
@@ -890,7 +927,7 @@ fogice.getMemberList(deviceid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 enduserid     | String       | 用户的id
 
@@ -941,12 +978,12 @@ fogice.removeBindRole(mdeviceid, menduserid, new FogCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 listendevparams     | ListenDevParFog       | ListenDevParFog至少包含以下的信息
 
 ##### ShareDeviceParams
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 deviceid     | String       | 设备的deviceid
 host     | String       | 云端的host地址，默认为"mqtt.fogcloud.io"
 port     | String       | 云端的port，默认为"1883"
@@ -996,7 +1033,7 @@ fog.startListenDevice(listendevparams, new ControlDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 cmdpara     | CommandPara       | 发送命令 参数结合
 
 endpoint+"/"+cmdpara.productid+"/"+cmdpara.deviceid+"/command/json";
@@ -1038,7 +1075,7 @@ fog.sendCommandSub(cmdPara, new ControlDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 topic     | String       | 需要定义的topic
 qos     | int       | 0
 
@@ -1072,7 +1109,7 @@ fog.addDeviceListener(topic, qos, new ControlDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 topic     | String       | 需要定义的topic
 
 ##### callback
@@ -1184,12 +1221,12 @@ elink.getSSID()
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 easylinkPara     | EasyLinkParams       | EasyLinkParams包含以下的信息
 
 ##### EasyLinkParams
 参数名 | 类型 | 默认值 | 描述
-:-----------  | :-------------:| -----------:| -----------:
+:-----------  | :-------------:| :-----------| :-----------
 ssid        | String       | 无默认值，不可为空 | 当前wifi的名称
 password     | String       | 无默认值，可为空 | 当前wifi的密码(8-64个字节，越长配网速度越慢)
 isSendIP     | Boolean       | 默认值为false，可为空|是否发送手机的IP，默认不发送，如果此参数为false，那么extraData也不可用
@@ -1327,7 +1364,7 @@ dependencies {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 serviceName     | 字符串       | mdns服务的名称, 如果使用庆科模块，那么此信息为“_easylink._tcp.local.”
 
 ##### callback
@@ -1464,13 +1501,13 @@ dependencies {
 ##### params
 
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 listendevparams     | ListenDeviceParams       | ListenDeviceParams包含以下的信息
 
 ##### ListenDeviceParams
 
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 host        | String       | host，域名或者IP
 port     | String       | 端口(非必填)
 userName         | int       | 用户名
@@ -1548,7 +1585,7 @@ mqtt.stopMqtt(new ListenDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 topic     | String       | 发送指令的通道
 command        | String       | 指令
 qos     | int       | 建议为0(描述见[附录](#appendixes))
@@ -1585,7 +1622,7 @@ mqtt.publish(sendtopic, command, 0, false,
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 topic     | String       | 订阅的通道
 qos     | int       | 建议为0(描述见[附录](#appendixes))
 
@@ -1619,7 +1656,7 @@ mqtt.subscribe(addtopic, 0, new ListenDeviceCallBack() {
 
 ##### params
 参数名 | 类型 | 描述
-:-----------  | :-------------:| -----------:
+:-----------  | :-------------:| :-----------
 topic     | String       | 订阅的通道
 
 ##### callback
