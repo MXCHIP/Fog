@@ -4,7 +4,6 @@
 2. `Build Settings`->`Other linker Flags` 添加`-ObjC`
 3. 引入头文件，如`#import <Fog/Fog.h>`
 4. 网络请求全局配置(本静态库采用XMNetWorking) 如：
-
 #### 代码示例
 ```
 [XMCenter setupConfig:^(XMConfig *config) {
@@ -16,9 +15,7 @@ config.consoleLog = YES;
 }];
 ```
 
-
 </br>
-
 
 ## 概述
 #### 想通过APP远程控制一个智能设备，您需要FAE的支持，如果WIFI模块（硬件）已经准备就绪，那么您只需要完成以下几步
@@ -33,7 +30,7 @@ config.consoleLog = YES;
 
 >3)绑定它(bindDevice)
 
-## FogUser 用户管理
+## #FogUser 用户管理
 #### 基础功能
 * [获取验证码](#getVerifyCode)
 * [检查验证码](#checkVerifyCode)
@@ -50,9 +47,9 @@ config.consoleLog = YES;
 
 ### *getVerifyCode*
 #### params
-| 参数名       |    类型    |                   描述 |
-| :-------- | :------: | -------------------: |
-| loginName | NSString |          登录名，邮箱或者手机号 |
+| 参数名       |    类型    |     描述 |
+| :-------- | :------: | :-------------------|
+| loginName | NSString |登录名，邮箱或者手机号 |
 | appid     | NSString | 在Fogcloud平台注册的APP的id |
 
 #### 代码示例
@@ -71,8 +68,8 @@ NSString *appid = @"appidappidappidappid";
 
 ### *checkVerifyCode*
 #### params
-| 参数名       |    类型    |                   描述 |
-| :-------- | :------: | -------------------: |
+| 参数名       |    类型    |       描述 |
+| :-------- | :------: | :------------------- |
 | loginName | NSString |          登录名，邮箱或者手机号 |
 | appid     | NSString | 在Fogcloud平台注册的APP的id |
 | vercode   | NSString |         邮箱或者手机收到的验证码 |
@@ -95,10 +92,10 @@ NSString *vercode = @"478966";
 ### *register*
 
 #### params
-| 参数名       |    类型    |                   描述 |
-| :-------- | :------: | -------------------: |
-| password  | NSString |                 用户密码 |
-| token     | NSString |       检查验证码返回的 token |
+| 参数名       |    类型    |       描述 |
+| :-------- | :------: | :-------------------|
+| password  | NSString |           用户密码 |
+| token     | NSString |检查验证码返回的 token |
 
 #### 代码示例
 ```
@@ -115,10 +112,10 @@ NSString *token = @"xxx...";
 ### *login*
 
 #### params
-| 参数名       |    类型    |                        描述 |
-| :-------- | :------: | ------------------------: |
-| loginName | NSString |            登录名，可以是邮箱或者手机号 |
-| password  | NSString |                      用户密码 |
+| 参数名       |    类型    |     描述 |
+| :-------- | :------: | :------------------------ |
+| loginName | NSString |登录名，可以是邮箱或者手机号 |
+| password  | NSString |                    用户密码 |
 | appid     | NSString | 在 Fogcloud 平台注册的 app 的 id |
 
 #### 代码示例
@@ -135,8 +132,8 @@ NSString *token = @"xxx...";
 ### *refreshToken*
 
 #### params
-| 参数名   |    类型    |           描述 |
-| :---- | :------: | -----------: |
+| 参数名   |    类型    |     描述 |
+| :---- | :------: | :----------- |
 | token | NSString | 本地持久化的旧的 token |
 #### 代码示例
 ```
@@ -151,8 +148,8 @@ NSString *token = @"xxx...";
 
 ### *getMemberList*
 #### params
-| 参数名      |    类型    |           描述 |
-| :------- | :------: | -----------: |
+| 参数名      |    类型    |     描述 |
+| :------- | :------: | :----------- |
 | token    | NSString | 本地持久化的 token |
 | deviceid | NSString |       设备的 id |
 #### 代码示例
@@ -170,8 +167,8 @@ NSString *deviceid = @"xxx-asdfasdf-asdfasdfas";
 
 ### *removeBindRole*
 #### params
-| 参数名      |    类型    |           描述 |
-| :------- | :------: | -----------: |
+| 参数名      |    类型    |   描述 |
+| :------- | :------: | :----------- |
 | token    | NSString | 本地持久化的 token |
 | deviceid | NSString |       设备的 id |
 | enduserid   | NSString | 欲移除权限的用户的 id |
@@ -185,7 +182,7 @@ NSString *deviceid = @"xxx-asdfasdf-asdfasdfas";
 }];
 ```
 
-## FogDevice 设备管理
+## #FogDevice 设备管理
 #### EasyLink
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
@@ -220,8 +217,8 @@ NSString *ssid= [[FogDeviceManager sharedInstance] getSSID];
 <div id='startEasyLink'>
 
 ### *startEasyLink*
-| 参数名      |    类型    |             描述 |
-| :------- | :------: | -------------: |
+| 参数名      |    类型    |   描述 |
+| :------- | :------: | :------------- |
 | password | NSString | 当前连接的 wifi 的密码 |
 #### 代码示例
 ```
@@ -270,8 +267,8 @@ NSLog(@"%@", devicesArray);
 <div id='bindDevice'>
 
 ### *bindDevice*
-| 参数名      |    类型    |                   描述 |
-| :------- | :------: | -------------------: |
+| 参数名      |    类型    |       描述 |
+| :------- | :------: | :------------------- |
 | deviceid | NSString |     设备id |
 | token    | NSString |    登录 app 后获取的 token |
 #### 代码示例
@@ -286,10 +283,10 @@ NSLog(@"%@", devicesArray);
 <div id='unBindDevice'>
 
 ### *unBindDevice*
-| 参数名      |    类型    |                             描述 |
-| :------- | :------: | -----------------------------: |
+| 参数名      |    类型    |    描述 |
+| :------- | :------: | :----------------------------- |
 | deviceid | NSString | 想要解除绑定的设备 ID（在上面的绑定设备接口成功后会返回） |
-| token    | NSString |              登录 app 后获取的 token |
+| token    | NSString |     登录 app 后获取的 token |
 #### 代码示例
 ```
 [[FogDeviceManager sharedInstance]unBindDeviceWithDeviceId:deviceid token:token success:^(id responseObject) {
@@ -301,12 +298,11 @@ NSLog(@"%@", devicesArray);
 <div id='getShareVerCode'>
 
 ### *getShareVerCode*
-| 参数名      |    类型    |                   描述 |
-| :------- | :------: | -------------------: |
+| 参数名      |    类型    |       描述 |
+| :------- | :------: | :---------------- |
 | deviceid | NSString |     设备id |
 | token    | NSString |    登录 app 后获取的 token |
-| role | NSInteger |     授权级别：2→管理员 3→普通用户
- |
+| role | NSInteger |     授权级别：2→管理员 3→普通用户|
 | granttimes    | NSInteger |    验证码是否一次有效，0为一次有效，非0为十分钟有效|
 #### 代码示例
 ```
@@ -320,13 +316,13 @@ NSLog(@"%@", devicesArray);
 <div id='addDeviceByVerCode'>
 
 ### *addDeviceByVerCode*
-| 参数名      |    类型    |                   描述 |
-| :------- | :------: | -------------------: |
+| 参数名      |    类型    |           描述 |
+| :------- | :------: | :------------------- |
 | deviceid | NSString |     设备id |
 | token    | NSString |    登录 app 后获取的 token |
 | vercode | NSString |     授权分享码|
 | bindingtype    | enum |    用户分组|
-| extra | NSInteger |     扩展参数|
+| extra | Json String |     扩展参数|
 | iscallback    | NSInteger |    是否需要发送mqtt消息通知设备|
 
 #### 代码示例
@@ -353,8 +349,8 @@ NSLog(@"%@", error.localizedDescription)
 <div id='getDeviceInfo'>
 
 ### *getDeviceInfo*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
+| 参数名      |    类型    |       描述 |
+| :------- | :------: | :---------------- |
 | deviceid | NSString |             设备 id |
 | token    | NSString | 登录 app 后获取的 token |
 #### 示例代码
@@ -369,8 +365,8 @@ NSLog(@"%@", error.localizedDescription)
 <div id='updateDeviceAlias'>
 
 ### *updateDeviceAlias*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
+| 参数名      |    类型    |    描述 |
+| :------- | :------: | :---------------- |
 | alias    | NSString |              设备别名 |
 | deviceid | NSString |             设备 id |
 | token    | NSString | 登录 app 后获取的 token |
@@ -383,7 +379,7 @@ NSLog(@"%@", error.localizedDescription)
 }];
 ```
 
-## FogMQTT 管理
+## #FogMQTT 管理
 #### MQTT
 
 * [获取mqtt信息](#getMqttInfo)
@@ -396,8 +392,8 @@ NSLog(@"%@", error.localizedDescription)
 <div id='getMqttInfo'>
 
 ### *getMqttInfo*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
+| 参数名      |    类型    |          描述 |
+| :------- | :------: | :---------------- |
 | token    | NSString | 登录 app 后获取的 token |
 #### 示例代码
 ```
@@ -411,8 +407,8 @@ NSLog(@"%@", error.localizedDescription)
 <div id='startListenDevice'>
 
 ### *startListenDevice*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
+| 参数名      |    类型    |      描述 |
+| :------- | :------: | :---------------- |
 | mqttInfo    | MqttInfo |              mqttInfo模型 |
 | usingSSL    | BOOL |              是否使用SSL |
 #### 示例代码
@@ -425,8 +421,8 @@ NSLog(@"%@", error.localizedDescription)
 <div id='addDeviceListener'>
 
 ### *addDeviceListener*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
+| 参数名      |    类型    |          描述 |
+| :------- | :------: | :---------------- |
 | topic    | NSString |              主题 |
 | qoslevel | enum |             消息质量|
 #### 示例代码
@@ -439,11 +435,11 @@ NSLog(@"%@", error.localizedDescription)
 <div id='sendCommand'>
 
 ### *sendCommand*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
-| data    | NSData |              指令
+| 参数名      |    类型    |     描述 |
+| :------- | :------: | :---------------- |
+| data  | NSData |              指令
 | topic | NSString |             主题 |
-| retain    | NSString | if YES, data is stored on the MQTT broker until overwritten by the next publish with retainFlag = YES |
+| retain| Bool | if YES, data is stored on the MQTT broker until overwritten by the next publish with retainFlag = YES |
 | qoslevel | enum |             消息质量 |
 #### 示例代码
 ```
@@ -455,8 +451,8 @@ NSLog(@"%@", error.localizedDescription)
 <div id='removeDeviceListener'>
 
 ### *removeDeviceListener*
-| 参数名      |    类型    |                描述 |
-| :------- | :------: | ----------------: |
+| 参数名      |    类型    |    描述 |
+| :------- | :------: | :---------------- |
 | topic    | NSString |              要移除的主题
 
 #### 示例代码
