@@ -84,8 +84,8 @@ easylinkcb
 EasyLinkParams easylinkPara = new EasyLinkParams();
 easylinkPara.ssid = "mxchip";
 easylinkPara.password = "12345678";
-easylinkPara.runSecond = 20000;
-easylinkPara.sleeptime = 50;
+easylinkPara.runSecond = 60000;
+easylinkPara.sleeptime = 20;
 
 elink.startEasyLink(easylinkPara, new EasyLinkCallBack() {
     @Override
