@@ -4,9 +4,14 @@
 
 ```js
 dependencies {
-    compile 'io.fogcloud.sdk:easylinkv3:0.1.4'
+    // 只发广播的版本
+    compile 'io.fogcloud.sdk:easylinkv3:0.1.4'
+    // 广播组播同时发的版本
+    compile 'io.fogcloud.sdk:easylinkv3:0.1.5'
 }
 ```
+
+一般情况使用只发广播的版本就可以了，特殊需求，比如广播收不到的情况可以使用0.1.5版本，广播组播一起发
 
 ##### eclipse版本使用此demo
 
