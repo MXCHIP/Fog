@@ -1,9 +1,11 @@
 ##  FogV3 使用指南
 
-1. 解压 `Fog.framework.zip` 引入解压后的 `Fog.framework`文件
-2. `Build Settings`->`Other linker Flags` 添加`-ObjC`
-3. 引入头文件，如`#import <Fog/Fog.h>`
-4. 网络请求全局配置(本静态库采用XMNetWorking) 如：
+1. 解压 `FogV3.framework.zip` 引入解压后的 `FogV3.framework`文件
+2. pod 导入XMNetWorking，MQTTClient
+3. `Build Settings`->`Other linker Flags` 添加`-ObjC`
+4. `General`-> `Embedded Binaries` 添加`FogV3.framework`
+5. 引入头文件，如`#import <FogV3/FogV3.h>`
+6. 网络请求全局配置 如：
 #### 代码示例
 ```
 [XMCenter setupConfig:^(XMConfig *config) {
@@ -30,7 +32,7 @@ config.consoleLog = YES;
 
 >3)绑定它(bindDevice)
 
-## #FogUser 用户管理
+## FogUser 用户管理
 #### 基础功能
 * [获取验证码](#getVerifyCode)
 * [检查验证码](#checkVerifyCode)
@@ -117,13 +119,14 @@ NSString *token = @"xxx...";
 | loginName | NSString |登录名，可以是邮箱或者手机号 |
 | password  | NSString |                    用户密码 |
 | appid     | NSString | 在 Fogcloud 平台注册的 app 的 id |
+| extend | NSString |扩展参数（没有传nil） |
 
 #### 代码示例
 ```
-[[FogUserManager sharedInstance]loginWithName:loginName password:password appid:appid success:^(id responseObject) {
-
+[[FogUserManager sharedInstance]loginWithName:loginName password:password appid:appid extend:nil success:^(id responseObject) {
+        
 } failure:^(NSError *error) {
-
+        
 }];
 ```
 
@@ -182,7 +185,7 @@ NSString *deviceid = @"xxx-asdfasdf-asdfasdfas";
 }];
 ```
 
-## #FogDevice 设备管理
+## FogDevice 设备管理
 #### EasyLink
 * [获取SSID](#getSSID)
 * [开始配网](#startEasyLink)
@@ -211,7 +214,7 @@ NSString *deviceid = @"xxx-asdfasdf-asdfasdfas";
 ### *getSSID*
 #### 代码示例
 ```
-NSString *ssid= [[FogDeviceManager sharedInstance] getSSID];
+NSString *ssid= [[FogEasyLinkManager sharedInstance] getSSID];
 ```
 
 <div id='startEasyLink'>
@@ -222,7 +225,7 @@ NSString *ssid= [[FogDeviceManager sharedInstance] getSSID];
 | password | NSString | 当前连接的 wifi 的密码 |
 #### 代码示例
 ```
- [[FogDeviceManager sharedInstance]startEasyLinkWithPassword:password];
+ [[FogEasyLinkManager sharedInstance]startEasyLinkWithPassword:password];
 
 ```
 
@@ -231,7 +234,7 @@ NSString *ssid= [[FogDeviceManager sharedInstance] getSSID];
 ### *stopEasyLink*
 #### 代码示例
 ```
-[[FogDeviceManager sharedInstance]stopEasyLink];
+[[FogEasyLinkManager sharedInstance]stopEasyLink];
 ```
 
 <div id='startSearchDevices'>
@@ -271,13 +274,15 @@ NSLog(@"%@", devicesArray);
 | :------- | :------: | :------------------- |
 | deviceid | NSString |     设备id |
 | token    | NSString |    登录 app 后获取的 token |
+| extend | NSString |     扩展参数（没有传nil） |
 #### 代码示例
 ```
-[[FogDeviceManager sharedInstance]bindDeviceWithDeviceId:deviceid token:token success:^(id responseObject) {
-            
-} failure:^(NSError *error) {
-            
-}];
+[[FogDeviceManager sharedInstance]bindDeviceWithDeviceId:deviceId token:[HJUserInfo shareUserInfo].token extend:nil success:^(id responseObject) {
+        
+ } failure:^(NSError *error) {
+        
+     
+ }];
 ```
 
 <div id='unBindDevice'>
@@ -322,12 +327,12 @@ NSLog(@"%@", devicesArray);
 | token    | NSString |    登录 app 后获取的 token |
 | vercode | NSString |     授权分享码|
 | bindingtype    | enum |    用户分组|
-| extra | Json String |     扩展参数|
+| extend | Json String |     扩展参数(没有传nil)|
 | iscallback    | NSInteger |    是否需要发送mqtt消息通知设备|
 
 #### 代码示例
 ```
-[[FogDeviceManager sharedInstance]addDeviceByVerCodeWithDeviceId:deviceid vercode:vercode bindingtype:bindingtype extra:extra iscallback:iscallback token:token success:^(id responseObject) {
+[[FogDeviceManager sharedInstance]addDeviceByVerCodeWithDeviceId:deviceid vercode:vercode bindingtype:bindingtype extend:extend iscallback:iscallback token:token success:^(id responseObject) {
 
   } failure:^(NSError *error) {
         
@@ -337,12 +342,15 @@ NSLog(@"%@", devicesArray);
 
 
 ### *getDeviceList*
+| 参数名      |    类型    |       描述 |
+| :------- | :------: | :---------------- |
+| token    | NSString | 登录 app 后获取的 token |
 #### 示例代码
 ```
-[[MicoDeviceManager sharedInstance] fetchDeviceListWithToken:token 		success:^(NSDictionary *result) {
-NSLog(@"%@", result);    
+[[FogDeviceManager sharedInstance] getDeviceListWithToken:token success:^(id responseObject) {
+        
 } failure:^(NSError *error) {
-NSLog(@"%@", error.localizedDescription)
+        
 }];
 ```
 
@@ -379,7 +387,7 @@ NSLog(@"%@", error.localizedDescription)
 }];
 ```
 
-## #FogMQTT 管理
+## FogMQTT 管理
 #### MQTT
 
 * [获取mqtt信息](#getMqttInfo)
