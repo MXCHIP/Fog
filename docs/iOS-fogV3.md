@@ -3,9 +3,8 @@
 1. 解压 `FogV3.framework.zip` 引入解压后的 `FogV3.framework`文件
 2. pod 导入XMNetWorking，MQTTClient
 3. `Build Settings`->`Other linker Flags` 添加`-ObjC`
-4. `General`-> `Embedded Binaries` 添加`FogV3.framework`
-5. 引入头文件，如`#import <FogV3/FogV3.h>`
-6. 网络请求全局配置 如：
+4. 引入头文件，如`#import <FogV3/FogV3.h>`
+5. 网络请求全局配置 如：
 #### 代码示例
 ```
 [XMCenter setupConfig:^(XMConfig *config) {
